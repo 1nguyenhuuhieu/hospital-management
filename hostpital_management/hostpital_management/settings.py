@@ -122,3 +122,11 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+SQL_SERVER = {
+    'server': '192.168.123.254',
+    'database': 'eHospital_NgheAn',
+    'user': 'dashboard',
+    'pwd': 'ttytanhson@2023',
+    'driver': 'SQL Server Native Client 11.0'
+}
