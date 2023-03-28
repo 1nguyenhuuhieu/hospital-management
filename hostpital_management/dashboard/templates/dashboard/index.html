@@ -1,1 +1,210 @@
 {% extends 'dashboard/base.html' %}
+{% block header %}
+<span class=""><i class="fa-solid fa-chart-simple me-2"></i>{% block title %}Dashboard{% endblock %}</span>
+{% endblock %}
+{% block content %}
+{% if is_connect_sqlserver %}
+<div class="row">
+    <div class="col-lg-6">
+      <div class="row g-2">
+        <div class="col-12">
+          <!-- Top card -->
+          <div class="row g-3">
+            <div class="col-lg-6 mb-2 mb-sm-0">
+              <!-- Money card -->
+              <div class="card shadow-sm text-bg-warning h-100">
+                <div class="card-body">
+                  <h6 class="card-subtitle mb-2 d-flex justify-content-between align-items-center">
+                    <div>
+                      <i class="value.money_card.icon  me-2"></i>
+                        value.money_card.title 
+                    </div>
+                  </h6>
+                  <hr class="my-2">
+                  <div class="d-flex flex-row flex-md-column justify-content-between">
+                  <h3 class="card-title fw-semibold"> value.money_card.current_format() </h3>
+                  <div class="d-flex flex-column justify-content-between align-items-end">
+                    <p class="fw-semibold card-text m-0 text-end p-0
+               if value.money_card.is_increased() 
+                    text-success
+      else 
+                    text-danger
+       endif 
+                    ">
+                      <span class="">
+                    
+                        <i class="fa-solid fa-arrow-trend-up me-1 fw-bold text-success"></i>
+                
+                        <i class="fa-solid fa-arrow-trend-down me-1 fw-bold text-danger"></i>
+                 
+                         value.money_card.percent() %</span>
+                      <span>kì trước</span>
+  
+                    </p>
+                    <span class="text-muted"> <small> value.money_card.previous_format() </small> </span>
+  
+                    <div class="text-end mt-1">
+                      <a href=" url_for(value.money_card.link, day_query=value.today
+                        ,time = request.args.get('time'),
+                        start = request.args.get('start'),
+                        end = request.args.get('end')) "
+                      class="text-decoration-none text-end stretched-link btn btn-sm rounded-pill btn-light mt-1">Chi tiết<i
+                        class="fa-solid fa-arrow-right ms-1"></i></a>
+  
+                    </div>
+  
+                  </div>
+                </div>
+       
+                </div>
+              </div>
+              <!-- Money card -->
+            </div>
+            <!-- Dược và dịch vụ card -->
+            <div class="col-lg-6">
+              <div class="card shadow-sm h-100 text-bg-warning">
+                <div class="card-body">
+                  {% for card in value.all_service_card %}
+                  <div class=" 'mb-3' if loop.first ">
+                    <p class="mt-0 mb-2 d-flex justify-content-between">
+                      <a href=" url_for(card.link,day_query=value.today
+                        ,time = request.args.get('time'),
+                        start = request.args.get('start'),
+                        end = request.args.get('end'))"
+                        class="fw-bolder text-decoration-none link-dark"><i
+                          class="card.icon me-1 fa-fw"></i> card.title </a>
+                      <span class="fw-bolder"> card.current_format()</span>
+                    </p>
+                    <div class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="25"
+                      aria-valuemin="0" aria-valuemax="100">
+                      <div class="progress-bar  'bg-danger' if loop.first else 'bg-success'  " style="width: card.percent()%">
+                        card.percent()%</div>
+                    </div>
+                  </div>
+                  {% endfor %}
+  
+  
+                  <div class="d-flex justify-content-end ">
+                    <a href=" url_for('list_revenue', day_query=value.today
+                    ,time = request.args.get('time'),
+                    start = request.args.get('start'),
+                    end = request.args.get('end')) "
+                      class="text-decoration-none text-end  btn btn-sm rounded-pill btn-light mt-3">Chi tiết<i class="fa-solid fa-arrow-right ms-1"></i></a>
+                  </div>
+  
+  
+                </div>
+              </div>
+            </div>
+            <!-- Dược và dịch vụ card -->
+  
+          </div>
+  
+          <!-- Top card-->
+        </div>
+      </div>
+      <div class="row g-3 mt-1">
+        {% for card in value.patient_card %}
+        <div class="col-lg-6 mt-3">
+          <div class="card shadow-sm border ">
+            <!-- style="  background: url(url_for('static', filename='imgs/4930491.jpg')) no-repeat center ;
+            background-size: cover;" -->
+            <div class="card-body">
+              <h6 class="card-subtitle mb-2   d-flex justify-content-between align-items-center">
+                <div>
+                  <i class=" card.icon  me-2 fa-fw"></i> card.title 
+                </div>
+              </h6>
+              <hr class="my-2">
+              <div class="row">
+                <div class="col-4 align-items-center justify-content-start d-flex">
+                  <h3 class="card-title p-0 m-0  fw-semibold"> card.current </h3>
+                </div>
+                <div class="col-8 justify-content-end align-items-end d-flex flex-column">
+                  <p class="card-text p-0 m-0 fw-semibold
+                   'text-success' if card.is_increased() else 'text-danger'">
+                    <span>
+   
+                      <i class="fa-solid fa-arrow-trend-up me-1 fw-bold text-success"></i>
+         
+                      <i class="fa-solid fa-arrow-trend-down me-1 fw-bold text-danger"></i>
+      
+                       card.percent() %</span>
+                    <span>kì trước</span>
+  
+                  </p>
+  
+                  <small class="text-muted">  card.previous </small>
+  
+  
+                </div>
+                <div class="text-end mt-3">
+                  <a href=" url_for(card.link, day_query=value.today
+                    ,time = request.args.get('time'),
+                    start = request.args.get('start'),
+                    end = request.args.get('end')
+                    ) "
+                  class="text-decoration-none text-end stretched-link btn btn-sm btn-light rounded-pill border shadow-sm">Chi tiết<i
+                    class="fa-solid fa-arrow-right ms-1"></i></a>
+  
+                </div>
+  
+  
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+  
+      <div class="row mt-3">
+        <div class="col-12">
+          
+      <div class="border shadow-sm rounded p-3 bg-white mt-2 mt-sm-0">
+        <div id="chart_soluotkham"></div>
+      </div>
+  
+        </div>
+      </div>
+  
+  
+    </div>
+  
+    <div class="col-lg-6 mt-2 mt-sm-0">
+       include 'home/news.html' 
+  
+      <div class="row g-2 mt-2">
+        <div class="col-lg-6">
+           include 'visited/list_department.html' 
+                  <!-- Chart lượt khám bệnh -->
+                  <div class="border shadow-sm rounded p-2 bg-white mt-2">
+                    <div id="piechart"></div>
+                  </div>
+                  <!-- End Chart lượt khám bệnh -->
+  
+        </div>
+        <div class="col-lg-6">
+           include 'hospitalized/list_department.html' 
+  
+          <!-- Chart bệnh nhân nội trú -->
+          <div class="border shadow-sm rounded p-1 bg-white mt-2">
+            <div id="piechart_benhnhannoitru"></div>
+          </div>
+          <!-- End Chart bệnh nhân nội trú -->
+  
+  
+        </div>
+  
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    const urlGenerator = '/dashboard/';
+    const todayURL = " url_for('home') ";
+  </script>
+  
+{% else %}
+<h1 class="text-danger">Lỗi kết nối với sql server</h1>
+{% endif %}
+{% endblock %}

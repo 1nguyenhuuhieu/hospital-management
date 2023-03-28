@@ -103,7 +103,9 @@
         <div class="container-fluid p-0 p-sm-3">
           <div class="row mt-3 mb-2">
             <div class="col-12">
-               include 'dashboard/breadcrumb.html' 
+              {% if breadcrumbs %}
+                  {% include "dynamic_breadcrumbs/breadcrumbs.html" with breadcrumbs=breadcrumbs%}
+              {% endif %}
               <hr class="my-2">
               include 'dashboard/recent.html' 
 
