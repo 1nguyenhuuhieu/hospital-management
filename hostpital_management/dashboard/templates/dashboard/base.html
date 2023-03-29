@@ -2,6 +2,7 @@
 
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -25,6 +26,7 @@
   <script src="https://cdn.jsdelivr.net/npm/sharer.js@latest/sharer.min.js"></script>
   <link rel="stylesheet" href="https://printjs-4de6.kxcdn.com/print.min.css">
 </head>
+
 <body class="bg-light" style="font-family: Sans-serif;">
   <header class="navbar sticky-top flex-md-nowrap p-0  shadow-sm  bg-warning">
     <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 pt-2 pb-3 py-md-0 d-flex text-bg-warning m-0"
@@ -36,7 +38,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="w-100 bg-dark m-0 ">
-      <!-- Header on desktop -->
+      <!-- Header-->
       <div class="col-12">
         <div class="d-md-flex justify-content-between align-items-center px-sm-4 px-3 py-2 ">
           <div class="">
@@ -50,26 +52,22 @@
           {% if not hidden_top_filter %}
           <div class="justify-content-end-md justify-content-between d-flex align-items-center">
             <div>
+              <form method="get" id="dayForm">
               <input type="date" class="border border-secondary rounded-1 py-1 px-2 me-2 border-secondary text-muted"
-                id="dateQuery" value="{{ value.today }}">
-              <a href="#" class="btn btn-success d-none " id="dateQueryLink">Xem</a>
+                id="dateQuery" value="" name="time">
+                <button type="submit" class="d-none"></button>
+              </form>
             </div>
             <div class="">
-              <div class="btn-group">
-                <a href="#" class="btn btn-sm btn-light" id="yesterdayLink"><i
-                    class="fa-solid fa-caret-left mx-1"></i></a>
-                <a href="#" class="btn btn-sm btn-light" id="tomorrowLink"><i
-                    class="fa-solid fa-caret-right mx-1"></i></a>
-              </div>
-              <div class="btn-group">
-                <a href="url_for('home') " class="btn btn-sm btn-warning ms-1" id="todayLink">Hôm nay</a>
-
-                <button type="button" class="btn btn-warning btn-sm dropdown-toggle dropdown-toggle-split"
-                  data-bs-toggle="dropdown" aria-expanded="false">
-                  <span class="visually-hidden">Toggle Dropdown</span>
-                </button>
-                <ul class="dropdown-menu dropdown-menu-end">
-                  <form method="get">
+              <form method="get">
+                <button class="btn btn-sm btn-light" type="submit" name="time" value="yesterday">Hôm qua</button>
+                <div class="btn-group">
+                  <button class="btn btn-sm btn-warning ms-1" type="submit" name="time" value="today">Hôm nay</button>
+                  <button type="button" class="btn btn-warning btn-sm dropdown-toggle dropdown-toggle-split"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    <span class="visually-hidden">Toggle Dropdown</span>
+                  </button>
+                  <ul class="dropdown-menu dropdown-menu-end">
                     <li><button class="dropdown-item" type="submit" name="time" value="week">Tuần</button></li>
                     <li><button class="dropdown-item" type="submit" name="time" value="month">Tháng</button></li>
                     <li><button class="dropdown-item" type="submit" name="time" value="year">Năm</button></li>
@@ -78,15 +76,15 @@
                     </li>
                     <li><button class="dropdown-item" type="button" data-bs-toggle="modal"
                         data-bs-target="#customTimeModal">Tùy chỉnh</button></li>
-                  </form>
-                </ul>
-              </div>
+                  </ul>
+                </div>
+              </form>
             </div>
           </div>
           {% endif %}
         </div>
       </div>
-      <!-- Header on desktop -->
+      <!-- Header-->
     </div>
   </header>
   <div class="container-fluid ">
@@ -102,16 +100,19 @@
             <div class="modal-body">
               <div class="input-group mb-3">
                 <span class="input-group-text" id="basic-addon1">Từ</span>
-                <input type="datetime-local" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" name="start">
+                <input type="datetime-local" class="form-control" placeholder="Username" aria-label="Username"
+                  aria-describedby="basic-addon1" name="start">
               </div>
               <div class="input-group mb-3">
                 <span class="input-group-text" id="basic-addon1">Đến</span>
-                <input type="datetime-local" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" name="end">
+                <input type="datetime-local" class="form-control" placeholder="Username" aria-label="Username"
+                  aria-describedby="basic-addon1" name="end">
               </div>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-              <button type="submit" class="btn btn-primary" name="time" value="custom_filter"><i class="fa-solid fa-magnifying-glass me-2"></i>Xem</button>
+              <button type="submit" class="btn btn-primary"><i
+                  class="fa-solid fa-magnifying-glass me-2"></i>Xem</button>
             </div>
           </form>
         </div>
@@ -124,33 +125,24 @@
           <div class="row mt-3 mb-2">
             <div class="col-12">
               {% if breadcrumbs %}
-                  {% include "dynamic_breadcrumbs/breadcrumbs.html" with breadcrumbs=breadcrumbs%}
+              {% include "dashboard/breadcrumbs.html" with breadcrumbs=breadcrumbs%}
               {% endif %}
               <hr class="my-2">
               <div class="d-flex flex-column flex-sm-row justify-content-start align-items-start mb-1 text-truncate">
-
-                {% if value.today %}   <p class="h6 me-3 m-0" id="date_today"></p><span class="text-muted fst-italic">{% if value.diff %} {{ value.diff }} ngày, từ {{ value.start }} đến {{ value.end }} {% endif %}</span> {% endif %}
-           
-                   </div>
-           
-
+                {% if value.today %} <p class="h6 me-3 m-0" id="date_today"></p><span class="text-muted fst-italic">{%
+                  if value.diff %} {{ value.diff }} ngày, từ {{ value.start }} đến {{ value.end }} {% endif %}</span> {%
+                endif %}
+              </div>
               <div class="alert alert-primary d-none alert-dismissible fade show my-2" role="alert" id="loading">
                 <div class="d-flex align-items-center">
                   <div class="spinner-grow spinner-grow-sm me-3" role="status">
                     <span class="visually-hidden">Loading...</span>
                   </div>
                   <span>Đang tải dữ liệu, vui lòng đợi...</span>
-
                 </div>
-
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-  
               </div>
-  
             </div>
-
-        
-      
           </div>
           {% block content %}
           {% endblock %}
@@ -173,14 +165,13 @@
     integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha"
     crossorigin="anonymous"></script>
   <script src="{% static 'dashboard/js/dashboard.js' %}"></script>
-  <script src="{% static 'dashboard/js/myjs.js' %}"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.2/moment.min.js"></script>
 
   {% if value.today %}
   <script>
     new ClipboardJS('.btnClipboard');
     const dateToday = document.getElementById('date_today');
-    const today =  value.today| tojson ;
+    const today = value.today | tojson;
     const event = new Date(today);
     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
     const dayLocale = event.toLocaleDateString('vi-VN', options)
@@ -189,18 +180,21 @@
   {% endif %}
 
   <script>
-
     let btns = document.querySelectorAll('button[type="submit"]');
     btns.forEach(btn => {
 
-    btn.addEventListener('click', (event)=> {
-      const loadingElement = document.getElementById('loading')
-      loadingElement.classList.remove("d-none");
+      btn.addEventListener('click', (event) => {
+        const loadingElement = document.getElementById('loading')
+        loadingElement.classList.remove("d-none");
+      });
     });
-
-});
   </script>
 
+  <script>
+    const dateQuery = document.getElementById("dateQuery");
+    dateQuery.addEventListener('change', function(){
+      document.getElementById("dayForm").submit();
+    } );
+  </script>
 </body>
-
 </html>

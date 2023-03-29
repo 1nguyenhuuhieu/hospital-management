@@ -11,12 +11,16 @@ def index(request):
     if con:
         is_connect_sqlserver = True
         cursor = con.cursor()
-    else:
-        is_connect_sqlserver = False
-    context = {
+
+        if request.method == 'GET':
+            if 'time' in request.GET:
+                print(request.GET['time'])
+        context = {
         'is_connect_sqlserver': is_connect_sqlserver,
         'value': None
-    }
+        }
+        if is_connect_sqlserver:con.close()
+        return render(request, 'dashboard/index.html', context)
+    else:
+        is_connect_sqlserver = False
 
-    if is_connect_sqlserver:con.close()
-    return render(request, 'dashboard/index.html', context)
