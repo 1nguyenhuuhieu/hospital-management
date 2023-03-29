@@ -1,7 +1,7 @@
 import pyodbc
 from django.conf import settings
 
-is_home = True
+is_home = False
 def get_db():
     try:
         user = settings.SQL_SERVER['user']
@@ -14,9 +14,7 @@ def get_db():
             con = pyodbc.connect(driver='{ODBC Driver 17 for SQL Server}', server='localhost', database='eHospital_NgheAn',
                                     trusted_connection='yes')
         else:
-            con = pyodbc.connect(f'''
-            DRIVER={driver};SERVER={server};DATABASE={database};UID={user};PWD={pwd}
-            ''')
+            con = pyodbc.connect(f'DRIVER={driver};SERVER={server};DATABASE={database};UID={user};PWD={pwd}')
         
         return con
     except:

@@ -5,5 +5,4 @@ app_name = 'dashboard'
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('test/', views.index, name='index')
 ]
