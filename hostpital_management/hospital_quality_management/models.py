@@ -1,5 +1,5 @@
 from django.db import models
-from ckeditor.fields import RichTextField 
+from ckeditor.fields import RichTextField
 
 
 # Models for Hospital Quality Management - HRM
@@ -25,9 +25,12 @@ class EvaluationCriteria(models.Model):
     pre_index = models.ForeignKey(Chapter, on_delete=models.CASCADE)
     index = models.IntegerField()
     title = models.CharField(max_length=1000)
-    legal_basis = models.RichTextField()
+    legal_basis = RichTextField()
+    files = models.ManyToManyField('File', blank=True)
+    
     def __str__(self):
         return f'{self.pre_index}{self.index}'
+    
 
 # Mức đánh giá
 class Level(models.Model):
@@ -43,9 +46,15 @@ class Level(models.Model):
         (9, 'Mức 9'),
         (10, 'Mức 10'),
     )
+    pre_index = models.ForeignKey(EvaluationCriteria, on_delete=models.CASCADE)
     index = models.IntegerField(choices = LEVEL_CHOICES)
+
     title = models.CharField(max_length=1000)
     def __str__(self):
         return f'{self.index}'
 
-    
+# Upload file
+class File(models.Model):
+    title = models.CharField(max_length=200)
+    description = models.TextField()
+    file = models.FileField(upload_to='doccument/')
