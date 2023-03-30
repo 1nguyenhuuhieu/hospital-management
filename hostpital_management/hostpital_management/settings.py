@@ -40,7 +40,8 @@ INSTALLED_APPS = [
 
     'dynamic_breadcrumbs',
 
-    'dashboard'
+    'dashboard',
+    'hospital_quality_management'
 ]
 
 MIDDLEWARE = [
