@@ -1,4 +1,5 @@
 from django.db import models
+from ckeditor.fields import RichTextField 
 
 
 # Models for Hospital Quality Management - HRM
@@ -13,18 +14,20 @@ class Section(models.Model):
 
 # Chương tiêu chí đánh giá
 class Chapter(models.Model):
+    pre_index = models.ForeignKey(Section, on_delete=models.CASCADE)
     index = models.IntegerField()
     title = models.CharField(max_length=200)
     def __str__(self):
-        return self.index
+        return f'{self.pre_index}{self.index}'
 
 # Tiêu chuẩn đánh giá
 class EvaluationCriteria(models.Model):
+    pre_index = models.ForeignKey(Chapter, on_delete=models.CASCADE)
     index = models.IntegerField()
-    title = models.TextField()
-    legal_basis = models.TextField()
+    title = models.CharField(max_length=1000)
+    legal_basis = models.RichTextField()
     def __str__(self):
-        return self.index
+        return f'{self.pre_index}{self.index}'
 
 # Mức đánh giá
 class Level(models.Model):
@@ -43,6 +46,6 @@ class Level(models.Model):
     index = models.IntegerField(choices = LEVEL_CHOICES)
     title = models.CharField(max_length=1000)
     def __str__(self):
-        return self.index
+        return f'{self.index}'
 
     
