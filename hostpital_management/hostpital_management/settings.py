@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'dynamic_breadcrumbs',
     'ckeditor',
 
+
     'dashboard',
     'hospital_quality_management'
 ]
@@ -53,7 +54,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
 ]
+
 
 ROOT_URLCONF = 'hostpital_management.urls'
 
@@ -138,3 +141,4 @@ SQL_SERVER = {
     'pwd': 'ttytanhson@2023',
     'driver': 'SQL Server Native Client 11.0'
 }
+
