@@ -176,7 +176,7 @@
         {% for e in chapter.evaluationcriteria_set.all %}
 
         <article class="my-3" id="{{section.index}}{{chapter.index}}">
-          <div class="bd-heading sticky-xl-top align-self-start mt-5 mb-3 mt-xl-0 mb-xl-2">
+          <div class="bd-heading sticky-xl-top align-self-start mt-5 mb-3 mt-xl-0 mb-xl-2 border p-3 bg-white shadow-sm rounded bg-warning-subtle">
             <h5 class="mt-5">{{section.index}}{{chapter.index}}{{e.index}}. {{e.title|lower|capfirst }}</h5>
             <div class="d-flex">
                 <i class="bi bi-square-fill me-1 text-danger"></i>
@@ -191,16 +191,15 @@
                 Phụ trách chính: Nguyễn Hữu Hiếu
             </div>
             <a href="" class="btn btn-primary">Xem chi tiết</a>
-            <hr>
           </div>
     
           <div>
-            <h5 >{{section.index}}{{chapter.index}}{{e.index}}. {{e.title|lower|capfirst }}</h5>
+            <h4 class="display-6">{{section.index}}{{chapter.index}}{{e.index}}. {{e.title|lower|capfirst }}</h4>
 
             <div class="accordion" id="accordionExample">
                 {% for i in e.level_set.all %}
      
-                <div class="accordion-item">
+                <div class="accordion-item shadow-sm ">
                   <h2 class="accordion-header ">
                     <button class="accordion-button {% if i.level != 3 %} collapsed {% endif %}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{i.id}}" aria-expanded="false" aria-controls="collapseThree">
                
