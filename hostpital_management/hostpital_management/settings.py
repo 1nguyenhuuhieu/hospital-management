@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     'dynamic_breadcrumbs',
     'ckeditor',
+    'import_export',
 
 
     'dashboard',
@@ -142,3 +143,4 @@ SQL_SERVER = {
     'driver': 'SQL Server Native Client 11.0'
 }
 
+IMPORT_EXPORT_USE_TRANSACTIONS = True
