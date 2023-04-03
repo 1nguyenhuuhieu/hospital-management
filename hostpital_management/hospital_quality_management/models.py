@@ -22,11 +22,13 @@ class Section(models.Model):
         verbose_name  = 'phần'
         verbose_name_plural  = 'phần'
 
+    def __str__(self):
+        return f'{self.section}'
+
 
 
 # Chương tiêu chí đánh giá
 class Chapter(models.Model):
-    section = models.ForeignKey(Section,verbose_name='phần', on_delete=models.CASCADE)
     CHAPTER_CHOICES = (
         (1, 'Chương 1'),
         (2, 'Chương 2'),
@@ -39,12 +41,16 @@ class Chapter(models.Model):
         (9, 'Chương 9'),
         (10, 'Chương 10'),
     )
+    section = models.ForeignKey(Section,verbose_name='phần', on_delete=models.CASCADE)
     chapter = models.IntegerField('chương', choices=CHAPTER_CHOICES)
     title = models.TextField('tiêu đề')
     
     class Meta:
         verbose_name  = 'chương'
         verbose_name_plural  = 'chương'
+
+    def __str__(self):
+        return f'{self.section}{self.chapter}'
 
 
 # Tiêu chí đánh giá
@@ -67,6 +73,9 @@ class EvaluationCriteria(models.Model):
     class Meta:
         verbose_name  = 'tiêu chí'
         verbose_name_plural  = 'tiêu chí'    
+    
+    def __str__(self):
+        return f'{self.section_chapter}.{self.evaluation_criteria}'
 
 # Mức chất lượng
 class Level(models.Model):

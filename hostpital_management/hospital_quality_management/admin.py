@@ -42,16 +42,23 @@ class ConditionResource(resources.ModelResource):
 @admin.register(Section)
 class SectionAdmin(ImportExportModelAdmin):
     resource_classes = [SectionResource]
+    list_display = ('section', 'title')
 
 
 @admin.register(Chapter)
 class ChapterAdmin(ImportExportModelAdmin):
     resource_classes = [ChapterResource]
+    list_display = ('__str__','title')
 
 
 @admin.register(EvaluationCriteria)
 class EvaluationCriteriaAdmin(ImportExportModelAdmin):
     resource_classes = [EvaluationCriteriaResource]
+    list_display = ('__str__','title')
+    list_filter = ('section_chapter__section', 'section_chapter__chapter', 'evaluation_criteria')
+@admin.register(Level)
+class LevelAdmin(ImportExportModelAdmin):
+    resource_classes = [LevelResource]
 
 
 @admin.register(Condition)
