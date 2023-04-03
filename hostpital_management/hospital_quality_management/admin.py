@@ -12,8 +12,13 @@ class LevelInline(admin.TabularInline):
 class ResponserInline(admin.TabularInline):
     model = Responser
 
-class LevelResource(resources.ModelResource):
+class ResponserConditionInline(admin.TabularInline):
+    model = ResponserCondition
 
+class SelfAssessmentInline(admin.TabularInline):
+    model = SelfAssessment
+
+class LevelResource(resources.ModelResource):
     class Meta:
         model = Level
         fields = ('id','pre_index','level',)
@@ -67,17 +72,31 @@ class EvaluationCriteriaAdmin(ImportExportModelAdmin):
     list_display_links = ('title',)
     inlines = [
         LevelInline,
-        ResponserInline
+        ResponserInline,
+        SelfAssessmentInline
     ]
     resource_classes = [EvaluationCriteriaResource]
 
 
 @admin.register(Condition)
 class ConditionAdmin(ImportExportModelAdmin):
+    ordering = ['pre_index__level', 'index']
+
+    list_display = ('index_name', 'level_name', 'index','title')
+    list_filter = ('pre_index__pre_index__pre_index__pre_index__index','pre_index__pre_index__pre_index__index','pre_index__pre_index__index', 'pre_index__level')
+    list_display_links = ('title',)
+
+    inlines = [
+        ResponserConditionInline,
+    ]
     resource_classes = [ConditionResource]
-class RequestLevelAdmin(ImportExportModelAdmin):
-    resource_classes = [LevelResource]
+
+
+@admin.register(Level)
+class LevelAdmin(admin.ModelAdmin):
+    pass
 
 admin.site.register(File)
-admin.site.register(Level, RequestLevelAdmin)
 admin.site.register(Responser)
+admin.site.register(ResponserCondition)
+admin.site.register(SelfAssessment)
