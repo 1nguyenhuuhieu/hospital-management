@@ -93,9 +93,10 @@ class Level(models.Model):
         verbose_name  = 'mức chất lượng'
         verbose_name_plural  = 'mức chất lượng'
     
-
+    def __str__(self):
+        return f'{self.evaluation_criteria}. {self.get_level_display()}'
     
-# Điều kiện cho từng mức chất lượng
+# Tiểu mục trong từng tiêu chí
 class Condition(models.Model):
 
     evaluation_criteria_level = models.ForeignKey(Level, verbose_name='mức chất lượng', on_delete=models.CASCADE)
@@ -105,6 +106,10 @@ class Condition(models.Model):
     class Meta:
         verbose_name  = 'tiểu mục trong tiêu chí'
         verbose_name_plural  = 'tiểu mục trong tiêu chí'
+
+    def __str__(self):
+        return f'{self.evaluation_criteria_level}. Tiểu mục {self.index}'
+    
 
 # Upload file
 class File(models.Model):

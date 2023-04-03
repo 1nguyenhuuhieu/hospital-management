@@ -56,11 +56,21 @@ class EvaluationCriteriaAdmin(ImportExportModelAdmin):
     resource_classes = [EvaluationCriteriaResource]
     list_display = ('__str__','title')
     list_filter = ('section_chapter__section', 'section_chapter__chapter', 'evaluation_criteria')
+
 @admin.register(Level)
 class LevelAdmin(ImportExportModelAdmin):
     resource_classes = [LevelResource]
+    list_display = ('__str__', )
+
+    list_filter = ('evaluation_criteria__section_chapter__section', 'evaluation_criteria__section_chapter__chapter', 'evaluation_criteria__evaluation_criteria', 'level')
 
 
 @admin.register(Condition)
 class ConditionAdmin(ImportExportModelAdmin):
     resource_classes = [ConditionResource]
+    list_display = ('evaluation_criteria_level', 'title' )
+    list_filter = ('evaluation_criteria_level__evaluation_criteria__section_chapter__section',
+                   'evaluation_criteria_level__evaluation_criteria__section_chapter__chapter',
+                   'evaluation_criteria_level__evaluation_criteria__evaluation_criteria',
+                   'evaluation_criteria_level__level',
+                   'index')
