@@ -174,10 +174,10 @@ class SelfAssessment(models.Model):
     date_created = models.DateField(auto_now_add=True, blank=True, null=True, verbose_name='thời gian tạo')
     date_updated = models.DateField(auto_now=True, blank=True, null=True, verbose_name='thòi gian cập nhật')
     user = models.ForeignKey(User, verbose_name="người đánh giá", on_delete=models.CASCADE)
-    evaluation_criteria = models.ForeignKey(EvaluationCriteria, verbose_name='tiêu chí', on_delete=models.CASCADE)
+    evaluation_criteria = models.OneToOneField(EvaluationCriteria, verbose_name='tiêu chí', on_delete=models.CASCADE)
     level = models.IntegerField(choices=LEVEL_CHOICES, verbose_name="mức đánh giá")
 
-    note = RichTextField(blank=True, null=True)
+    note = RichTextField(blank=True, null=True, verbose_name='Ghi chú')
     class Meta:
         verbose_name  = 'tự đánh giá'
         verbose_name_plural  = 'tự đánh giá'    

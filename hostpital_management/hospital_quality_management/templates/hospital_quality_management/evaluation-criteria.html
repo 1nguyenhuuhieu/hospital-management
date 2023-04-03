@@ -150,11 +150,11 @@
         {% if sections %}
         {% for section in sections %}
         <li class="my-2">
-            <button class="btn btn-sm d-inline-flex text-truncate align-items-center collapsed border-0" data-bs-toggle="collapse" aria-expanded="false" data-bs-target="#contents-collapse-{{section.id}}" aria-controls="contents-collapse">{{ section.index }}. {{ section.title|lower|capfirst }}</button>
+            <button class="btn btn-sm d-inline-flex text-truncate align-items-center collapsed border-0" data-bs-toggle="collapse" aria-expanded="false" data-bs-target="#contents-collapse-{{section.id}}" aria-controls="contents-collapse">{{ section.section }}. {{ section.title|capfirst }}</button>
             {% if section.chapter_set.all %}
             <ul class="list-unstyled ps-3 collapse" id="contents-collapse-{{section.id}}">
             {% for chapter in section.chapter_set.all %}
-              <li><a class="d-inline-flex align-items-center rounded text-decoration-none" href="#{{section.index}}{{chapter.index}}">{{chapter.index}}. {{chapter.title|lower|capfirst }}</a></li>
+              <li><a class="d-inline-flex align-items-center rounded text-decoration-none" href="#{{section.section}}{{chapter.chapter}}">{{chapter.chapter}}. {{chapter.title|capfirst }}</a></li>
               {% endfor %}
             </ul>
             {% endif %}
@@ -171,13 +171,13 @@
     {% if section.chapter_set.all %}
     {% for chapter in section.chapter_set.all %}
     <section id="section-{{chapter.id}}">
-        <h2 class="sticky-xl-top fw-bold pt-3 pt-xl-5 pb-2 pb-xl-3 h5">{{section.index}}{{chapter.index}}. {{ chapter.title }}</h2>
+        <h2 class="sticky-xl-top fw-bold pt-3 pt-xl-5 pb-2 pb-xl-3 h5">{{ chapter}}. {{ chapter.title|upper }}</h2>
         {% if chapter.evaluationcriteria_set.all %}
         {% for e in chapter.evaluationcriteria_set.all %}
 
-        <article class="my-3" id="{{section.index}}{{chapter.index}}">
+        <article class="my-3" id="{{section.section}}{{chapter.chapter}}">
           <div class="bd-heading sticky-xl-top align-self-start mt-5 mb-3 mt-xl-0 mb-xl-2 border p-3 bg-white shadow-sm rounded bg-warning-subtle">
-            <h5 class="mt-5">{{section.index}}{{chapter.index}}{{e.index}}. {{e.title|lower|capfirst }}</h5>
+            <h5 class="mt-5">{{ e }}. {{e.title|lower|capfirst }}</h5>
             <div class="d-flex">
                 <i class="bi bi-square-fill me-1 text-danger"></i>
                 <i class="bi bi-square-fill me-1 text-danger"></i>
@@ -204,7 +204,7 @@
           </div>
     
           <div>
-            <h4 class="display-6">{{section.index}}{{chapter.index}}{{e.index}}. {{e.title|lower|capfirst }}</h4>
+            <h4 class="display-6">{{ e }}. {{e.title|lower|capfirst }}</h4>
 
             <div class="accordion" id="accordionExample">
                 {% for i in e.level_set.all %}
