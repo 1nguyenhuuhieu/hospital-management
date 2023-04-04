@@ -44,7 +44,8 @@ INSTALLED_APPS = [
 
 
     'dashboard',
-    'hospital_quality_management'
+    'hospital_quality_management',
+    'human_resource_management'
 ]
 
 MIDDLEWARE = [

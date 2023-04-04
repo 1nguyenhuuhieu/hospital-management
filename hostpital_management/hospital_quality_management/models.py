@@ -2,6 +2,8 @@ from django.db import models
 from ckeditor.fields import RichTextField
 from django.contrib.auth.models import User
 
+from human_resource_management.models import *
+
 
 # Models for Hospital Quality Management - HQM
 
@@ -108,7 +110,7 @@ class Condition(models.Model):
         verbose_name_plural  = 'tiểu mục trong tiêu chí'
 
     def __str__(self):
-        return f'{self.evaluation_criteria_level}. Tiểu mục {self.index}'
+        return f'{self.evaluation_criteria_level.evaluation_criteria} - Tiểu mục {self.index}({self.evaluation_criteria_level.get_level_display()})'
     
 
 # Upload file
@@ -133,14 +135,14 @@ class Image(models.Model):
 # Người chịu trách nhiệm quản lý tiêu chí
 class Responser(models.Model):
     time_created = models.DateField(auto_now=True, blank=True, null=True)
-    user = models.ForeignKey(User, verbose_name='nhân viên' , on_delete=models.CASCADE)
+    user = models.ForeignKey('HQMMember', verbose_name='thành viên' , on_delete=models.CASCADE)
     evalution_criteria = models.ForeignKey(EvaluationCriteria, verbose_name='tiêu chí', on_delete=models.CASCADE)
     ROLE_CHOICES = (
         (1, 'Phụ trách chính'),
         (2, 'Phụ tránh chung'),
     )
     role = models.IntegerField(choices=ROLE_CHOICES, verbose_name="vai trò")
-    notes = models.TextField(blank=True, null=True)
+    notes = models.CharField(max_length=200 ,blank=True, null=True, verbose_name='ghi chú')
     class Meta:
         verbose_name  = 'người phụ trách tiêu chí'
         verbose_name_plural  = 'người phụ trách tiêu chí'    
@@ -149,14 +151,14 @@ class Responser(models.Model):
 # Người chịu trách nhiệm tiểu mục trong tiêu chí
 class ResponserCondition(models.Model):
     time_created = models.DateField(auto_now=True, blank=True, null=True)
-    user = models.ForeignKey(User, verbose_name='nhân viên' , on_delete=models.CASCADE)
+    member = models.ForeignKey('HQMMember', verbose_name='người phụ trách' , on_delete=models.CASCADE)
     condition = models.ForeignKey(Condition, verbose_name='tiểu mục', on_delete=models.CASCADE)
     ROLE_CHOICES = (
         (1, 'Phụ trách chính'),
         (2, 'Phụ tránh chung'),
     )
     role = models.IntegerField(choices=ROLE_CHOICES, verbose_name='vai trò')
-    notes = models.TextField(blank=True, null=True, verbose_name='ghi chú')
+    notes = models.CharField(blank=True, null=True, verbose_name='ghi chú', max_length=1000)
     class Meta:
         verbose_name  = 'người phụ trách tiểu mục'
         verbose_name_plural  = 'người phụ trách tiểu mục'    
@@ -173,26 +175,48 @@ class SelfAssessment(models.Model):
     )
     date_created = models.DateField(auto_now_add=True, blank=True, null=True, verbose_name='thời gian tạo')
     date_updated = models.DateField(auto_now=True, blank=True, null=True, verbose_name='thòi gian cập nhật')
-    user = models.ForeignKey(User, verbose_name="người đánh giá", on_delete=models.CASCADE)
-    evaluation_criteria = models.OneToOneField(EvaluationCriteria, verbose_name='tiêu chí', on_delete=models.CASCADE)
+    user = models.ForeignKey('HQMMember', verbose_name="người đánh giá", on_delete=models.CASCADE)
+    evaluation_criteria = models.ForeignKey(EvaluationCriteria, verbose_name='tiêu chí', on_delete=models.CASCADE)
     level = models.IntegerField(choices=LEVEL_CHOICES, verbose_name="mức đánh giá")
 
-    note = RichTextField(blank=True, null=True, verbose_name='Ghi chú')
+    note = models.CharField(blank=True, null=True, verbose_name='Ghi chú', max_length=1000)
     class Meta:
         verbose_name  = 'tự đánh giá'
-        verbose_name_plural  = 'tự đánh giá'    
+        verbose_name_plural  = 'tự đánh giá'
+        unique_together = ('level', 'evaluation_criteria')    
+
+    def __str__(self):
+        return f'{self.get_level_display()}'
 
 # Bằng chứng cho các tiểu mục
 class Proof(models.Model):
     time_created = models.DateTimeField(auto_now=True)
     time_updated = models.DateTimeField(auto_now_add=True)
-    user = models.ForeignKey(User, verbose_name='người tải lên', on_delete=models.CASCADE)
+    user = models.ForeignKey('HQMMember', verbose_name='người chịu trách nhiệm', on_delete=models.CASCADE)
     condition = models.ForeignKey(Condition, verbose_name='tiểu mục', on_delete=models.CASCADE)
-    files = models.ManyToManyField(File, blank=True, verbose_name='file đính kèm')
-    images = models.ManyToManyField(Image, blank=True, verbose_name='ảnh đính kèm')
-    notes = RichTextField(blank=True, null=True)
+    file = models.FileField(upload_to='proofs/files/',blank=True, null=True,verbose_name='file đính kèm')
+    images = models.ImageField(upload_to='proofs/images/', blank=True, null=True,verbose_name='ảnh đính kèm')
+    notes = models.CharField(max_length=1000, verbose_name='ghi chú',blank=True, null=True)
 
     class Meta:
         verbose_name  = 'bằng chứng đánh giá'
         verbose_name_plural  = 'bằng chứng đánh giá'   
+
+# Thành viên nhóm quản lý chất lượng bệnh viện
+class HQMMember(models.Model):
+    member = models.ForeignKey(Staff, on_delete=models.CASCADE, verbose_name='nhân viên')
+    date_joined = models.DateField(auto_now=True)
+    ROLE_CHOICES = (
+        (1, 'Quản lý'),
+        (2, 'Thành viên'),
+    )
+
+    role = models.IntegerField(choices=ROLE_CHOICES, verbose_name='Vai trò')
+    note = models.CharField(max_length=200, blank=True, null=True, verbose_name='Ghi chú')
+
+    class Meta:
+        verbose_name  = 'thành viên nhóm QLCLBV'
+        verbose_name_plural  = 'thành viên nhóm QLCLBV'
     
+    def __str__(self):
+        return f'{self.member} - {self.get_role_display()}'

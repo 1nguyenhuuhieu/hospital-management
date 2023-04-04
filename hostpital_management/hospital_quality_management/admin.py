@@ -35,10 +35,23 @@ class ConditionResource(resources.ModelResource):
         model = Condition
         fields = ('id', 'evaluation_criteria_level', 'index', 'title',)
 
-# tabular admin inline
 
+
+# tabular admin inline
 class SelfAssessmentInline(admin.TabularInline):
     model = SelfAssessment
+
+class ResponserInline(admin.TabularInline):
+    model = Responser
+
+class ProofInline(admin.TabularInline):
+    model = Proof
+
+class ResponserConditionInline(admin.TabularInline):
+    model = ResponserCondition
+
+class HQMMemberInline(admin.TabularInline):
+    model = HQMMember
 
 # Khai báo trang admin models
 @admin.register(Section)
@@ -58,13 +71,15 @@ class EvaluationCriteriaAdmin(ImportExportModelAdmin):
     fields = ['title']
     readonly_fields = ["title"]
 
-    ordering = ('evaluation_criteria',)
+    ordering = ('id',)
     resource_classes = [EvaluationCriteriaResource]
-    list_display = ('__str__','evaluation_criteria','title')
-    list_filter = ('section_chapter__section', 'section_chapter__chapter', 'evaluation_criteria')
+    list_display = ('id','__str__','selfassessment','title')
+    list_display_links = ('title',)
+    list_filter = ('section_chapter__section', 'section_chapter__chapter', 'evaluation_criteria', 'selfassessment')
 
     inlines = [
         SelfAssessmentInline,
+        ResponserInline
     ]
 
 
@@ -78,14 +93,27 @@ class LevelAdmin(ImportExportModelAdmin):
 
 @admin.register(Condition)
 class ConditionAdmin(ImportExportModelAdmin):
+    ordering = ('id',)
+    fields = ['title',]
+    readonly_fields = ['evaluation_criteria_level',"title"]
+
     resource_classes = [ConditionResource]
-    list_display = ('evaluation_criteria_level', 'title' )
+    list_display = ('id','evaluation_criteria_level', 'title' )
+    list_display_links = ('title',)
     list_filter = ('evaluation_criteria_level__evaluation_criteria__section_chapter__section',
                    'evaluation_criteria_level__evaluation_criteria__section_chapter__chapter',
                    'evaluation_criteria_level__evaluation_criteria__evaluation_criteria',
                    'evaluation_criteria_level__level',
                    'index')
     
-@admin.register(SelfAssessment)
-class SelfAssessmentAdmin(admin.ModelAdmin):
-    pass
+    inlines = [
+        ResponserConditionInline,
+        ProofInline,
+    ]
+
+@admin.register(HQMMember)
+class HQMMemberAdmin(admin.ModelAdmin):
+    inlines = [
+        ResponserInline,
+        ResponserConditionInline
+    ]
