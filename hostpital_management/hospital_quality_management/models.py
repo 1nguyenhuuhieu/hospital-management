@@ -7,7 +7,6 @@ from human_resource_management.models import *
 
 # Models for Hospital Quality Management - HQM
 
-
 # Phần tiêu chí đánh giá
 class Section(models.Model):
     SECTION_CHOICES = (
@@ -27,8 +26,6 @@ class Section(models.Model):
     def __str__(self):
         return f'{self.section}'
 
-
-
 # Chương tiêu chí đánh giá
 class Chapter(models.Model):
     CHAPTER_CHOICES = (
@@ -43,7 +40,7 @@ class Chapter(models.Model):
         (9, 'Chương 9'),
         (10, 'Chương 10'),
     )
-    section = models.ForeignKey(Section,verbose_name='phần', on_delete=models.CASCADE)
+    section = models.ForeignKey(Section, verbose_name='phần', on_delete=models.CASCADE)
     chapter = models.IntegerField('chương', choices=CHAPTER_CHOICES)
     title = models.TextField('tiêu đề')
     
@@ -53,7 +50,6 @@ class Chapter(models.Model):
 
     def __str__(self):
         return f'{self.section}{self.chapter}'
-
 
 # Tiêu chí đánh giá
 class EvaluationCriteria(models.Model):
@@ -111,26 +107,24 @@ class Condition(models.Model):
 
     def __str__(self):
         return f'{self.evaluation_criteria_level.evaluation_criteria} - Tiểu mục {self.index}({self.evaluation_criteria_level.get_level_display()})'
-    
 
 # Upload file
 class File(models.Model):
-    title = models.CharField(max_length=200)
-    description = models.TextField()
-    file = models.FileField(upload_to='doccument/')
+    description = models.CharField(max_length=200)
+    file = models.FileField(upload_to='doccuments/')
     class Meta:
         verbose_name  = 'file đính kèm'
         verbose_name_plural  = 'file đính kèm'  
 
 # Upload Image
 class Image(models.Model):
-    title = models.CharField(max_length=200)
-    description = models.TextField()
+    description = models.CharField(max_length=200)
     image = models.ImageField(upload_to='images/')  
     
     class Meta:
         verbose_name  = 'ảnh đính kèm'
         verbose_name_plural  = 'ảnh đính kèm' 
+
 
 # Người chịu trách nhiệm quản lý tiêu chí
 class Responser(models.Model):
@@ -165,7 +159,7 @@ class ResponserCondition(models.Model):
 
 
 # Tự đánh giá các tiêu chí
-class SelfAssessment(models.Model):
+class Assessment(models.Model):
     LEVEL_CHOICES = (
         (1, 'Mức 1'),
         (2, 'Mức 2'),
@@ -175,32 +169,32 @@ class SelfAssessment(models.Model):
     )
     date_created = models.DateField(auto_now_add=True, blank=True, null=True, verbose_name='thời gian tạo')
     date_updated = models.DateField(auto_now=True, blank=True, null=True, verbose_name='thòi gian cập nhật')
-    user = models.ForeignKey('HQMMember', verbose_name="người đánh giá", on_delete=models.CASCADE)
-    evaluation_criteria = models.ForeignKey(EvaluationCriteria, verbose_name='tiêu chí', on_delete=models.CASCADE)
+    responser = models.ForeignKey('HQMMember', verbose_name="người đánh giá", on_delete=models.CASCADE)
+    evaluation_criteria = models.OneToOneField(EvaluationCriteria, verbose_name='tiêu chí', on_delete=models.CASCADE)
     level = models.IntegerField(choices=LEVEL_CHOICES, verbose_name="mức đánh giá")
 
     note = models.CharField(blank=True, null=True, verbose_name='Ghi chú', max_length=1000)
     class Meta:
         verbose_name  = 'tự đánh giá'
         verbose_name_plural  = 'tự đánh giá'
-        unique_together = ('level', 'evaluation_criteria')    
 
     def __str__(self):
         return f'{self.get_level_display()}'
 
-# Bằng chứng cho các tiểu mục
-class Proof(models.Model):
+# Tự đánh giá tiểu mục
+class AssessmentCondition(models.Model):
     time_created = models.DateTimeField(auto_now=True)
     time_updated = models.DateTimeField(auto_now_add=True)
-    user = models.ForeignKey('HQMMember', verbose_name='người chịu trách nhiệm', on_delete=models.CASCADE)
-    condition = models.ForeignKey(Condition, verbose_name='tiểu mục', on_delete=models.CASCADE)
-    file = models.FileField(upload_to='proofs/files/',blank=True, null=True,verbose_name='file đính kèm')
-    images = models.ImageField(upload_to='proofs/images/', blank=True, null=True,verbose_name='ảnh đính kèm')
-    notes = models.CharField(max_length=1000, verbose_name='ghi chú',blank=True, null=True)
+    responser = models.ForeignKey('HQMMember', verbose_name="người đánh giá", on_delete=models.CASCADE)
+    is_pass = models.BooleanField(default=False, verbose_name='đạt hay chưa?')
+    condition = models.OneToOneField(Condition, verbose_name='tiểu mục', on_delete=models.CASCADE)
+    notes = models.CharField(max_length=1000, verbose_name='ghi chú', blank=True, null=True)
+    files = models.ManyToManyField(File, verbose_name='file đính kèm', blank=True)
+    images = models.ManyToManyField(Image, verbose_name='ảnh đính kèm', blank=True)
 
     class Meta:
-        verbose_name  = 'bằng chứng đánh giá'
-        verbose_name_plural  = 'bằng chứng đánh giá'   
+        verbose_name  = 'tự đánh giá'
+        verbose_name_plural  = 'tự đánh giá'
 
 # Thành viên nhóm quản lý chất lượng bệnh viện
 class HQMMember(models.Model):

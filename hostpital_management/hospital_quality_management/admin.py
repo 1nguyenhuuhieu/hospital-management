@@ -38,14 +38,11 @@ class ConditionResource(resources.ModelResource):
 
 
 # tabular admin inline
-class SelfAssessmentInline(admin.TabularInline):
-    model = SelfAssessment
+class AssessmentInline(admin.TabularInline):
+    model = Assessment
 
 class ResponserInline(admin.TabularInline):
     model = Responser
-
-class ProofInline(admin.TabularInline):
-    model = Proof
 
 class ResponserConditionInline(admin.TabularInline):
     model = ResponserCondition
@@ -53,35 +50,37 @@ class ResponserConditionInline(admin.TabularInline):
 class HQMMemberInline(admin.TabularInline):
     model = HQMMember
 
+class AssessmentConditionInline(admin.StackedInline):
+    model = AssessmentCondition
+    fields = ('responser', 'is_pass', 'files', 'images')
+    filter_horizontal = ('files', 'images') 
+
+
 # Khai báo trang admin models
 @admin.register(Section)
 class SectionAdmin(ImportExportModelAdmin):
     resource_classes = [SectionResource]
     list_display = ('section', 'title')
 
-
 @admin.register(Chapter)
 class ChapterAdmin(ImportExportModelAdmin):
     resource_classes = [ChapterResource]
     list_display = ('__str__','title')
 
-
 @admin.register(EvaluationCriteria)
 class EvaluationCriteriaAdmin(ImportExportModelAdmin):
     fields = ['title']
     readonly_fields = ["title"]
-
     ordering = ('id',)
     resource_classes = [EvaluationCriteriaResource]
     list_display = ('id','__str__','title')
     list_display_links = ('title',)
-    list_filter = ('section_chapter__section', 'section_chapter__chapter', 'evaluation_criteria', 'selfassessment')
+    list_filter = ('section_chapter__section', 'section_chapter__chapter', 'evaluation_criteria', 'assessment')
 
     inlines = [
-        SelfAssessmentInline,
+        AssessmentInline,
         ResponserInline
     ]
-
 
 @admin.register(Level)
 class LevelAdmin(ImportExportModelAdmin):
@@ -108,8 +107,9 @@ class ConditionAdmin(ImportExportModelAdmin):
     
     inlines = [
         ResponserConditionInline,
-        ProofInline,
+        AssessmentConditionInline,
     ]
+
 
 @admin.register(HQMMember)
 class HQMMemberAdmin(admin.ModelAdmin):
@@ -117,3 +117,11 @@ class HQMMemberAdmin(admin.ModelAdmin):
         ResponserInline,
         ResponserConditionInline
     ]
+
+@admin.register(File)
+class FileAdmin(admin.ModelAdmin):
+    pass
+
+@admin.register(Image)
+class ImageAdmin(admin.ModelAdmin):
+    pass
