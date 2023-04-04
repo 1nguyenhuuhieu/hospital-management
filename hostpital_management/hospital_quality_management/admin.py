@@ -73,7 +73,7 @@ class EvaluationCriteriaAdmin(ImportExportModelAdmin):
 
     ordering = ('id',)
     resource_classes = [EvaluationCriteriaResource]
-    list_display = ('id','__str__','selfassessment','title')
+    list_display = ('id','__str__','title')
     list_display_links = ('title',)
     list_filter = ('section_chapter__section', 'section_chapter__chapter', 'evaluation_criteria', 'selfassessment')
 

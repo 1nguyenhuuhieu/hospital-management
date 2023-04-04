@@ -212,14 +212,14 @@
                 <div class="accordion-item shadow-sm ">
                   <h2 class="accordion-header ">
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{i.id}}" aria-expanded="false" aria-controls="collapseThree">
-                      {% if i.level <= e.selfassessment.level %}
+                      {% if i.level <= 4 %}
                       <i class="bi bi-check-circle-fill me-2 text-success fw-bold"></i>
                       {% else %}
                       <i class="bi bi-x-circle-fill me-2 text-danger fw-bold"></i>
                       {% endif %}
                         {{ i.get_level_display }}
             
-                      <small class="fst-italic text-muted ms-3">{% if e.selfassessment %}update at 03/04/2023 by #username {% endif %}</small>
+                      <small class="fst-italic text-muted ms-3">update at 03/04/2023 by #username</small>
                     </button>
                   </h2>
                   <div id="collapse{{i.id}}" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
