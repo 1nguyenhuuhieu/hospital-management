@@ -97,13 +97,14 @@ class ConditionAdmin(ImportExportModelAdmin):
     readonly_fields = ['evaluation_criteria_level',"title"]
 
     resource_classes = [ConditionResource]
-    list_display = ('id','evaluation_criteria_level', 'title' )
+    list_display = ('id','assessment_condition_name','evaluation_criteria_level', 'title' )
     list_display_links = ('title',)
     list_filter = ('evaluation_criteria_level__evaluation_criteria__section_chapter__section',
                    'evaluation_criteria_level__evaluation_criteria__section_chapter__chapter',
                    'evaluation_criteria_level__evaluation_criteria__evaluation_criteria',
                    'evaluation_criteria_level__level',
-                   'index')
+                   'index',
+                   'assessmentcondition__is_pass')
     
     inlines = [
         ResponserConditionInline,
@@ -113,15 +114,21 @@ class ConditionAdmin(ImportExportModelAdmin):
 
 @admin.register(HQMMember)
 class HQMMemberAdmin(admin.ModelAdmin):
-    inlines = [
-        ResponserInline,
-        ResponserConditionInline
-    ]
+    pass
 
 @admin.register(File)
 class FileAdmin(admin.ModelAdmin):
-    pass
+    def get_model_perms(self, request):
+        """
+        Return empty perms dict thus hiding the model from admin index.
+        """
+        return {}
 
 @admin.register(Image)
 class ImageAdmin(admin.ModelAdmin):
-    pass
+    def get_model_perms(self, request):
+        """
+        Return empty perms dict thus hiding the model from admin index.
+        """
+        return {}
+

@@ -105,6 +105,12 @@ class Condition(models.Model):
         verbose_name  = 'tiểu mục trong tiêu chí'
         verbose_name_plural  = 'tiểu mục trong tiêu chí'
 
+    def assessment_condition_name(self):
+        return f'{self.assessmentcondition.is_pass}'
+
+
+
+
     def __str__(self):
         return f'{self.evaluation_criteria_level.evaluation_criteria} - Tiểu mục {self.index}({self.evaluation_criteria_level.get_level_display()})'
 
@@ -116,14 +122,22 @@ class File(models.Model):
         verbose_name  = 'file đính kèm'
         verbose_name_plural  = 'file đính kèm'  
 
+    def __str__(self):
+        return f'{self.description}'
+    
 # Upload Image
 class Image(models.Model):
     description = models.CharField(max_length=200)
     image = models.ImageField(upload_to='images/')  
     
+
+    def __str__(self):
+        return f'{self.description}'
+    
     class Meta:
         verbose_name  = 'ảnh đính kèm'
         verbose_name_plural  = 'ảnh đính kèm' 
+    
 
 
 # Người chịu trách nhiệm quản lý tiêu chí
@@ -175,9 +189,16 @@ class Assessment(models.Model):
 
     note = models.CharField(blank=True, null=True, verbose_name='Ghi chú', max_length=1000)
     class Meta:
-        verbose_name  = 'tự đánh giá'
-        verbose_name_plural  = 'tự đánh giá'
+        verbose_name  = 'đánh giá tiêu chí'
+        verbose_name_plural  = 'đánh giá tiêu chí'
+    
+    def color_level(self):
+        if self.level < 3: return 'text-danger'
+        if self.level > 2 and self.level < 5: return 'text-warning'
+        if self.level > 4: return 'text-success'
 
+    def remain(self):
+        return 5 - self.level
     def __str__(self):
         return f'{self.get_level_display()}'
 
@@ -192,9 +213,11 @@ class AssessmentCondition(models.Model):
     files = models.ManyToManyField(File, verbose_name='file đính kèm', blank=True)
     images = models.ManyToManyField(Image, verbose_name='ảnh đính kèm', blank=True)
 
+
+
     class Meta:
-        verbose_name  = 'tự đánh giá'
-        verbose_name_plural  = 'tự đánh giá'
+        verbose_name  = 'đánh giá tiểu mục'
+        verbose_name_plural  = 'đánh giá tiểu mục'
 
 # Thành viên nhóm quản lý chất lượng bệnh viện
 class HQMMember(models.Model):
