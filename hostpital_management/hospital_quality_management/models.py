@@ -143,7 +143,7 @@ class Image(models.Model):
 # Người chịu trách nhiệm quản lý tiêu chí
 class Responser(models.Model):
     time_created = models.DateField(auto_now=True, blank=True, null=True)
-    user = models.ForeignKey('HQMMember', verbose_name='thành viên' , on_delete=models.CASCADE)
+    member = models.ForeignKey('HQMMember', verbose_name='thành viên' , on_delete=models.CASCADE)
     evalution_criteria = models.ForeignKey(EvaluationCriteria, verbose_name='tiêu chí', on_delete=models.CASCADE)
     ROLE_CHOICES = (
         (1, 'Phụ trách chính'),
