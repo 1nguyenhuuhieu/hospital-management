@@ -183,7 +183,7 @@
         {% for e in chapter.evaluationcriteria_set.all %}
 
         <article class="my-3" id="{{section.section}}{{chapter.chapter}}">
-          <div class="bd-heading sticky-xl-top align-self-start mt-5 mb-3 mt-xl-0 mb-xl-2 p-3 border rounded shadow-sm bg-white ">
+          <div class="bd-heading sticky-xl-top align-self-start mt-5 mb-3 mt-xl-0 mb-xl-2  ">
             <h6 class="mt-5">{{ e }}. {{e.title|lower|capfirst }}</h6>
             <hr>
             {% if e.assessment%}
@@ -210,19 +210,17 @@
      
             <a href="" class="text-decoration-none">Chi tiết<i class="bi bi-arrow-right ms-2"></i></a>
             <hr>
-            <div class="mb-3 d-flex flex-column">
               {% if e.responser_set.all %}
               {% for responser in e.responser_set.all %}
               {% if responser.role == 1 %}
-              <div><span class="badge text-bg-danger mt-1">{{responser.member.member|lower|title}}</span></div>
+             <span class="badge text-bg-danger mt-1">{{responser.member.member|lower|title}}</span>
               {% else %}
-              <div><span class="badge text-bg-primary mt-1">{{responser.member.member|lower|title}}</span></div>
+            <span class="badge text-bg-primary mt-1">{{responser.member.member|lower|title}}</span>
 
               {% endif %}
 
               {% endfor %}
               {% endif %}
-            </div>
             <div class="small text-muted fst-italic d-flex align-items-center my-2">
               <i class="bi bi-circle-fill text-primary me-2"></i>Phụ trách chung
             </div>
@@ -245,7 +243,7 @@
                       <i class="bi bi-x-circle-fill me-2 text-danger fw-bold"></i>
                       {% endif %}
                         {{ i.get_level_display }}
-                      <small class="fst-italic text-muted ms-3">{{ i.condition_set.all|length}}</small>
+                      <small class="fst-italic text-muted ms-3">{{ i.condition.assessmentcondition_set.all|length}}/{{ i.condition_set.all|length}}</small>
                     </button>
                   </h2>
                   <div id="collapse{{i.id}}" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
