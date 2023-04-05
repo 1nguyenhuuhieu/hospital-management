@@ -245,7 +245,7 @@
                       <i class="bi bi-x-circle-fill me-2 text-danger fw-bold"></i>
                       {% endif %}
                         {{ i.get_level_display }}
-                      <small class="fst-italic text-muted ms-3">update at 03/04/2023 by #username</small>
+                      <small class="fst-italic text-muted ms-3">{{ i.condition_set.all|length}}</small>
                     </button>
                   </h2>
                   <div id="collapse{{i.id}}" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
