@@ -1,0 +1,153 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize%}
+{% block content %}
+<div class="shadow-sm border-bottom border-5 border-warning">
+  <div class="py-5" class="parallax-window py-5" data-parallax="scroll"
+    data-image-src="{% static 'imgs/spotlight_quote.jpg' %}">
+    <h1 class="display-4 fw-semibold text-light text-center" style="font-family: 'Oswald', sans-serif;">{{ tag_title|upper }}</h1>
+  </div>
+</div>
+<div class="container">
+  <div class="row mt-4 mt-sm-5 justify-content-center">
+    <div class="col-lg-7">
+      {% for post in list_object %}
+      <div class="card border-0 hover01">
+        <div class="row g-2 g-sm-3">
+          <h5 class="mb-1"> <a href="{% url 'post' post_id=post.id %}"
+              class="text-decoration-none link-dark stretched-link">{{post.title}}
+              
+            
+            </a></h5>
+          <div class="col-4 col-sm-3">
+            <div class="hovereffect rounded-3 shadow-sm ">
+              {% if post.cover %}
+              <img src="{{ post.cover.url }}" class="img-fluid " alt="...">
+              {% elif post.youtube_url %}
+              <img src="https://img.youtube.com/vi/{{ post.youtube_id }}/hqdefault.jpg" class="img-fluid " alt="...">
+              {% else %}
+              <img src="{% static 'imgs/post-cover.png' %}" class="img-fluid " alt="...">
+              {% endif %}
+            </div>
+          </div>
+          <div class="col-8 col-sm-9">
+            <p class="mb-1">{% if post.youtube_url %}<span class="badge text-bg-danger rounded-pill me-2">video</span>{% endif %}{{ post.content|striptags|safe|truncatewords:15 }}</p>
+            <p class="m-0"><small class="text-body-secondary fst-italic">{{ post.created_time|naturaltime }}</small></p>
+          </div>
+        </div>
+        <div class="col-12">
+          {% if not forloop.last %}
+          <hr class="mb-2 mb-sm-4 mt-2 mt-sm-4">
+          {% endif %}
+        </div>
+      </div>
+      {% endfor %}
+      {% if p.page_range %}
+      <nav aria-label="Page navigation example">
+        <ul class="pagination mt-5">
+          {% if current_page.has_previous %} 
+          <li class="page-item ">
+            <form method="get">
+            <button class="page-link" type="submit" name="page" value="{{current_page.previous_page_number}}">Trước</button>
+              </form>
+            </li>
+            {% else %}
+            <li class="page-item disabled ">
+              <button class="page-link">Trước</button>
+              </li>
+            {% endif %}
+          {% for number_page in p.page_range %}
+          <li class="page-item">
+            <form method="get">
+            <button class="page-link {% if current_page.number == number_page %}active{% endif %}"
+               type="submit" name="page" value="{{number_page}}">{{number_page}}</button>
+            </form>
+            </li>
+          {% endfor %}
+          {% if current_page.has_next %} 
+          <li class="page-item ">
+            <form method="get">
+            <button class="page-link" type="submit" name="page" value="{{current_page.next_page_number}}">Sau</button>
+              </form>
+            </li>
+            {% else %}
+            <li class="page-item disabled ">
+              <button class="page-link">Sau</button>
+              </li>
+            {% endif %}
+        </ul>
+      </nav>
+      <p class="text-muted small fst-italic">Trang {{current_page.number}} trong {{p.num_pages}}. Tổng số {{ p.count }}
+        bài viết</p>
+      {% endif %}
+    </div>
+    <div class="col-lg-4">
+      <div>
+        <div class="p-3 mb-3 bg-body-tertiary rounded border">
+          <h4 class="fst-italic">Danh mục</h4>
+          <hr>
+          {% if tag_list %}
+          {% for child in tag_list %}
+           <a href="{% url 'posts' tag_id=child.id %}" class="btn btn-sm btn-warning m-1 rounded-pill">
+            {{ child.title }}
+              <span class=" badge text-bg-light rounded-pill">
+                {{ child.post_set.all|length }}
+                <span class="visually-hidden">unread messages</span>
+              </span>
+           </a>
+          {% endfor %}
+          {% endif %}
+        </div>
+        <div>
+          <label for="exampleDataList" class="form-label fw-semibold"><i class="bi bi-search me-2"></i>Tìm kiếm bài viết</label>
+          <input type="search" oninput='onInput()' class="form-control" list="datalistSearch" id="searchInput" placeholder="Tên bài viết...">
+          <datalist id="datalistSearch">
+            {% for post in posts %}
+          <option data-value="{{ post.id }}" value="{{ post.title}}">{{ post.tags_list }}</option>
+          {% endfor %}
+          </datalist>
+      </div>
+      {% if top_view_posts %}
+        <h4 class="mb-4 mt-3 border-bottom border-danger border-2 pb-2">Xem nhiều</h4>
+        {% for post in top_view_posts %}
+        <div class="card border-0">
+        <div class="row g-2 {% if not forloop.last %} border-bottom {% endif %} my-2 pb-2 ">
+          <div class="col-3 ">
+            {% if post.cover %}
+            <img src="{{ post.cover.url }}" class="img-fluid rounded-3 shadow-sm" alt="...">
+            {% else %}
+            <img src="{% static 'imgs/post-cover.png' %}" class="img-fluid rounded-3 shadow-sm" alt="...">
+            {% endif %}
+          </div>
+          <div class="col-9">
+            <p class="mb-0" > <a href="{% url 'post' post_id=post.id %}" class="stretched-link link-dark text-decoration-none">{{ post.title }}</a> </p>
+            <p class="mt-0 text-muted" ><small>Lượt xem {{ post.view_count }}</small> </p>
+          </div>
+        </div>
+      </div>
+        {% endfor %}
+        {% endif%}
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function onInput() {
+    var val = document.getElementById("searchInput").value;
+    var opts = document.getElementById('datalistSearch').childNodes;
+    for (var i = 0; i < opts.length; i++) {
+      if (opts[i].value === val) {
+        // An item was selected from the list!
+        // yourCallbackHere()
+        const postID = opts[i].getAttribute('data-value');
+        const targetURL = "{% url 'post' post_id=999999 %}"
+        const postURL = targetURL.replace('999999', postID)
+        window.location.href = postURL
+
+        break;
+      }
+    }
+  }
+</script>
+{% endblock %}

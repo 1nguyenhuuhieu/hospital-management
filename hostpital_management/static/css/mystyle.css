@@ -1,0 +1,202 @@
+.active-red{
+  color: #DA251C !important;
+  }
+
+.nounderline {
+    text-decoration: none !important
+  }
+
+  .rainbow { 
+  background: linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);
+  background-size: 1800% 1800%;
+  
+  -webkit-animation: rainbow 18s ease infinite;
+  -z-animation: rainbow 18s ease infinite;
+  -o-animation: rainbow 18s ease infinite;
+    animation: rainbow 18s ease infinite;}
+  
+  @-webkit-keyframes rainbow {
+      0%{background-position:0% 82%}
+      50%{background-position:100% 19%}
+      100%{background-position:0% 82%}
+  }
+  @-moz-keyframes rainbow {
+      0%{background-position:0% 82%}
+      50%{background-position:100% 19%}
+      100%{background-position:0% 82%}
+  }
+  @-o-keyframes rainbow {
+      0%{background-position:0% 82%}
+      50%{background-position:100% 19%}
+      100%{background-position:0% 82%}
+  }
+  @keyframes rainbow { 
+      0%{background-position:0% 82%}
+      50%{background-position:100% 19%}
+      100%{background-position:0% 82%}
+  }
+
+  .parallax {
+    /* The image used */
+    background-image: url("../imgs/cover2.jpg");
+  
+    /* Set a specific height */
+   
+   min-height: 300px; 
+  
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    /* background-position: center; */
+    background-repeat: no-repeat;
+    background-size: 100%;
+  }
+
+
+  .parallax-window {
+    min-height: 500px;
+    background: transparent;
+}
+
+.speratorline {
+    height: 5px;
+    border-left: 1px solid red;
+}
+
+
+.rainbow-box {
+    border: 2px solid transparent;
+    border-image: linear-gradient(to bottom right, #b827fc 0%, #2c90fc 25%, #b8fd33 50%, #fec837 75%, #fd1892 100%);
+    border-image-slice: 1;
+
+  }
+
+
+    .thaytroviet{
+      font-size:25px;
+    }
+
+    @media only screen and (max-width: 768px){
+
+  
+
+    }
+  .fontsizeaboutus{
+    font-size: 30px;
+  }
+.homecategoriesiconsize{
+  font-size: 15px;
+}
+
+.homecategoriestextsize{
+  font-size: 13px;
+}
+.homecategoriestitle{
+  font-weight: normal;
+}
+  @media only screen and (min-width: 768px) {
+    .homecategoriestitle{
+      font-weight: bold;
+    }
+    .homecategoriesiconsize{
+       font-size: 25px;
+    }
+    .homecategoriestextsize{
+      font-size: 1rem;
+    }
+    .thaytroviet {
+      font-size: 60px;
+    }
+
+    .fontsizeaboutus{
+      font-size: 50px;
+    }
+  
+
+    .tacgia {
+      border: 0 !important;
+      box-shadow: none !important;
+    }
+
+  }
+
+  .font25{
+    font-size: 25px;
+  }
+
+  .bg-sky{
+    background-image: url("../imgs/spotlight.png");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    min-height: 400px;
+
+  }
+
+  .fontthaytroviet {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  }
+
+  .funfactsizeicon {
+    font-size: 50px;
+  }
+
+  ul.timeline {
+    list-style-type: none;
+    position: relative;
+}
+ul.timeline:before {
+    content: ' ';
+    background: #d4d9df;
+    display: inline-block;
+    position: absolute;
+    left: 29px;
+    width: 2px;
+    height: 100%;
+    z-index: 400;
+}
+ul.timeline > li {
+    margin: 20px 0;
+    padding-left: 20px;
+}
+ul.timeline > li:before {
+    content: ' ';
+    background: white;
+    display: inline-block;
+    position: absolute;
+    border-radius: 50%;
+    border: 3px solid #707070;
+    left: 20px;
+    width: 20px;
+    height: 20px;
+    z-index: 400;
+}
+
+.bghoa{
+  background-image: url("../imgs/bg_hoa.png");
+  background-repeat: repeat;
+}
+
+.homecategoriesshadow{
+  -webkit-box-shadow: 4px 4px 8px 1px rgba(57,57,57,0.48); 
+box-shadow: 4px 4px 8px 1px rgba(57,57,57,0.48);
+}
+
+.homecategoriesborder{
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+}
+
+.hovereffect {
+  overflow: hidden;
+}
+.hover01  img {
+	-webkit-transform: scale(1);
+	transform: scale(1);
+	-webkit-transition: .3s ease-in-out;
+	transition: .3s ease-in-out;
+}
+.hover01 :hover img {
+	-webkit-transform: scale(1.1);
+	transform: scale(1.1);
+  
+}

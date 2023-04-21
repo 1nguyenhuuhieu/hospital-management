@@ -1,0 +1,69 @@
+<!-- gặp gỡ -->
+{% load static %}
+{% if home_post3 %}
+<section class="pt-lg-5 pt-0 bg-light">
+    <div class="container pt-5">
+      <div class="text-center mb-0 mb-lg-5">
+        <h3 class="mb-2 thaytroviet" style="font-family: 'Sedgwick Ave Display', cursive;">Gương thi đua điển hình</h3>
+        <img src="{% static 'imgs/flower-line.png' %}" alt=""
+          class="img-fluid mt-4" style="max-width: 200px">
+        <i class="fas  fa-pencil-alt mb-3" style="font-size:40px"></i>
+      </div>
+      <div class="row ">
+        <div class="col-lg-4 d-flex align-items-center  justify-content-end ">
+          <div class="d-none d-lg-block">
+            {% if home_post3.cover %}
+            <img src="{{ home_post3.cover.url }}" class="img-fluid m-0 border rounded-3 shadow-sm" style="width: 300px;">
+            {% else %}
+            <img src="{% static 'imgs/teacher_gapgo.png' %}" class="img-fluid m-0" style="width: 300px;">
+            {% endif %}
+          </div>
+        </div>
+        <div class="col-lg-6 ">
+          <div class="d-lg-none">
+            {% if home_post3.cover %}
+            <img src="{{ home_post3.cover.url }}" class="img-fluid">
+            {% else %}
+            <img src="{% static 'imgs/teacher_gapgo.png' %}" class="img-fluid">
+            {% endif %}
+
+        </div>
+          <h3 class="card-title fontthaytroviet mb-2 mt-3" style="font-weight: bold;">{{ home_post3.title }}
+          </h3>
+          <small class="text-muted" class="text-decoration-none">Đăng {{ home_post3.created_time }}</small>
+          <div class="fontthaytroviet mt-4" style="font-size: 20px;">
+            {{ home_post3.content|safe|truncatewords:120 }}</div>
+          <div class="d-lg-none">
+            <div class="row mt-3">
+                <div class="col  p-0 d-flex justify-content-center border-right"><i
+                        class="bi bi-heart  me-2"></i>
+                    <span>{{ home_post3.like }}</span>
+                </div>
+                <div class="col p-0  d-flex justify-content-center border-right"><i
+                        class="bi bi-chat-left  me-2"></i>
+                    <span>{{ home_post3.comment_set.all|length }}</span>
+                </div>
+                <div class="col  p-0 d-flex justify-content-center"><i class="bi bi-eye me-2"></i>
+                    <span>{{ home_post3.view_count }}</span></div>
+            </div>
+            <hr>
+          </div>
+          <p class="text-end mt-5 mb-5"> <a href="{% url 'news:post' post_id=home_post3.id %}" class="text-decoration-none"> Đọc tiếp <i
+                class="bi bi-arrow-right ms-2"></i></a> </p>
+        </div>
+        <div class="col-1 text-center text-secondary ms-5 d-none d-lg-block">
+            <p><i class="bi bi-heart text-dark font25"></i>
+                <br>{{ home_post3.like }}
+            </p>
+            <p>
+                <i class="bi bi-chat-left text-dark font25 mt-3"></i>
+                <br>{{ home_post3.comment_set.all|length }}
+            </p>
+            <p><i class="bi bi-eye text-dark font25 mt-3"></i>
+                <br>{{ home_post3.view_count }}
+            </p>
+        </div>
+      </div>
+    </div>
+  </section><!-- end gặp gỡ -->
+  {% endif %}

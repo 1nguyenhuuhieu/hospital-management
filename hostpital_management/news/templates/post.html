@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% load static %}
+{% block content %}
+<div class="container">
+  <div class="row mt-3 mt-sm-5 justify-content-center pb-5">
+    <div class="col-lg-1 text-center ">
+      {% include 'include/left_info.html' %}
+    </div>
+    <div class="col-lg-7 ">
+      <form method="post" id="printJS-form">
+        {% if post.cover %}
+      <img src="{{ post.cover.url }}" alt="" class=" mb-4 rounded-3 shadow-sm w-100">
+        {% endif %}
+      <h1>{{ post.title }}</h1>
+        {% include 'include/post_info.html' %}
+        <div class="d-flex justify-content-end align-items-center my-1"> 
+
+          <span class="text-muted fst-italic small">
+            Thời gian đọc <span id="time"></span> phút
+          </span>
+        </div>
+      <div class="fs-5 mb-4">
+        {% if post.youtube_url %}
+        {% with video=post %}
+          <div class="ratio ratio-16x9 my-3">
+            <iframe src="https://www.youtube.com/embed/{{video.youtube_id}}" title="{{video.title}}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          </div>
+          {% endwith %}
+        {% endif %}
+        <article id="article">
+          {% autoescape off %}
+          {{ post.content }}
+          {% endautoescape %}
+      </article>
+      </div>
+    </form>
+    <form method="post">
+      {% csrf_token %}
+      <div class="d-flex align-items-center justify-content-end">
+        <span class="fs-6 me-3 fw-semibold">{{ post.like }}<i class="ms-2 bi bi-heart-fill text-danger ms-2"></i></span> 
+        {% if  has_reaction  %}
+        <button type="submit" name="like" class="btn btn-sm btn-outline-danger rounded-pill">
+          Đã thích
+              </button>
+  
+        {% else %}
+        <button type="submit" name="like" class="btn btn-sm btn-outline-secondary rounded-pill">Thích</button>
+        {% endif%}
+      </div>
+
+    </form>
+    {% include 'include/comment.html' %}
+    </div>
+    <div class="col-lg-4" >
+      <div style="position: sticky;
+      top: 100px;">
+        {% with author=post.author %}
+        {% include 'include/author.html' %}
+        {% endwith %}
+        {% if latest_posts %}
+        {% with posts=latest_posts %}
+        <h4 class="pb-2 mb-3 mt-4 border-bottom border-2 border-danger">Bài viết mới</h4>
+        {% for post in posts %}
+        <div class="card border-0">
+        <div class="row g-2 my-1">
+          <div class="col-3">
+            {% if post.cover %}
+            <img src="{{ post.cover.url }}" class="img-fluid rounded-3 shadow-sm" alt="...">
+            {% else %}
+            <img src="{% static 'imgs/post-cover.png' %}" class="img-fluid rounded-3 shadow-sm" alt="...">
+            {% endif %}
+          </div>
+          <div class="col-9">
+            <h6 class="mb-0 fw-normal"> <a href="{% url 'post' post_id=post.id %}" class="stretched-link link-dark text-decoration-none">{{ post.title|truncatechars:70 }}</a> </h6>
+            <p class="text-muted mt-1"> {{ post.created_time|naturaltime }}</p>
+          </div>
+          {% if not forloop.last %}
+          <div class="col-12"><hr class="my-0"></div>
+          {% endif %} 
+        </div>
+      </div>
+        {% endfor %}
+        {% endwith %}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  window.onload = function () {
+    const postDiv = document.getElementById('article')
+    const imgs = postDiv.querySelectorAll("img");
+    for (let i = 0; i < imgs.length; i++) {
+      imgs[i].style = '';
+      imgs[i].className = 'img-fluid rounded-3 shadow-sm my-2';
+      imgs[i].parentElement.className = 'text-center';
+    }
+  };
+  function readingTime() {
+  const text = document.getElementById("article").innerText;
+  const wpm = 225;
+  const words = text.trim().split(/\s+/).length;
+  const time = Math.ceil(words / wpm);
+  document.getElementById("time").innerText = time;
+}
+readingTime();
+</script>
+{% endblock %}

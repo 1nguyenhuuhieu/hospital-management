@@ -1,0 +1,31 @@
+{% load humanize %}
+<div class="my-4 bg-body-tertiary border p-2 p-sm-3 shadow-sm rounded-3" id="comment">
+<form method="post">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="exampleFormControlTextarea1" class="form-label h5">Bình luận của bạn</label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="comment_text" required></textarea>
+      </div>
+      <div class="d-flex flex-column flex-sm-row justify-content-end align-items-end">
+        <div>
+            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Tên" name="comment_author" required>
+          </div>
+          <div>
+          <button class="btn btn-outline-danger ms-2 mt-2 mt-sm-0 rounded-pill" type="submit" name="comment"><i class="bi bi-send me-2"></i>Gửi bình luận</button>
+          </div>
+      </div>
+</form>
+</div>
+<h4 class="mb-4">{{ post.comment_set.all|length }} bình luận</h4>
+{% for comment in post.comment_set.all %}
+<div class="d-flex">
+  <h6>{{ comment.author }} </h6>
+  <small class="text-muted ms-2 fst-italic">{{ comment.created_time|naturaltime }}</small>
+
+</div>
+<p>{{comment.comment}}
+  {% if not forloop.last %}
+  <hr class="w-25">
+  {% endif %}
+</p>
+{% endfor %}

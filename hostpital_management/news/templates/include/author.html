@@ -1,0 +1,28 @@
+{% load static %}
+<div class="p-2 p-sm-3 bg-body-tertiary rounded-3 border shadow-sm my-3 my-sm-0">
+    <h4 class="fst-italic">Giới thiệu tác giả</h4>
+    <hr class="my-2">
+    <div class="row">
+        <div class="col-3 d-flex flex-column justify-content-center">
+            <div>
+                {% if author.avatar %}
+                <img src="{{author.avatar.url}}" alt="" class="img-fluid border border-2 rounded-circle shadow-sm">
+                {% else %}
+                <img src=" {% static 'imgs/logo-circle.png' %}" alt="" class="img-fluid border border-2 rounded-circle shadow-sm">
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-9">
+            <h5 class="mb-1"> {{ author.name|title }}</h5>
+            <p class="mb-0 text-muted fw-semibold">
+                {% if author.description %}
+                {{ author.description }}
+                {% endif %}
+            </p>
+            <p class="m-0 text-muted  small">
+                Bài viết: {{ author.post_set.all|length }}, Lượt thích: {{ author_liked }}
+            </p>
+        </div>
+    </div>
+
+  </div>
