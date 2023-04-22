@@ -7,7 +7,7 @@
         <img src="{{ slide.cover.url }}" class="d-block w-100" alt="{{ slide.title }}">
         {% if slide.post %}
         <div class="carousel-caption d-none d-md-block">
-            <a href=" {% url 'post' post_id=slide.post.id %}" class="btn btn-lg btn-light rounded-pill opacity-75">Xem chi tiết<i class="bi bi-arrow-right ms-2"></i></a>
+            <a href=" {% url 'news:post' post_id=slide.post.id %}" class="btn btn-lg btn-light rounded-pill opacity-75">Xem chi tiết<i class="bi bi-arrow-right ms-2"></i></a>
           </div>
           {% endif %}
       </div>
