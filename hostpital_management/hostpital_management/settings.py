@@ -40,12 +40,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.humanize',
 
-
     'dynamic_breadcrumbs',
     'import_export',
     'ckeditor',
     'ckeditor_uploader',
-
 
     'dashboard',
     'hospital_quality_management',
@@ -61,7 +59,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-
 ]
 
 
