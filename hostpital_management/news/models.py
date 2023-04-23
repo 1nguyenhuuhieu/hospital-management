@@ -41,8 +41,6 @@ class Slide(models.Model):
     
 class Tag(models.Model):
     title = models.CharField(max_length=200, verbose_name='tên đầy đủ')
-    description = models.CharField(max_length=1000, verbose_name='mô tả', null=True)
-    cover = models.ImageField(upload_to='cover-tag/',verbose_name='ảnh bìa', blank=True, null=True)
     parrent_tag = models.ForeignKey('self', verbose_name='danh mục cha', blank=True, on_delete=models.CASCADE, null=True)
     class Meta:
         verbose_name = 'danh mục'
