@@ -6,12 +6,10 @@ import random
 
 def index(request):
     slides = Slide.objects.filter(is_show=True)[:3]
-    highlight_post = Post.objects.latest('is_highlight', 'created_time')
     videos = Post.objects.filter(tags__title='Video').order_by('-created_time')[:3]
     
     latest_post = Post.objects.filter(is_public=True).latest('created_time')
     latest_posts = Post.objects.all().exclude(id=latest_post.id).order_by('-created_time')[:4]
-    quotes = Quote.objects.all()
     try:
         home_post2 = Post.objects.filter(tags=1).latest('created_time')
     except:
@@ -26,10 +24,8 @@ def index(request):
     context = {
         'videos': videos,
         'slides': slides,
-        'highlight_post': highlight_post,
         'latest_posts': latest_posts,
         'latest_post': latest_post,
-        'quotes': quotes,
         'home_post2': home_post2,
         'author_liked': author_liked,
         'home_post3': home_post3,

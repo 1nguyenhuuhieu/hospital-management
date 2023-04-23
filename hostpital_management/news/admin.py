@@ -14,16 +14,15 @@ class SlideAdmin(admin.ModelAdmin):
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('author', 'title', 'is_highlight', 'is_public', 'youtube_url')
+    list_display = ('author', 'title',  'is_public', 'youtube_url')
     list_display_links = ('title', )
-    list_filter = ('author', 'is_highlight', 'is_public',  'tags')
+    list_filter = ('author', 'is_public',  'tags')
     filter_horizontal = ('tags',)
     readonly_fields = ('view_count', 'like')
     search_fields = ("title", 'author__name', 'tags__title',)
 
 admin.site.register(Author)
 admin.site.register(Comment)
-admin.site.register(Quote)
 
 
 @admin.register(Tag)

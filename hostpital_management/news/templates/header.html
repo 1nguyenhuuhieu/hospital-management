@@ -18,13 +18,15 @@
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              TIN TỨC
+              TIN BÀI
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
+              <li><a class="dropdown-item" href="#">Hoạt động đơn vị</a></li>
+              <li><a class="dropdown-item" href="#">Tin mời thầu</a></li>
+              <li><a class="dropdown-item" href="#">Tuyển dụng</a></li>
+              <li><a class="dropdown-item" href="#">Tin nội bộ</a></li>
               <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
+              <li><a class="dropdown-item" href="#">Tất cả bài viết</a></li>
             </ul>
           </li>
     
@@ -33,18 +35,23 @@
               CHUYÊN KHOA
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
+              <li><a class="dropdown-item" href="#">Hồi sức cấp cứu</a></li>
+              <li><a class="dropdown-item" href="#">Nội tổng hợp</a></li>
+              <li><a class="dropdown-item" href="#">Ngoại tổng hợp</a></li>
+              <li><a class="dropdown-item" href="#">Y học cổ truyền</a></li>
+              <li><a class="dropdown-item" href="#">Phụ sản</a></li>
+              <li><a class="dropdown-item" href="#">Liên chuyên khoa TMH-RHM-Mắt</a></li>
               <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
+              <li><a class="dropdown-item" href="#">Các khoa, phòng khác</a></li>
             </ul>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              DỊCH VỤ
+              DỊCH VỤ & KỸ THUẬT
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Action</a></li>
+              <li><a class="dropdown-item" href="#">Danh sách & bảng giá dịch vụ</a></li>
+              <li><a class="dropdown-item" href="#">Kỹ thuật nổi bật</a></li>
               <li><a class="dropdown-item" href="#">Another action</a></li>
               <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item" href="#">Something else here</a></li>
@@ -60,17 +67,15 @@
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="#">Action</a></li>
               <li><a class="dropdown-item" href="#">Another action</a></li>
+              <li><a class="dropdown-item" href="#">Thư viện tài liệu</a></li>
+
               <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item" href="#">Something else here</a></li>
             </ul>
           </li>
           <li class="nav-item d-flex align-items-center">
-            <a class="btn btn-warning rounded-pill ms-0 ms-sm-5" href="{% url 'admin:index' %}">
-              {% if request.user.is_authenticated %}
-              <i class="bi bi-person-circle me-2"></i>{{ request.user.username }}
-              {% else %}
+            <a class="btn btn-outline-dark rounded-pill ms-0 ms-sm-5" href="#">
               <i class="bi bi-calendar-plus me-2"></i>ĐẶT LỊCH KHÁM
-              {% endif %}
             </a>
           </li>
         </ul>

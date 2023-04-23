@@ -52,7 +52,6 @@ class Tag(models.Model):
 class Post(models.Model):
     title = models.CharField(max_length=1000, verbose_name='tên bài viết')
     author = models.ForeignKey('Author', verbose_name='tác giả', blank=True, null=True, on_delete=models.CASCADE)
-    is_highlight = models.BooleanField(verbose_name='có phải bài viết nổi bật', default=False)
     is_public = models.BooleanField(verbose_name='có hiển thị bài viết', default=True)
     content = RichTextUploadingField(verbose_name='nội dung')
     youtube_url = models.URLField(max_length=40, blank=True, null=True, verbose_name='URL video youtube', help_text='dán url video youtube vào đây')
@@ -115,15 +114,3 @@ class Author(models.Model):
 
     def __str__(self):
         return f'{self.name}' 
-
-
-class Quote(models.Model):
-    title = models.TextField(verbose_name='trích dẫn')
-    author = models.CharField(max_length=50, verbose_name='tác giả')
-
-    class Meta:
-        verbose_name = 'trích dẫn'
-        verbose_name_plural = 'trích dẫn'
-
-    def __str__(self):
-        return f'{self.title}' 

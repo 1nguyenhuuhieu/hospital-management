@@ -6,31 +6,18 @@
 {% include 'home/slide.html' %}
 <!-- end nav bar -->
 <!-- heading news -->
-{% include 'home/highlight.html' %}
-{% include 'home/video.html' %}
-{% include 'home/quote.html' %}
 {% include 'home/latest_posts.html' %}
+{% include 'home/departments.html' %}
 <!-- end heading news -->
-{% include 'home/home-post1.html' %}
 <!-- đóng góp bài viết -->
-<section class="bghoa py-5 text-center">
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-lg-6 ">
-        <p class="text-muted lead fw-semibold">Điều khoản sử dụng trang web</p>
-        <a href="#" class="btn  btn-dark "><i class="bi bi-book me-2"></i>Xem điều khoản</a>
-      </div>
-    </div>
-  </div>
-</section><!-- end đóng góp bài viết -->
-{% include 'home/home-post2.html' %}
+
 <!-- fun fact -->
-<section class="bg-dark" id="aboutus">
+<section class="bg-primary" id="aboutus">
   <div class="container ">
     <div class="row justify-content-center text-center text-muted py-5">
       <!-- fact -->
       <div class="col-6 col-lg-3  ">
-        <div class="  text-white-50">
+        <div class="  text-white">
           <i class="bi bi-clock-history funfactsizeicon mb-3"></i>
           <h3> <a href="#" class="text-decoration-none link-light"> <small class="text-white-50">Năm</small> 1963 </a>
           </h3>
@@ -73,84 +60,12 @@
   </div>
 </section><!-- end fun fact -->
 <!-- about us -->
-<section>
-  <div class="container py-5">
-    <div class="row   py-5">
-      <!-- giới thiệu -->
-      <div class="col-lg-6 text-center ">
-        <h3 class="mb-2 fontsizeaboutus" style="font-family: 'Charmonman', cursive">Huyện Anh Sơn</h3>
-        <img src="{% static 'imgs/swish.png' %}" alt="" class="img-fluid mt-4" style="max-width: 200px">
-        <i class="fas fa-pen-fancy mb-3" style="font-size:40px"></i>
-        <p class="mb-2 fs-4 fst-italic fw-semibold text-danger" style="font-family: 'Charmonman', cursive">
-          “Lèn Kim Nhan chín tầng mây phủ <br>
-          Rú Cao Vều ấp ủ tình thương”
-        </p>
-        <div class="text-start mt-3 fs-5">
-          <p>
-            Huyện Anh Sơn nằm dọc theo đôi bờ sông Lam, Quốc lộ 7, cách thành phố Vinh 100 km về phía tây bắc, có vị trí
-            địa lý:
-          <ul>
-            <li>Phía đông giáp huyện Đô Lương</li>
-            <li>Phía bắc giáp huyện Tân Kỳ và huyện Quỳ Hợp</li>
-            <li>Phía tây giáp huyện Con Cuông và nước Lào</li>
-            <li>Phía nam giáp huyện Thanh Chương.</li>
-          </ul>
-          </p>
-          <p>
-            Huyện có diện tích 592,5 km². Theo thống kê 2019, huyện có 116.922 người, mật độ dân số đạt 197 người/km².
-            Có 8 xã đồng bào dân tộc thiểu số 8.000 người (chiếm 6,4% dân số toàn huyện). Số người trong độ tuổi có khả
-            năng lao động hơn: 47.000 người. Số người được giải quyết việc làm trong năm bình quân: 1.375 người. 12% dân
-            số theo đạo Thiên Chúa.
-          </p>
-          <p>
-            Đây là huyện được UNESCO đưa vào danh sách các địa danh thuộc Khu dự trữ sinh quyển miền tây Nghệ An.
-          </p>
-        </div>
-      </div>
+
       <!-- end giới thiệu -->
       <!-- timeline -->
-      <div class="col-lg-6">
-        <ul class="timeline">
-          <li>
-            <span class="fw-bold h5">Lịch sử hình thành</span>
-            <span class="h5"> - trước 1963</span>
-            <ul class="mt-2">
-              <li>Thời nhà Hậu Lê, vùng đất Anh Sơn thuộc huyện Nam Đường, phủ Anh Đô, xứ Nghệ An.</li>
-              <li>Dưới thời nhà Nguyễn, năm Minh Mạng thứ 12 (1831), trấn Nghệ An chia tách thành 2 tỉnh: tỉnh Hà Tĩnh
-                và tỉnh Nghệ An. Phủ Anh Đô có thêm huyện Thanh Chương chuyển từ phủ Đức Quang sang. Thời Thành Thái,
-                Phủ Anh Đô đổi tên thành phủ Anh Sơn gồm các huyện: Hưng Nguyên, Nam Đàn, Lương Sơn, Đô Lương và Thanh
-                Chương.</li>
-              <li>Năm 1831 (năm Minh Mạng thứ 12), thành lập huyện Lương Sơn do tách 4 tổng của huyện Nam Đường và 1
-                tổng của huyện Thanh Chương. Địa bàn huyện Lương Sơn khi đó thuộc địa bàn các huyện Anh Sơn, Đô Lương và
-                một phần huyện Tân Kỳ ngày nay.</li>
-              <li>Năm 1919, chính quyền thực dân phong kiến bỏ cấp hành chính trung gian, đổi phủ ngang huyện, huyện
-                Lương Sơn đổi thành phủ Anh Sơn trực thuộc tỉnh Nghệ An.</li>
-              <li>Đến năm 1946, phủ Anh Sơn đổi thành huyện Anh Sơn.<a
-                  href="https://vi.wikipedia.org/wiki/Anh_%C4%90%C3%B4" target="_blank"
-                  class="text-decoration-none ms-1">Xem thêm</a></li>
-            </ul>
-          </li>
-          <li>
-            <span class="fw-bold h5">Thành lập</span>
-            <span class="h5"> - 1963</span>
-            <p class="mt-2">Huyện Anh Sơn hôm nay được thành lập từ tháng 4 năm 1963, tách ra từ huyện lớn Anh Sơn theo
-              Quyết định số 32/QĐ-TTg ngày 19 tháng 4 năm 1963 của Chủ tịch Hội đồng Bộ trưởng. Huyện được cấu thành từ
-              20 xã và 1 thị trấn.<a href="https://vi.wikipedia.org/wiki/Anh_S%C6%A1n" target="_blank"
-                class="text-decoration-none ms-1">Xem thêm</a>.</p>
-          </li>
-          <li>
-            <span class="fw-bold h5">Thị trấn Anh Sơn</span>
-            <span class="h5"> - 1988</span>
-            <p class="mt-2">Ngày 1 tháng 3 năm 1988, thành lập thị trấn Anh Sơn trên cơ sở 28 ha diện tích tự nhiên và
-              26 nhân khẩu của xã Hội Sơn; 92 ha diện tích tự nhiên và 87 nhân khẩu của xã Phúc Sơn; 93 ha diện tích tự
-              nhiên và 180 nhân khẩu của xã Thạch Sơn.</p>
-          </li>
-        </ul>
-      </div>
+{% include 'home/history.html' %}
       <!-- end timeline -->
-    </div>
-  </div>
-</section><!-- end about us -->
+
 <!-- footer -->
 
 
