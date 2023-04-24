@@ -1,15 +1,14 @@
 from django.db import models
-from ckeditor.fields import RichTextField
 from ckeditor_uploader.fields import RichTextUploadingField
 import PIL.Image
 from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
-from django.utils.html import mark_safe
+from human_resource_management.models import *
+
 import os
     
 class Tag(models.Model):
     title = models.CharField(max_length=200, verbose_name='tên đầy đủ')
-    parrent_tag = models.ForeignKey('self', verbose_name='danh mục cha', blank=True, on_delete=models.CASCADE, null=True)
     class Meta:
         verbose_name = 'danh mục'
         verbose_name_plural = 'danh mục'
@@ -19,8 +18,9 @@ class Tag(models.Model):
     
 class Post(models.Model):
     title = models.CharField(max_length=1000, verbose_name='tên bài viết')
-    author = models.ForeignKey('Author', verbose_name='tác giả', blank=True, null=True, on_delete=models.CASCADE)
+    author = models.ForeignKey(Staff, verbose_name='tác giả', blank=True, null=True, on_delete=models.CASCADE)
     is_public = models.BooleanField(verbose_name='có hiển thị bài viết', default=True)
+    is_pinned = models.BooleanField(verbose_name='có ghim bài viết', default=False)
     content = RichTextUploadingField(verbose_name='nội dung')
     youtube_url = models.URLField(max_length=40, blank=True, null=True, verbose_name='URL video youtube', help_text='dán url video youtube vào đây')
     cover = models.ImageField(upload_to='post-covers/', verbose_name='ảnh bìa', blank=True, null=True)

@@ -3,7 +3,6 @@ from django.contrib.auth.models import User
 
 
 # Create your models here.
-
 class Staff(models.Model):
     user = models.ForeignKey(User, verbose_name='tài khoản đăng nhập', blank=True, null=True, on_delete=models.CASCADE)
     full_name = models.CharField(max_length=200, verbose_name='Họ và tên')

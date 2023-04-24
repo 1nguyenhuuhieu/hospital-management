@@ -19,6 +19,7 @@ class PostAdmin(admin.ModelAdmin):
     filter_horizontal = ('tags',)
     readonly_fields = ('view_count', 'like')
     search_fields = ("title", 'author__name', 'tags__title',)
+    autocomplete_fields = ('author',)
 
 admin.site.register(Author)
 admin.site.register(Comment)

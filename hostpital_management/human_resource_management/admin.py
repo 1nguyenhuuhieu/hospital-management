@@ -16,5 +16,6 @@ class StaffResource(resources.ModelResource):
 @admin.register(Staff)
 class StaffAdmin(ImportExportModelAdmin):
     resource_class = StaffResource
+    search_fields = ['full_name']
 
 
