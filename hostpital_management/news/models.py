@@ -6,38 +6,6 @@ from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
 from django.utils.html import mark_safe
 import os
-
-
-class Slide(models.Model):
-    title = models.CharField(max_length=200, verbose_name='tiêu đề', default='banner')
-    cover = models.ImageField(upload_to='slides/',verbose_name='ảnh slide', help_text='ảnh slide nên có tỉ lệ cao:rộng là 1:4 để đẹp nhất ')
-    is_show = models.BooleanField(verbose_name='hiển thị trang chủ', default=True)
-    post = models.ForeignKey('Post', blank=True, null=True, verbose_name='bài viết liên kết', on_delete=models.CASCADE)
-    created_time = models.TimeField(auto_now_add=True, blank=True, null=True)
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
-        self.title = f'banner-{self.id}'
-        super(Slide, self).save(*args, **kwargs)
-        if self.cover:
-            img = PIL.Image.open(self.cover)
-            target_width = 1920
-            target_height = target_width/4
-            img = img.resize((int(target_width), int(target_height)), PIL.Image.ANTIALIAS)
-            img.save(self.cover.path, quality=100)
-            img.close()
-            self.cover.close()
-
-
-    def image_tag(self):
-        return mark_safe('<img src="%s" height=100' % (self.cover.url))
-    image_tag.short_description = 'Image'
-    image_tag.allow_tags = True
-
-    class Meta:
-        verbose_name = 'slide trang chủ'
-        verbose_name_plural = 'slide trang chủ'
-    def __str__(self):
-        return f'{self.title}'
     
 class Tag(models.Model):
     title = models.CharField(max_length=200, verbose_name='tên đầy đủ')

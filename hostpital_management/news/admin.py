@@ -6,7 +6,6 @@ from .models import *
 class TagInline(admin.StackedInline):
     model = Tag
 
-@admin.register(Slide)
 class SlideAdmin(admin.ModelAdmin):
     list_display = ('title', 'is_show')
     fields = ('title', 'cover','image_tag', 'is_show','post', )

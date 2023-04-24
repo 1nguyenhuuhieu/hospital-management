@@ -5,8 +5,6 @@ from django.shortcuts import get_object_or_404
 import random
 
 def index(request):
-    slides = Slide.objects.filter(is_show=True)[:3]
-    videos = Post.objects.filter(tags__title='Video').order_by('-created_time')[:3]
     
     latest_post = Post.objects.filter(is_public=True).latest('created_time')
     latest_posts = Post.objects.all().exclude(id=latest_post.id).order_by('-created_time')[:4]
@@ -22,8 +20,6 @@ def index(request):
     author2_liked = sum(post.like for post in Post.objects.filter(author=home_post3.author))
 
     context = {
-        'videos': videos,
-        'slides': slides,
         'latest_posts': latest_posts,
         'latest_post': latest_post,
         'home_post2': home_post2,
