@@ -28,4 +28,3 @@ admin.site.register(Comment)
 @admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):
     readonly_fields = ('id', )
-    inlines = [TagInline, ]
