@@ -5,27 +5,8 @@ from django.shortcuts import get_object_or_404
 import random
 
 def index(request):
-    
-    latest_post = Post.objects.filter(is_public=True).latest('created_time')
-    latest_posts = Post.objects.all().exclude(id=latest_post.id).order_by('-created_time')[:4]
-    try:
-        home_post2 = Post.objects.filter(tags=1).latest('created_time')
-    except:
-        home_post2 = None
-    try:
-        home_post3 = Post.objects.filter(tags=1).latest('created_time')
-    except:
-        home_post3 = None
-    author_liked = sum(post.like for post in Post.objects.filter(author=home_post2.author))
-    author2_liked = sum(post.like for post in Post.objects.filter(author=home_post3.author))
 
     context = {
-        'latest_posts': latest_posts,
-        'latest_post': latest_post,
-        'home_post2': home_post2,
-        'author_liked': author_liked,
-        'home_post3': home_post3,
-        'author2_liked': author2_liked
     }
 
     return render(request, 'index.html', context)

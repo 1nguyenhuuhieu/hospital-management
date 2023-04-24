@@ -1,23 +1,9 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load humanize %}
-{% block title%}Trang chủ{% endblock %}
+{% block title%}Website{% endblock %}
 {% block content %}
 
-
-
-
-<script>
-  window.onload = function () {
-    const postDiv = document.getElementById('article')
-    const imgs = postDiv.querySelectorAll("img");
-    for (let i = 0; i < imgs.length; i++) {
-      imgs[i].style = '';
-      imgs[i].className = 'img-fluid rounded-3 shadow-sm my-2';
-      imgs[i].parentElement.className = 'text-center';
-    }
-  };
-</script>
 
 
 {% endblock %}
