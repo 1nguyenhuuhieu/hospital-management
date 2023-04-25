@@ -1,5 +1,5 @@
 {% load static %}
-<div class="d-none d-lg-block mb-4">
+<div class="d-none d-lg-block mb-4 sticky-top">
 <div class="bg-white">
     <div class="container-fluid bg-white shadow-sm py-2">
         <!-- header on desktop -->
@@ -11,39 +11,106 @@
                 </a>
             </div>
             <div class="col-lg-6 px-0">
-                <div class="row align-items-center ">
-                    <div class="col-9">
+                <div class="row align-items-center">
+                    <div class="col-3 text-start">
+          
+                            <a href="#collapseCategory" class="link-dark text-decoration-none" data-bs-toggle="collapse">
+                                <span class="fw-semibold">DANH MỤC<i class="bi bi-chevron-down ms-2"></i></span>
+                            </a>
+     
+                    </div> 
+
+                    <div class="col-6">
                         <form action="" method="get">
-                            <div class="input-group input-group-sm rounded-4 p-2" style="background-color: #F0F0F0;">
+                            <div class="input-group input-group-sm rounded-4 p-1 w-100" style="background-color: #F0F0F0;">
                                 <span class="input-group-text border-0" style="background-color: #F0F0F0;"><i class="bi bi-search"></i></span>
                                 <input type="search" class="form-control border-0" placeholder="Tìm kiếm"
                                     name="search" style="background-color: #F0F0F0;">
-                                <button class="input-group-text btn btn-light rounded-pill"
+                                <button class="input-group-text btn btn-light rounded-pill text-muted fw-semibold"
                                     type="submit">TÌM KIẾM</button>
                             </div>
                         </form>
+             
                     </div>
-                    <div class="col-3 text-end">
-                        <div class="dropdown">
-                            <a href="#" class="link-dark text-decoration-none"  data-bs-toggle="dropdown"
-                                aria-expanded="false">
-                                <span class="fw-semibold">DANH MỤC<i class="bi bi-chevron-down ms-2"></i></span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                            </ul>
-                        </div>
+                    <div class="col-3 p-0 text-end">
+                        <button class="btn btn-white rounded-pill fw-semibold"><i
+                            class="bi bi-calendar-plus me-2 "></i>ĐẶT LỊCH KHÁM</button>
                     </div>
                 </div>
+
+
             </div>
             <div class="col-lg-3">
                 <div class="d-flex justify-content-end">
-                    <button class="btn btn-white rounded-pill fw-semibold text-muted"><i
-                            class="bi bi-calendar-plus me-2 "></i>ĐẶT LỊCH KHÁM</button>
-                    <button class="btn btn-dark rounded-pill fw-semibold shadow-sm ms-3 px-3">ĐĂNG NHẬP</button>
+
+                    <button class="btn btn-dark rounded-pill fw-semibold shadow-sm px-3">ĐĂNG NHẬP</button>
                 </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-lg-6 px-0">
+                <div class="collapse my-4  collapseCategoryClose" id="collapseCategory">
+                    <div class="card position-static d-flex flex-column flex-lg-row align-items-stretch justify-content-start p-3 rounded-3 shadow-lg  collapseCategoryClose">
+                        <nav class="col-lg-8  collapseCategoryClose">
+                          <ul class="list-unstyled d-flex flex-column gap-2  collapseCategoryClose">
+                            <li>
+                              <a href="#" class="btn btn-hover-light rounded-2 d-flex align-items-start gap-2 py-2 px-3 lh-sm text-start">
+                                <i class="bi bi-hospital fs-3"></i>
+                                <div>
+                                  <strong class="d-block">Hoạt động đơn vị</strong>
+                                  <small>Tin bài về các hoạt động tại TTYT huyện Anh Sơn.</small>
+                                </div>
+                              </a>
+                            </li>
+                            <li>
+                              <a href="#" class="btn btn-hover-light rounded-2 d-flex align-items-start gap-2 py-2 px-3 lh-sm text-start">
+                                <i class="bi bi-bookmark-star fs-3"></i>
+                                <div>
+                                  <strong class="d-block">Dịch vụ & Kỹ thuật</strong>
+                                  <small>Các dịch vụ và kĩ thuật tiêu biểu đang triển khai.</small>
+                                </div>
+                              </a>
+                            </li>
+                            <li>
+                              <a href="#" class="btn btn-hover-light rounded-2 d-flex align-items-start gap-2 py-2 px-3 lh-sm text-start">
+                                <i class="bi bi-headset fs-3"></i>
+                                <div>
+                                  <strong class="d-block">Chăm sóc khách hàng</strong>
+                                  <small>Thông tin, hướng dẫn và hỏi đáp khi thăm khám.</small>
+                                </div>
+                              </a>
+                            </li>
+                            <li>
+                                <a href="#" class="btn btn-hover-light rounded-2 d-flex align-items-start gap-2 py-2 px-3 lh-sm text-start">
+                                  <i class="bi bi-question-circle fs-3"></i>
+                                  <div>
+                                    <strong class="d-block">Tin nội bộ</strong>
+                                    <small>Tin tức nội bộ dành cho nhân viên đơn vị.</small>
+                                  </div>
+                                </a>
+                              </li>
+                          </ul>
+                        </nav>
+                        <div class="d-none d-lg-block vr mx-4 opacity-10">&nbsp;</div>
+                        <hr class="d-lg-none">
+                        <div class="col-lg-auto pe-3  collapseCategoryClose">
+                          <nav>
+                            <ul class="d-flex flex-column gap-2 list-unstyled small  collapseCategoryClose">
+                              <li><a href="#" class="link-offset-2 link-underline link-underline-opacity-25 link-underline-opacity-75-hover">Tin mời thầu</a></li>
+                              <li><a href="#" class="link-offset-2 link-underline link-underline-opacity-25 link-underline-opacity-75-hover">Tuyển dụng</a></li>
+                              <li><a href="#" class="link-offset-2 link-underline link-underline-opacity-25 link-underline-opacity-75-hover">Thư viện tài liệu</a></li>
+                              <li><a href="#" class="link-offset-2 link-underline link-underline-opacity-25 link-underline-opacity-75-hover">API status</a></li>
+                              <li><a href="#" class="link-offset-2 link-underline link-underline-opacity-25 link-underline-opacity-75-hover">Partners</a></li>
+                              <li><a href="#" class="link-offset-2 link-underline link-underline-opacity-25 link-underline-opacity-75-hover">Resources</a></li>
+                            </ul>
+                          </nav>
+                        </div>
+                      </div>
+                  </div>
+
+
+       
             </div>
         </div>
     </div>
