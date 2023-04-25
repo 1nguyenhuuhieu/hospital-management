@@ -1,4 +1,11 @@
 {% load static %}
+
+<style>
+  .accordion-button:after {
+    order: 0;
+    margin-left: 0.5em; 
+}
+</style>
 <div class="d-none d-lg-block mb-4 sticky-top">
 
   
@@ -17,12 +24,12 @@
                 </a>
             </div>
             <div class="col-lg-6 px-0">
-                <div class="row align-items-center">
+                <div class="row g-0 align-items-center">
                     <div class="col-3 text-start accordion-header">
                       <div class="accordion accordion-flush" id="accordionExample">
                         <div class="accordion-item ">
                           <span class="accordion-header ">
-                            <button class="accordion-button collapsed p-0  fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            <button class="accordion-button collapsed p-0 fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCategory1" aria-expanded="true" aria-controls="collapseOne">
                               DANH MỤC
                             </button>
                           </span>
@@ -30,7 +37,7 @@
                       </div>
                     </div> 
 
-                    <div class="col-6">
+                    <div class="col-6 px-2">
                         <form action="" method="get">
                             <div class="input-group input-group-sm rounded-4 p-1 w-100" style="background-color: #F0F0F0;">
                                 <span class="input-group-text border-0" style="background-color: #F0F0F0;"><i class="bi bi-search"></i></span>
@@ -42,9 +49,11 @@
                         </form>
              
                     </div>
-                    <div class="col-3 p-0 text-end">
-                        <button class="btn btn-white rounded-pill fw-semibold"><i
-                            class="bi bi-calendar-plus me-2 "></i>ĐẶT LỊCH KHÁM</button>
+                    <div class="col-3 text-end">
+                        <a href="#" class="fw-semibold link-offset-2 link-offset-3-hover link-underline-dark link-underline-opacity-0 link-underline-opacity-75-hover link-dark text-truncate">
+                          ĐẶT LỊCH KHÁM<i class="bi bi-calendar-plus ms-2"></i>
+                        </a>
+                        
                     </div>
                 </div>
 
@@ -58,14 +67,13 @@
             </div>
         </div>
 
-        {% include 'include/category.html' %}
+        {% include 'include/category.html' with id="collapseCategory1" %}
+
     </div>
         <!-- header on desktop -->
-
 </div>
 </div>
 </div>
-
 <!-- header on mobile -->
 <div class="d-lg-none">
     <nav class="navbar bg-white fixed-top shadow-sm">
@@ -90,22 +98,24 @@
             <div class="offcanvas-body">
               <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                 <li class="nav-item">
-                  <a href="#collapseCategory" class="link-dark text-decoration-none" data-bs-toggle="collapse">
-                    DANH MỤC <i class="bi bi-chevron-down ms-2"></i>
-                  </a>
+                  <div class="accordion accordion-flush" id="accordionExample">
+                    <div class="accordion-item ">
+                      <span class="accordion-header ">
+                        <button class="accordion-button collapsed p-0 fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCategory2" aria-expanded="true" aria-controls="collapseOne">
+                          DANH MỤC
+                        </button>
+                      </span>
+                    </div>
+                  </div>
                 </li>
               </ul>
-
-              {% include 'include/category.html' %}
-
-
-
+              {% include 'include/category.html' with id="collapseCategory2" %}
               <form action="" method="get" class="mt-3">
                 <div class="input-group input-group-sm rounded-4 p-2 bg-body-tertiary">
                     <span class="input-group-text border-0"><i class="bi bi-search"></i></span>
                     <input type="search" class="form-control border-0 bg-light " placeholder="Tìm kiếm"
                         name="search">
-                    <button class="input-group-text btn btn-light border rounded-pill"
+                    <button class="input-group-text btn btn-light border rounded-pill" 
                         type="submit">Tìm kiếm</button>
                 </div>
             </form>
