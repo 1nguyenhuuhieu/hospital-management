@@ -7,18 +7,12 @@
 }
 </style>
 <div class="d-none d-lg-block mb-4 sticky-top">
-
-  
 <div class="bg-white">
     <div class="container-fluid bg-white shadow-sm py-2">
-
-      
         <!-- header on desktop -->
         <div class="row align-items-center">
             <div class="col-lg-3">
-
-              
-                <a href="{% url 'news:index' %}">
+                <a href="{% url 'news:index' %}" id="topPage">
                     <img src="{% static 'imgs/logo-dark-200.png' %}" alt="logo trung tâm y tế huyện anh sơn"
                         class="img-fluid">
                 </a>
@@ -36,7 +30,6 @@
                         </div>
                       </div>
                     </div> 
-
                     <div class="col-6 px-2">
                         <form action="" method="get">
                             <div class="input-group input-group-sm rounded-4 p-1 w-100" style="background-color: #F0F0F0;">
@@ -47,32 +40,24 @@
                                     type="submit">TÌM KIẾM</button>
                             </div>
                         </form>
-             
                     </div>
                     <div class="col-3 text-end">
                         <a href="#" class="fw-semibold link-offset-2 link-offset-3-hover link-underline-dark link-underline-opacity-0 link-underline-opacity-75-hover link-dark text-truncate">
                           ĐẶT LỊCH KHÁM<i class="bi bi-calendar-plus ms-2"></i>
                         </a>
-                        
                     </div>
                 </div>
-
-
             </div>
             <div class="col-lg-3">
                 <div class="d-flex justify-content-end align-items-center">
                 <a href="#" class="btn btn-light border rounded-circle p-1 sha">
                     <svg xmlns="http://www.w3.org/2000/svg" height="25" viewBox="0 96 960 960" width="25"><path d="M226 896q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19ZM226 642q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19ZM226 388q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Z"/></svg>
                 </a>
-
-
                     <button class="btn btn-dark rounded-pill fw-semibold shadow-sm px-3 ms-2">ĐĂNG NHẬP</button>
                 </div>
             </div>
         </div>
-
         {% include 'include/category.html' with id="collapseCategory1" %}
-
     </div>
         <!-- header on desktop -->
 </div>
@@ -86,6 +71,9 @@
                 <img src="{% static 'imgs/logo-dark-200.png' %}" alt="logo trung tâm y tế huyện anh sơn"
                     class="img-fluid" style="height: 40px;">
           </a>
+          <a href="#" class="btn btn-light rounded-circle border p-1 ms-auto me-2">
+            <svg xmlns="http://www.w3.org/2000/svg" height="25" viewBox="0 96 960 960" width="25"><path d="M226 896q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19ZM226 642q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19ZM226 388q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Z"/></svg>
+        </a>
           <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
