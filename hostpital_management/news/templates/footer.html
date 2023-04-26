@@ -1,5 +1,35 @@
 {% load static %}
-<footer>
+<footer class="bg-white mt-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 d-flex justify-content-between pt-5 pb-3 align-items-center border-bottom">
+        <div class="text-start">
+          <a href="{% url 'news:index'%}" class="link-dark link-offset-2 link-offset-3-hover link-underline-dark link-underline-opacity-0 link-underline-opacity-75-hover">
+          <img src="{% static 'imgs/logo-dark-400.png'%}" alt="">
+          <p class="mt-2 opacity-75 fw-semibold mb-0">Bệnh viện đa khoa - Y tế dự phòng - Dân Số.</p>
+        </a>
+        </div>
+
+        <div class="align-items-end d-flex flex-column justify-content-between h-100">
+          <a href="tel:+84917579677" class="link-dark opacity-75 link-offset-2 link-offset-3-hover link-underline-dark link-underline-opacity-0 link-underline-opacity-75-hover" >
+            trực lãnh đạo 24/7: 0917631100
+          </a>
+          <a href="tel:+84917579677" class="link-dark opacity-75 link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" >
+            <span class="fw-semibold text-primary">email </span>trungtamytehuyenanhson.com
+          </a>
+          <a href="tel:+84917579677" class="link-dark opacity-75 link-offset-2 link-offset-3-hover link-underline-dark link-underline-opacity-0 link-underline-opacity-75-hover" >
+            facebook: 0917579677
+          </a>
+          <a href="tel:+84917579677" class="link-dark opacity-75 link-offset-2 link-offset-3-hover link-underline-dark link-underline-opacity-0 link-underline-opacity-75-hover" >
+            youtube: 0917579677
+          </a>
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
       <!-- liên hệ -->
   <section class="parallax-window py-5" data-parallax="scroll" data-image-src="{% static 'imgs/bg_contact.png' %}">
     <div class="container">
@@ -53,23 +83,19 @@
   </section><!-- end liên hệ -->
 
     <section>
-      <div class=" rainbow p-0 py-5 p-lg-5">
+      <div class="p-0 py-5 p-lg-5">
         <div class="container text-center">
           <div class="row justify-content-center">
-            <div class="col-lg-4">
-              <p class="text-white">Đăng ký nhận thông báo về các bài viết mới trên trang</p>
+            <div class="col-lg-6">
+              <p>Đăng ký nhận thông báo về các bài viết mới trên trang</p>
               <form role="form">
                 <div class="input-group ">
-                  <input type="email" name="EMAIL" class="form-control border-0" placeholder="Địa chỉ email...">
+                  <input type="email" name="EMAIL" class="form-control " placeholder="Địa chỉ email...">
                   <div class="input-group-append">
-                    <button type="submit" name="subscribe" class="btn btn-light border-start-0 rounded-start-0">Theo dõi!</button>
+                    <button type="submit" name="subscribe" class="btn btn-light border border-start-0 rounded-start-0">Theo dõi!</button>
                   </div>
                 </div>
               </form>
-              <div class="text-center mt-4">
-                <p class="text-white mb-4">Kết nối với chúng tôi trên Facebook</p>
-                <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100044550437342" data-tabs="timeline" data-width="" data-height="70" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/profile.php?id=100044550437342" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/profile.php?id=100044550437342">Anh Sơn - Xanh, Sạch Đẹp, Sáng, Thân Thiện</a></blockquote></div>
-              </div>
             </div>
           </div>
         </div>
@@ -77,18 +103,10 @@
     </section>
     <!-- bottom content -->
     <section>
-      <div class="container-fluid bg-dark py-5">
-        <div class="container text-secondary">
-          <a href="/about" class="text-white-50 text-decoration-none">Thi đua - Khen thưởng Anh Sơn</a>
+      <div class="container-fluid bg-dark py-5 text-center text-secondary">
+          <a href="/about" class="text-white-50 text-decoration-none">benhvienanhson.com</a>
           is a project created and maintained by <a href="mailto:1nguyenhuuhieu@gmail.com" class="text-white-50 text-decoration-none">Nguyễn Hữu
             Hiếu</a> with <i class="fas fa-heart text-danger"></i>.
-          <br>
-          thiduakhenthuonganhson.vn website
-          <a href="https://creativecommons.org/licenses/by-nc/4.0/" class="text-white-50 text-decoration-none">CC BY-NC 4.0</a>.
-          <br>
-          Based on <a href="https://getbootstrap.com " class="text-white-50 text-decoration-none">Django</a> and
-          <a href="https://getbootstrap.com" class="text-white-50 text-decoration-none">Bootstrap</a>.
-        </div>
     </section>
     <!-- bottom content -->
   </footer><!-- end footer -->
