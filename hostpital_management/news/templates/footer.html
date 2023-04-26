@@ -1,113 +1,50 @@
 {% load static %}
 <footer class="bg-white mt-5">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-12 d-flex justify-content-between pt-5 pb-3 align-items-center border-bottom">
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-lg-9 d-flex flex-column flex-sm-row justify-content-between pt-5 pb-4 align-items-center border-bottom px-0">
         <div class="text-start">
-          <a href="{% url 'news:index'%}" class="link-dark link-offset-2 link-offset-3-hover link-underline-dark link-underline-opacity-0 link-underline-opacity-75-hover">
+          <a href="{% url 'news:index'%}" class="link-dark link-offset-2 link-offset-3-hover link-underline-danger link-underline-opacity-0 link-underline-opacity-75-hover">
           <img src="{% static 'imgs/logo-dark-400.png'%}" alt="">
           <p class="mt-2 opacity-75 fw-semibold mb-0">Bệnh viện đa khoa - Y tế dự phòng - Dân Số.</p>
         </a>
-
-        <div class="input-group mt-3">
-          <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2">
-          <span class="input-group-text" id="basic-addon2">@example.com</span>
         </div>
-
-
-        </div>
-
-        <div class="align-items-start d-flex flex-column justify-content-between h-100 border-start ps-3">
+        <div class="align-items-start d-flex flex-column justify-content-between h-100 border-start ps-3  mt-3 mt-sm-0">
           <a href="tel:+84917631100" class="fw-semibold  link-dark link-offset-2 link-offset-3-hover link-underline-danger link-underline-opacity-0 link-underline-opacity-75-hover" >
-            <span class="text-danger"><i class="bi bi-telephone me-2 text-dark opacity-50"></i>trực lãnh đạo 24/7 </span>0917631100
+            <span class="text-danger"><i class="bi bi-telephone me-2 text-dark opacity-75"></i>trực lãnh đạo 24/7 </span>0917631100
           </a>
-          <a href="tel:+84917579677" class="link-dark opacity-50 link-offset-2 link-offset-3-hover link-underline-danger link-underline-opacity-0 link-underline-opacity-75-hover" >
+          <a href="tel:+84917579677" class="link-dark opacity-75 link-offset-2 link-offset-3-hover link-underline-danger link-underline-opacity-0 link-underline-opacity-75-hover" >
             <i class="bi bi-envelope-at me-2"></i>trungtamytehuyenanhson@gmail.com
           </a>
-          <a href="tel:+84917579677" class="link-dark opacity-50 link-offset-2 link-offset-3-hover link-underline-danger link-underline-opacity-0 link-underline-opacity-75-hover" >
+          <a href="tel:+84917579677" class="link-dark opacity-75 link-offset-2 link-offset-3-hover link-underline-danger link-underline-opacity-0 link-underline-opacity-75-hover" >
             <i class="bi bi-facebook me-2"></i>fb.com/truyenthongyteanhson
           </a>
-          <a href="tel:+84917579677" class="link-dark opacity-50 link-offset-2 link-offset-3-hover link-underline-danger link-underline-opacity-0 link-underline-opacity-75-hover" >
+          <a href="tel:+84917579677" class="link-dark opacity-75 link-offset-2 link-offset-3-hover link-underline-danger link-underline-opacity-0 link-underline-opacity-75-hover" >
             <i class="bi bi-youtube me-2"></i>youtube.com/@trungtamytehuyeanhson
           </a>
-
         </div>
-
       </div>
     </div>
 
+    <div class="row justify-content-center">
+      <dic class="col-lg-6 d-flex flex-column flex-sm-row justify-content-between py-5 align-items-center px-0">
+        <a href="#" class="fw-medium small link-dark link-offset-2 link-offset-3-hover link-underline-danger link-underline-opacity-0 link-underline-opacity-75-hover" >
+          CHÍNH SÁCH BẢO MẬT
+        </a>
+        <a href="#" class="fw-medium small link-dark link-offset-2 link-offset-3-hover link-underline-danger link-underline-opacity-0 link-underline-opacity-75-hover" >
+          THỎA THUẬN NGƯỜI DÙNG
+        </a>
+        <a href="#" class="fw-medium small link-dark link-offset-2 link-offset-3-hover link-underline-danger link-underline-opacity-0 link-underline-opacity-75-hover" >
+          GIỚI THIỆU
+        </a>
+        <a href="#" class="fw-medium small link-dark link-offset-2 link-offset-3-hover link-underline-danger link-underline-opacity-0 link-underline-opacity-75-hover" >
+          LIÊN HỆ
+        </a>
+
+      </dic>
+    </div>
   </div>
-      <!-- liên hệ -->
-  <section class="parallax-window py-5" data-parallax="scroll" data-image-src="{% static 'imgs/bg_contact.png' %}">
-    <div class="container">
-      <h3 class="text-center">Chịu trách nhiệm nội dung</h3>
-      <hr>
-      <div class="row justify-content-center">
-        <div class="col-lg-6">
-          <div class="row"></div>
-          <h5>Trung tâm Y tế huyện Anh Sơn</h5>
-          <a href="mailto:trungtamytehuyenanhson@gmail.com" class="text-decoration-none"><i class="bi bi-envelope-at me-2"></i>thiduakhenthuonganhson@gmail.com</a> <br>
-          <a href="#" class="text-decoration-none"><i class="bi bi-geo-alt me-2"></i>Tổ dân phố 3, thị trấn Anh Sơn, tỉnh Nghệ An</a> <br>
-          <a href="tel:+84919428435" class="text-decoration-none"><i class="bi bi-phone me-2"></i>0919.428.435</a> <br>
-          <hr>
-          <h5>Đơn vị chủ quản</h5>
-          <h6>UBND Huyện Anh Sơn</h6>
-          <hr>
-          <h5>Đơn vị tham mưu</h5>
-          <h6>Phòng Nội vụ huyện Anh Sơn</h6>
 
-          <hr>
-          <h5>Trưởng ban biên tập<small class="text-muted ms-2">Trưởng phòng nội vụ</small></h5>
-          <h6>Nguyễn Đức Vĩnh</h6>
-
-          <a href="mailto:thiduakhenthuonganhson@gmail.com" class="text-decoration-none"><i class="bi bi-envelope-at me-2"></i>thiduakhenthuonganhson@gmail.com</a> <br>
-          <a href="tel:+84919428435" class="text-decoration-none"><i class="bi bi-phone me-2"></i>0919.428.435</a> <br>
-        </div>
-        <div class="col-lg-4">
-          <form>
-            <div class="form-group mb-3 ">
-              <label for="name">Họ và tên</label>
-              <input type="text" class="form-control form-control-sm" id="name">
-            </div>
-            <div class="form-group mb-3">
-              <label for="email">Email</label>
-              <input type="email" class="form-control form-control-sm" id="email">
-            </div>
-            <div class="form-group mb-3 ">
-              <label for="phone">Số điện thoại</label>
-              <input type="text" class="form-control form-control-sm" id="phone">
-            </div>
-            <div class="form-group">
-              <label for="ykien">Ý kiến của bạn</label>
-              <textarea class="form-control" id="ykien" rows="5"></textarea>
-            </div>
-            <button type="submit" class="btn btn-light border mt-3"><i class="far fa-paper-plane me-2"></i> Gửi góp
-              ý</button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </section><!-- end liên hệ -->
-
-    <section>
-      <div class="p-0 py-5 p-lg-5">
-        <div class="container text-center">
-          <div class="row justify-content-center">
-            <div class="col-lg-6">
-              <p>Đăng ký nhận thông báo về các bài viết mới trên trang</p>
-              <form role="form">
-                <div class="input-group ">
-                  <input type="email" name="EMAIL" class="form-control " placeholder="Địa chỉ email...">
-                  <div class="input-group-append">
-                    <button type="submit" name="subscribe" class="btn btn-light border border-start-0 rounded-start-0">Theo dõi!</button>
-                  </div>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
     <!-- bottom content -->
     <section>
       <div class="container-fluid bg-dark py-5 text-center text-secondary">
