@@ -4,19 +4,43 @@
 {% block title%}Website{% endblock %}
 {% block content %}
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-lg-3"></div>
+    <div class="row justify-content-center">
+        <div class="col-lg-3 ps-4">
+          <div style="position:sticky; top: 80px;">
+
+          <h5 class="fw-bold mb-4"><i class="bi bi-stars me-2"></i><span class="text-secondary">TÁC GIẢ NỔI BẬT</span></h5>
+          {% for i in '12345'%}
+          <div class="d-flex align-items-center mb-3">
+            <img src="https://thumbs.dreamstime.com/b/faces-avatar-circle-portrait-young-boy-glasses-vector-illustration-eps-flat-cartoon-style-83654284.jpg" alt="" class="rounded-circle me-2" style="width: 35px; height: 35px;">
+            <a href="#" class="link-body-emphasis h6 text-decoration-none">
+              Hiếu Nguyễn
+            </a>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+
         <div class="col-lg-6">
-            {% for i in '1234657890' %}
+            {% for i in '1234657' %}
 
                 <div class="card mb-3 rounded-4 border-0 shadow-sm">
                     <div class="row g-0 ">
-                      <div class="col-4 p-3">
-                        <img src="https://images.unsplash.com/photo-1449034446853-66c86144b0ad?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8NXx8fGVufDB8fHx8&w=1000&q=80" class="img-fluid rounded-4" alt="...">
+                      <div class="col-4 p-3 d-flex flex-column justify-content-center align-items-center">
+                        <div class="">
+                          <a href="#">
+                          <img src="https://images.unsplash.com/photo-1449034446853-66c86144b0ad?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8NXx8fGVufDB8fHx8&w=1000&q=80" class="img-fluid rounded-4" alt="...">
+                            
+                            </a>
+                        </div>
+
                       </div>
-                      <div class="col-8 ps-0 p-4 d-flex flex-column align-items-between justify-content-between ">
+                      <div class="col-8 ps-0 pe-2 d-flex flex-column align-items-between justify-content-center ">
                             <div>
-                              <h5 class="card-title">{{ "Chủ tịch Trung Quốc Tập Cận Bình điện đàm với Tổng thống Ukraine Zelensky, sau khi Kiev nhiều lần bày tỏ mong muốn có cuộc thảo luận thượng đỉnh về chiến sự.Trung Quốc sẽ cử các đại diện đặc biệt tới Ukraine và tổ chức các cuộc đàm phán với tất cả các bên về giảiq"|truncatechars:100 }}</h5>
+                              <h5 class="card-title">
+                                <a href="#" class="text-decoration-none link-body-emphasis">
+                                {{ "Chủ tịch Trung Quốc Tập Cận Bình điện đàm với Tổng thống Ukraine Zelensky, sau khi Kiev nhiều lần bày tỏ mong muốn có cuộc thảo luận thượng đỉnh về chiến sự.Trung Quốc sẽ cử các đại diện đặc biệt tới Ukraine và tổ chức các cuộc đàm phán với tất cả các bên về giảiq"|truncatechars:80 }}
+                              </a>
+                              </h5>
                             </div>
                             <div class="d-flex justify-content-between align-items-center">
                               <div class="d-flex align-items-center">
@@ -27,9 +51,16 @@
                                 </div>
 
                               </div>
-                              <div>
+                              <div class="pe-5">
+                                <a href="#" class="link-body-emphasis opacity-50 text-decoration-none">
+                                <span class="fw-medium">16</span>
+                                {% if forloop.first %}
+                                <i class="bi bi-hand-thumbs-up-fill fs-4"></i>
+                                {% else %}
                                 <i class="bi bi-hand-thumbs-up fs-4"></i>
 
+                                {% endif %}
+                              </a> 
                               </div>
                               
                             </div>
@@ -39,16 +70,19 @@
             {% endfor %}
         </div>
         <div class="col-lg-3 ps-5">
+          <div style="position:sticky; top: 80px;">
+
           <h5 class="fw-bold mb-4"><i class="bi bi-star-fill me-2"></i><span class="text-secondary">PHỔ BIẾN</span></h5>
           {% for i in '12345'%}
           <div class="d-flex align-items-center mb-4">
 
-            <button class="btn btn-light fw-semibold fs-5 me-3" style="width: 45px;">{{i}}</button>
+            <button class="btn btn-light fw-semibold fs-5 me-2" style="width: 50px;">{{i}}</button>
             <a href="#" class="link-body-emphasis h6 text-decoration-none">
               Ctịch Trung Quốc Tập Cận Bình điện đàm với T
             </a>
           </div>
           {% endfor %}
+        </div>
         </div>
     </div>
 </div>

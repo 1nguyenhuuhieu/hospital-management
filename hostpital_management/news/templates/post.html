@@ -2,12 +2,12 @@
 {% load humanize %}
 {% load static %}
 {% block content %}
-<div class="container">
+<div class="container-fluid">
   <div class="row mt-3 mt-sm-5 justify-content-center pb-5">
-    <div class="col-lg-1 text-center ">
+    <div class="col-lg-3 text-center ">
       {% include 'include/left_info.html' %}
     </div>
-    <div class="col-lg-7 ">
+    <div class="col-lg-6">
       <form method="post" id="printJS-form">
         {% if post.cover %}
       <img src="{{ post.cover.url }}" alt="" class=" mb-4 rounded-3 shadow-sm w-100">
@@ -52,7 +52,7 @@
     </form>
     {% include 'include/comment.html' %}
     </div>
-    <div class="col-lg-4" >
+    <div class="col-lg-3" >
       <div style="position: sticky;
       top: 100px;">
         {% with author=post.author %}
@@ -72,7 +72,7 @@
             {% endif %}
           </div>
           <div class="col-9">
-            <h6 class="mb-0 fw-normal"> <a href="{% url 'post' post_id=post.id %}" class="stretched-link link-dark text-decoration-none">{{ post.title|truncatechars:70 }}</a> </h6>
+            <h6 class="mb-0 fw-normal"> <a href="{% url 'news:post' post_id=post.id %}" class="stretched-link link-dark text-decoration-none">{{ post.title|truncatechars:70 }}</a> </h6>
             <p class="text-muted mt-1"> {{ post.created_time|naturaltime }}</p>
           </div>
           {% if not forloop.last %}
