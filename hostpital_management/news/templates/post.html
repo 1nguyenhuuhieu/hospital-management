@@ -15,10 +15,21 @@
       {% include 'include/post_info.html' %}
 <div class="d-lg-none">
 <div class="d-flex justify-content-end mt-3">
-  <!-- Example single danger button -->
+  <a href="#comment" class=" btn btn-light position-relative btn-sm me-2">
+    <span data-bs-toggle="tooltip" data-bs-title="Bình luận">
+        <i class="bi bi-chat-left-text me-1"></i>
+    </span>{{ post.comment_set.all|length }} Bình luận
+</a>
+
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit" name="like" class="btn btn-sm btn-light me-2"><i
+            class="bi bi-bookmark{% if  has_reaction  %}-fill text-dark{% endif %} me-1"></i>Lưu
+        </button>
+</form>
 <div class="btn-group btn-group-sm">
   <button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-    Chia sẻ bài viết
+    Chia sẻ
   </button>
   <ul class="dropdown-menu">
     <li><button class="btn btn-light dropdown-item" data-sharer="facebook" data-hashtag="thiduananhson"
