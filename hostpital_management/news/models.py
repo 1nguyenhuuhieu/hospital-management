@@ -4,7 +4,7 @@ import PIL.Image
 from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
 from human_resource_management.models import *
-import datetime
+from django.utils import timezone
 
 import os
     
@@ -41,9 +41,11 @@ class Post(models.Model):
         else:
             return None
         
-    def created_time_display(self):
-        now = datetime.datetime.now()
-        date_diff = (now - self.created_time).minutes
+    def is_old_created_time(self):
+        now = timezone.now()
+        date_diff = (now - self.created_time).days
+
+        return date_diff > 0
         
     def tags_list(self):
         return '; '.join(tag.title for tag in self.tags.all())
