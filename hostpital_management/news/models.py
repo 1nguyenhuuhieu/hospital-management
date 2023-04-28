@@ -4,6 +4,7 @@ import PIL.Image
 from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
 from human_resource_management.models import *
+import datetime
 
 import os
     
@@ -21,6 +22,7 @@ class Post(models.Model):
     author = models.ForeignKey(Staff, verbose_name='tác giả', blank=True, null=True, on_delete=models.CASCADE)
     is_public = models.BooleanField(verbose_name='có hiển thị bài viết', default=True)
     is_pinned = models.BooleanField(verbose_name='có ghim bài viết', default=False)
+    description = models.TextField(verbose_name='tóm tắt')
     content = RichTextUploadingField(verbose_name='nội dung')
     youtube_url = models.URLField(max_length=40, blank=True, null=True, verbose_name='URL video youtube', help_text='dán url video youtube vào đây')
     cover = models.ImageField(upload_to='post-covers/', verbose_name='ảnh bìa', blank=True, null=True)
@@ -38,6 +40,10 @@ class Post(models.Model):
             return str1_s[0]
         else:
             return None
+        
+    def created_time_display(self):
+        now = datetime.datetime.now()
+        date_diff = (now - self.created_time).minutes
         
     def tags_list(self):
         return '; '.join(tag.title for tag in self.tags.all())

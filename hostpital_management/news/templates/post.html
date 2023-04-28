@@ -9,17 +9,20 @@
     </div>
     <div class="col-lg-6">
       <form method="post" id="printJS-form">
-        {% if post.cover %}
-      <img src="{{ post.cover.url }}" alt="" class=" mb-4 rounded-3 shadow-sm w-100">
-        {% endif %}
-      <h1>{{ post.title }}</h1>
-        {% include 'include/post_info.html' %}
-        <div class="d-flex justify-content-end align-items-center my-1"> 
 
-          <span class="text-muted fst-italic small">
-            Thời gian đọc <span id="time"></span> phút
-          </span>
-        </div>
+      <h1 class="display-5 fw-bold mb-4">{{ post.title }}</h1>
+      <p class="text-muted fst-italic fs-6">{{ post.description }}</p>
+      {% include 'include/post_info.html' %}
+      <div class="d-flex justify-content-end align-items-center my-1"> 
+
+        <span class="text-muted fst-italic small">
+          Thời gian đọc <span id="time"></span> phút
+        </span>
+      </div>
+      {% if post.cover %}
+      <img src="{{ post.cover.url }}" alt="" class=" my-4 rounded-3 shadow-sm w-100">
+        {% endif %}
+
       <div class="fs-5 mb-4">
         {% if post.youtube_url %}
         {% with video=post %}

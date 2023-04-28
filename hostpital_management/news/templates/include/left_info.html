@@ -1,38 +1,63 @@
 {% load static %}
 
-<div class=" d-none d-sm-block d-flex flex-column mt-5 fs-5 text-muted align-items-center" style="position: sticky;
+<div class=" d-none d-sm-block d-flex flex-column mt-4 fs-5 text-muted align-items-end justify-content-end pe-5" style="position: sticky;
 top: 100px;">
-    <div class="flex-row flex-sm-column">
-        <button class="btn btn-lg btn-light" data-sharer="facebook" data-hashtag="thiduananhson"
+    <div class="d-flex flex-row flex-sm-column justify-content-end align-items-end">
+        <button class="btn btn-light" data-sharer="facebook" data-hashtag="thiduananhson"
             data-url="{{ request.build_absolute_uri }}" data-bs-toggle="tooltip" data-bs-title="Chia sẻ qua facebook"><i
                 class="bi bi-facebook"></i></button>
-        <button class="btn btn-lg  btn-light mt-2" data-sharer="email" data-title="Chia sẻ từ thiduananhson.com"
+        <button class="btn  btn-light mt-3" data-sharer="email" data-title="Chia sẻ từ thiduananhson.com"
             data-url="{{ request.build_absolute_uri }}" data-subject="Chia sẻ từ thiduananhson.com"
             data-to="some@email.com" data-bs-toggle="tooltip" data-bs-title="Chia sẻ qua email"><i
                 class="bi bi-envelope mt-2"></i></button>
-        <button class="btn btn-lg btn-copy  btn-light mt-2" data-clipboard-text="{{ request.build_absolute_uri }}"
+        <button class="btn btn-copy  btn-light mt-3" data-clipboard-text="{{ request.build_absolute_uri }}"
             id="copyBtn" data-bs-toggle="tooltip" data-bs-title="Copy liên kết"><i class="bi bi-link mt-2"></i></button>
-        <button class="btn btn-lg btn-light mt-2" data-bs-toggle="tooltip" data-bs-title="In bài viết"
+        <button class="btn btn-light mt-3" data-bs-toggle="tooltip" data-bs-title="In bài viết"
             onclick="printJS('printJS-form', 'html')"><i class="bi bi-printer mt-2"></i></button>
     </div>
     
-    <div class="d-flex flex-row flex-sm-column align-items-center mt-3">
-        <a href="#comment" class="link-dark text-decoration-none">
+    <div class="d-flex flex-row flex-sm-column align-items-end">
+
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" name="like" class="mt-3 btn btn-light"><i
+                    class="bi bi-bookmark{% if  has_reaction  %}-fill text-dark{% endif %}" data-bs-toggle="tooltip"
+                    data-bs-title="Lưu bài viết"></i>
+                </button>
+        </form>
+
+
+        <a href="#comment" class=" btn btn-light position-relative mt-3">
             <span data-bs-toggle="tooltip" data-bs-title="Bình luận">
                 <i class="bi bi-chat-left"></i>
             </span>
+
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill text-bg-dark opacity-50">
+                {{ post.comment_set.all|length }}
+                <span class="visually-hidden">unread messages</span>
+              </span>
         </a>
-        <small class="fs-6">{{ post.comment_set.all|length }}</small>
         <form method="post">
             {% csrf_token %}
-            <button type="submit" name="like" class="mt-2 btn btn-lg btn-light"><i
+            <button type="submit" name="like" class="mt-3 btn btn-light position-relative"><i
                     class="bi bi-heart{% if  has_reaction  %}-fill text-danger{% endif %}" data-bs-toggle="tooltip"
-                    data-bs-title="Lượt thích"></i></button>
+                    data-bs-title="Lượt thích"></i>
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill text-bg-dark opacity-50">
+                        {{  post.like }}
+                        <span class="visually-hidden">unread messages</span>
+                      </span>
+                </button>
         </form>
-        <small class="fs-6">{{ post.like }}</small>
-        <i class="bi bi-eye mt-2 mb-0" data-bs-toggle="tooltip" data-bs-title="Lượt xem"></i>
-        <small class="fs-6">{{ post.view_count }}</small>
-        <a href="{% url 'index' %}" class="text-decoration-none link-dark mt-2">
+
+        <button  class="mt-3 btn btn-light position-relative" data-bs-toggle="tooltip" data-bs-title="Lượt xem">
+            <i class="bi bi-eye mt-2 mb-0" ></i>
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill text-bg-dark opacity-50">
+                {{  post.view_count }}
+                <span class="visually-hidden">unread messages</span>
+              </span>
+        </button>
+        
+        <a href="{% url 'index' %}" class="btn btn-light mt-3">
             <i class="bi bi-house-door" data-bs-toggle="tooltip" data-bs-title="Về trang chủ"></i>
         </a>
     </div>
