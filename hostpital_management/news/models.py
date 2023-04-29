@@ -19,7 +19,8 @@ class Tag(models.Model):
     
 class Post(models.Model):
     title = models.CharField(max_length=1000, verbose_name='tên bài viết')
-    author = models.ForeignKey(Staff, verbose_name='người đăng', blank=True, null=True, on_delete=models.CASCADE)
+    author = models.ForeignKey('Author', verbose_name='tác giả', blank=True, null=True, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, verbose_name='người đăng', blank=True, null=True, on_delete=models.CASCADE)
     is_public = models.BooleanField(verbose_name='có hiển thị bài viết', default=True)
     is_pinned = models.BooleanField(verbose_name='có ghim bài viết', default=False)
     description = models.TextField(verbose_name='tóm tắt')
