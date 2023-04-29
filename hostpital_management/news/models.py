@@ -25,12 +25,22 @@ class Post(models.Model):
     description = models.TextField(verbose_name='tóm tắt')
     content = RichTextUploadingField(verbose_name='nội dung')
     youtube_url = models.URLField(max_length=40, blank=True, null=True, verbose_name='URL video youtube', help_text='dán url video youtube vào đây')
-    cover = models.ImageField(upload_to='post-covers/', verbose_name='ảnh bìa', blank=True, null=True)
+    cover = models.ImageField(upload_to='post-covers/', verbose_name='ảnh bìa', blank=True, null=True, help_text='ảnh bìa sẽ tự động resize về kích thước 768 x 432')
     tags = models.ManyToManyField(Tag, verbose_name='danh mục', blank=True)
     created_time = models.DateTimeField(auto_now_add=True,null=True)
     updated_time = models.DateTimeField(auto_now=True,null=True)
     view_count = models.IntegerField(blank=True, null=True, default=0, verbose_name='số lượt xem')
     like = models.IntegerField(blank=True, null=True, default=0, verbose_name='số lượt like')
+
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        if self.cover:
+            img = PIL.Image.open(self.cover)
+            img = img.resize((768, 432), PIL.Image.ANTIALIAS)
+            img.save(self.cover.path, quality=100)
+            img.close()
+            self.cover.close()
 
     def youtube_id(self):
         if self.youtube_url:

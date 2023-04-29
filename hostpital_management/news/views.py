@@ -5,8 +5,10 @@ from django.shortcuts import get_object_or_404
 import random
 
 def index(request):
+    posts = Post.objects.order_by('-created_time')[:2]
 
     context = {
+        'posts': posts
     }
 
     return render(request, 'index.html', context)
