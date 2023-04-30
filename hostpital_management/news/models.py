@@ -7,12 +7,22 @@ from human_resource_management.models import *
 from django.utils import timezone
 
 import os
-    
-class Tag(models.Model):
-    title = models.CharField(max_length=200, verbose_name='tên đầy đủ')
+
+class Category(models.Model):
+    title = models.CharField(max_length=200, verbose_name='tên danh mục')
+
     class Meta:
         verbose_name = 'danh mục'
         verbose_name_plural = 'danh mục'
+
+    def __str__(self):
+        return f'{self.title}'
+     
+class Tag(models.Model):
+    title = models.CharField(max_length=200, verbose_name='tên đầy đủ')
+    class Meta:
+        verbose_name = 'thẻ'
+        verbose_name_plural = 'thẻ'
 
     def __str__(self):
         return f'{self.title}'
@@ -21,8 +31,12 @@ class Post(models.Model):
     title = models.CharField(max_length=1000, verbose_name='tên bài viết')
     author = models.ForeignKey('Author', verbose_name='tác giả', blank=True, null=True, on_delete=models.CASCADE)
     user = models.ForeignKey(User, verbose_name='người đăng', blank=True, null=True, on_delete=models.CASCADE)
-    is_public = models.BooleanField(verbose_name='có hiển thị bài viết', default=True)
-    is_pinned = models.BooleanField(verbose_name='có ghim bài viết', default=False)
+    STATUS_CHOICES = [
+        ('private', 'Chỉ mình tôi'),
+        ('staff', 'Nhân viên'),
+        ('public', 'Mọi người')
+    ]
+    status = models.CharField(choices=STATUS_CHOICES,verbose_name='trạng thái bài viết', default='public', max_length=10)
     description = models.TextField(verbose_name='tóm tắt')
     content = RichTextUploadingField(verbose_name='nội dung')
     youtube_url = models.URLField(max_length=40, blank=True, null=True, verbose_name='URL video youtube', help_text='dán url video youtube vào đây')
@@ -33,6 +47,11 @@ class Post(models.Model):
     view_count = models.IntegerField(blank=True, null=True, default=0, verbose_name='số lượt xem')
     like = models.IntegerField(blank=True, null=True, default=0, verbose_name='số lượt like')
 
+    def status_icon(self):
+        if self.status == 'public':
+            return 'globe-americas'
+        else:
+            return 'people'
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)

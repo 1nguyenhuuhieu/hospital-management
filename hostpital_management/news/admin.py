@@ -6,16 +6,8 @@ from .models import *
 class TagInline(admin.StackedInline):
     model = Tag
 
-class SlideAdmin(admin.ModelAdmin):
-    list_display = ('title', 'is_show')
-    fields = ('title', 'cover','image_tag', 'is_show','post', )
-    readonly_fields = ('image_tag',)
-
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('author', 'title',  'is_public', 'youtube_url')
-    list_display_links = ('title', )
-    list_filter = ('author', 'is_public',  'tags')
     filter_horizontal = ('tags',)
     readonly_fields = ('view_count', 'like')
 
@@ -26,3 +18,7 @@ admin.site.register(Comment)
 @admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):
     readonly_fields = ('id', )
+
+@admin.register(Category)
+class CategoryAdmin(admin.ModelAdmin):
+    pass
