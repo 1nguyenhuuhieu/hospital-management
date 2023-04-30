@@ -68,9 +68,19 @@
     <nav class="navbar bg-white sticky-top shadow-sm">
         <div class="container-fluid">
           <a class="navbar-brand" href="{% url 'news:index' %}">
-                <img src="{% static 'imgs/logo-dark-200.png' %}" alt="logo trung tâm y tế huyện anh sơn"
-                    class="img-fluid" style="height: 40px;">
+                <img src="{% static 'imgs/logo-mobile.png' %}" alt="logo trung tâm y tế huyện anh sơn"
+                    class="img-fluid" style="height: 35px;">
           </a>
+
+          <div class="accordion accordion-flush ms-auto" id="accordionExample">
+            <div class="accordion-item ">
+              <span class="accordion-header ">
+                <button class="accordion-button collapsed p-0 fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCategory2" aria-expanded="true" aria-controls="collapseOne">
+                  DANH MỤC
+                </button>
+              </span>
+            </div>
+          </div>
           <a href="#" class="btn btn-outline-light  rounded-pill border-0 p-1 ms-auto me-2">
             <svg xmlns="http://www.w3.org/2000/svg" height="25" viewBox="0 96 960 960" width="25"><path d="M226 896q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19ZM226 642q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19ZM226 388q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Z"/></svg>
         </a>
@@ -88,29 +98,15 @@
               <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
             <div class="offcanvas-body">
-              <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                <li class="nav-item">
-                  <div class="accordion accordion-flush" id="accordionExample">
-                    <div class="accordion-item ">
-                      <span class="accordion-header ">
-                        <button class="accordion-button collapsed p-0 fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCategory2" aria-expanded="true" aria-controls="collapseOne">
-                          DANH MỤC
-                        </button>
-                      </span>
-                    </div>
-                  </div>
-                </li>
-              </ul>
-              {% include 'include/category.html' with id="collapseCategory2" %}
-              <form action="" method="get" class="mt-3">
-                <div class="input-group input-group-sm rounded-4 p-2 bg-body-tertiary">
+              <form action="" method="get" >
+                <div class="input-group rounded-4 p-2 bg-body-tertiary border">
                     <span class="input-group-text border-0"><i class="bi bi-search"></i></span>
                     <input type="search" class="form-control border-0 bg-light " placeholder="Tìm kiếm"
                         name="search">
                     <button class="input-group-text btn btn-light border rounded-pill" 
                         type="submit">Tìm kiếm</button>
-                </div>
             </form>
+          </div>
             <div class="d-flex justify-content-between mt-3">
                 <button class="btn btn-white rounded-pill fw-semibold text-muted"><i
                         class="bi bi-calendar-plus me-2 "></i>ĐẶT LỊCH KHÁM</button>
@@ -122,6 +118,9 @@
 
           
         </div>
+
+        {% include 'include/category.html' with id="collapseCategory2" %}
+
       </nav>
 
       
