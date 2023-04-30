@@ -1,0 +1,30 @@
+{% if paginate %}
+<div class="d-flex mb-5 justify-content-between align-items-center">
+    {% if posts.has_previous %}
+    <a href="{% url 'news:posts' page=posts.previous_page_number %}" class="btn px-3  btn-dark rounded-pill fw-semibold fs-6"><i class="bi bi-chevron-left me-1"></i>TRƯỚC</a>
+    {% else %}
+    <button class="disabled btn px-3  btn-dark rounded-pill fw-semibold fs-6"><i class="bi bi-chevron-left me-1"></i>TRƯỚC</button>
+    {% endif %}
+    <div>
+    <a href="{% url 'news:posts' page=1 %}" class="px-3 btn btn-outline-dark rounded-pill fw-semibold fs-6 {% if page == 1 %} active {% endif %}">1</a>
+    <button class="px-3 btn btn-outline-dark rounded-pill fw-semibold fs-6
+    {% if page != 1 and page != paginate.num_pages %}
+    active
+    {% endif %}">
+        {% if page == 1 %}
+        2
+        {% elif page == paginate.num_pages %}
+        {{ paginate.num_pages|add:"-1" }}
+        {% else %}
+        {{page}}
+        {% endif %}
+    </button>
+    <a href="{% url 'news:posts' page=paginate.num_pages %}" class="px-3 btn btn-outline-dark rounded-pill fw-semibold fs-6 {% if page == paginate.num_pages %} active {% endif %}">{{ paginate.num_pages}}</a>
+    </div>
+    {% if posts.has_next %}
+    <a href="{% url 'news:posts' page=posts.next_page_number %}" class="btn px-3  btn-dark rounded-pill fw-semibold fs-6">SAU<i class="bi bi-chevron-right ms-1"></i></a>
+    {% else %}
+    <button class="disabled btn px-3  btn-dark rounded-pill fw-semibold fs-6">SAU<i class="bi bi-chevron-right ms-1"></i></button>
+    {% endif %}
+</div>
+  {% endif %}
