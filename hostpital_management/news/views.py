@@ -15,6 +15,8 @@ def index(request, page=None):
     else:
         posts = Post.objects.order_by('-created_time')[:5]
 
+    # thành viên nổi bật: đăng nhiều bài, bình luận nhiều, xem nhiều
+
     # bài viết nổi bật bao gồm: bài viết xem nhiều, vừa bình luận, vừa đăng tải --> kèm status(xem nhiều, mới đăng, vừa bình luận)    
     popular_posts = Post.objects.order_by('-view_count')[:5]
 
