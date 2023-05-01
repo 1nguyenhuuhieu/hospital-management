@@ -6,20 +6,14 @@ from .models import *
 class TagInline(admin.StackedInline):
     model = Tag
 
-class SlideAdmin(admin.ModelAdmin):
-    list_display = ('title', 'is_show')
-    fields = ('title', 'cover','image_tag', 'is_show','post', )
-    readonly_fields = ('image_tag',)
-
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('author', 'title',  'is_public', 'youtube_url')
-    list_display_links = ('title', )
-    list_filter = ('author', 'is_public',  'tags')
     filter_horizontal = ('tags',)
     readonly_fields = ('view_count', 'like')
-    search_fields = ("title", 'author__name', 'tags__title',)
-    autocomplete_fields = ('author',)
+    exclude = ('user',)
+    def save_model(self, request, obj, form, change):
+        obj.user = request.user
+        super().save_model(request, obj, form, change)
 
 admin.site.register(Author)
 admin.site.register(Comment)
@@ -28,3 +22,7 @@ admin.site.register(Comment)
 @admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):
     readonly_fields = ('id', )
+
+@admin.register(Category)
+class CategoryAdmin(admin.ModelAdmin):
+    pass

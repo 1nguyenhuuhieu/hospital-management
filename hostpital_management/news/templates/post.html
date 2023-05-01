@@ -12,11 +12,12 @@
 
       <h1 class="display-5 fw-bold mb-4">{% block title %}{{ post.title }}{% endblock %}</h1>
       <p class="text-muted fst-italic fs-6">{{ post.description }}</p>
+
       {% include 'include/post_info.html' %}
 <div class="d-lg-none">
 <div class="d-flex justify-content-end mt-3">
 
-  <a href="#comment" class=" btn btn-light position-relative btn-sm me-2">
+  <a href="#comment" class=" btn btn-light position-relative me-2">
     <span data-bs-toggle="tooltip" data-bs-title="Bình luận">
         <i class="bi bi-chat-left-text me-1"></i>
     </span>{{ post.comment_set.all|length }} Bình luận
@@ -24,11 +25,11 @@
 
   <form method="post">
     {% csrf_token %}
-    <button type="submit" name="like" class="btn btn-sm btn-light me-2"><i
+    <button type="submit" name="like" class="btn btn-light me-2"><i
             class="bi bi-bookmark{% if  has_reaction  %}-fill text-dark{% endif %} me-1"></i>Lưu
         </button>
 </form>
-<div class="btn-group btn-group-sm">
+<div class="btn-group">
   <button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
     Chia sẻ
   </button>
@@ -66,6 +67,26 @@
           {{ post.content }}
           {% endautoescape %}
       </article>
+
+      <!-- Modal -->
+<div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-fullscreen">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="imageModalLabel">Xem ảnh</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body bg-dark text-center">
+        <img src="" alt="" class="img-fluid" id="imageElementModal">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+        <a href="#" class="btn btn-primary" download id="downloadBtn"><i class="bi bi-download me-2"></i>Tải ảnh</a>
+      </div>
+    </div>
+  </div>
+</div>
+
       </div>
     </form>
     <form method="post">
@@ -121,21 +142,40 @@
   </div>
 </div>
 <script>
+    function updateImageModal(e){
+    const imgModal = document.getElementById('imageElementModal')
+    const downloadBtn = document.getElementById('downloadBtn')
+    imgModal.src = e.src;
+    downloadBtn.href = e.src;
+  }
+  
+
   window.onload = function () {
     const postDiv = document.getElementById('article')
     const imgs = postDiv.querySelectorAll("img");
     for (let i = 0; i < imgs.length; i++) {
       imgs[i].style = '';
       imgs[i].className = 'img-fluid rounded-3 shadow-sm my-2';
-      imgs[i].parentElement.className = 'text-center';
+      let parent = imgs[i].parentNode;
+      let wrapper = document.createElement('a');
+      parent.replaceChild(wrapper, imgs[i]);
+      wrapper.appendChild(imgs[i]);
+      wrapper.href = '#';
+      wrapper.parentElement.className = 'text-center';
+      wrapper.setAttribute("data-bs-toggle", "modal");
+      wrapper.setAttribute("data-bs-target", "#imageModal");
+      imgs[i].setAttribute("onclick", "updateImageModal(this)");
     }
   };
+
+
   function readingTime() {
   const text = document.getElementById("article").innerText;
   const wpm = 225;
   const words = text.trim().split(/\s+/).length;
   const time = Math.ceil(words / wpm);
   document.getElementById("time").innerText = time;
+  document.getElementById("time2").innerText = time;
 }
 readingTime();
 </script>

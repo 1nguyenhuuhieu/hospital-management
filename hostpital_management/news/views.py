@@ -4,11 +4,25 @@ from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404
 import random
 
-def index(request):
-    posts = Post.objects.order_by('-created_time')[:2]
+
+def index(request, page=None):
+    paginate = None
+    current_view_name = request.resolver_match.view_name
+    if current_view_name == 'news:posts':
+        all_posts = Post.objects.order_by('-created_time')
+        paginate = Paginator(all_posts, 1)
+        posts = paginate.page(page)
+    else:
+        posts = Post.objects.order_by('-created_time')[:5]
+
+    # bài viết nổi bật bao gồm: bài viết xem nhiều, vừa bình luận, vừa đăng tải --> kèm status(xem nhiều, mới đăng, vừa bình luận)    
+    popular_posts = Post.objects.order_by('-view_count')[:5]
 
     context = {
-        'posts': posts
+        'posts': posts,
+        'popular_posts': popular_posts,
+        'paginate': paginate,
+        'page': page
     }
 
     return render(request, 'index.html', context)
@@ -16,6 +30,7 @@ def index(request):
 def post(request, post_id):
     post = Post.objects.get(pk=post_id)
     reaction_name = f'has_reaction_{post_id}'
+    viewed_name = f'has_viewed_{post_id}'
     has_reaction = reaction_name in request.session.keys()
 
     if request.method == 'POST' and 'like' in request.POST:
@@ -34,11 +49,15 @@ def post(request, post_id):
         comment.save()
     
     latest_posts = Post.objects.order_by('-created_time')[:5]
-    try:
-        post.view_count += 1
-        post.save()
-    except:
-        pass
+
+    has_viewed = viewed_name in request.session.keys()
+    if not has_viewed:
+        try:
+            post.view_count += 1
+            post.save()
+            request.session[viewed_name] = True
+        except:
+            pass
 
     post = Post.objects.get(pk=post_id)
     has_reaction = reaction_name in request.session.keys()
