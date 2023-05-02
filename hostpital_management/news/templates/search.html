@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% load static %}
+{% block title%}Kết quả tìm kiếm bài viết{% endblock %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-lg-7">
+            <h1 class="display-5 fw-medium">Kết quả tìm kiếm cho "{{ q }}"</h1>
+            <hr>
+            <ol>
+            {% for result in results %}
+            <li> <a href="{% url 'news:post' post_id=result.id %}">{{ result }}</a></li>
+            {% empty %}
+                <h1>no result</h1>
+            {% endfor %}
+        </ol>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
