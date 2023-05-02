@@ -1,4 +1,9 @@
 from django.contrib import admin
+from bs4 import BeautifulSoup
+
+
+
+
 from .models import *
 # Register your models here.
 
@@ -13,6 +18,9 @@ class PostAdmin(admin.ModelAdmin):
     exclude = ('user',)
     def save_model(self, request, obj, form, change):
         obj.user = request.user
+        plain_text = BeautifulSoup(obj.content).get_text()
+        obj.plaintext_content = plain_text
+        
         super().save_model(request, obj, form, change)
 
 admin.site.register(Author)

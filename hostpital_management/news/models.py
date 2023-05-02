@@ -40,6 +40,7 @@ class Post(models.Model):
     status = models.CharField(choices=STATUS_CHOICES,verbose_name='trạng thái bài viết', default='public', max_length=10)
     description = models.TextField(verbose_name='tóm tắt')
     content = RichTextUploadingField(verbose_name='nội dung')
+    plaintext_content = models.TextField(verbose_name='plain text of content', blank=True, null=True)
     youtube_url = models.URLField(max_length=40, blank=True, null=True, verbose_name='URL video youtube', help_text='dán url video youtube vào đây')
     cover = models.ImageField(upload_to='post-covers/', verbose_name='ảnh bìa', blank=True, null=True, help_text='ảnh bìa sẽ tự động resize về kích thước 768 x 432')
     tags = models.ManyToManyField(Tag, verbose_name='thẻ', blank=True)

@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'import_export',
     'ckeditor',
     'ckeditor_uploader',
+    'django.contrib.postgres',
 
     'dashboard',
     'hospital_quality_management',

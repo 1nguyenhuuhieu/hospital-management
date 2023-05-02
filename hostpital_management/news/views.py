@@ -2,8 +2,7 @@ from django.shortcuts import render
 from .models import *
 from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404
-import random
-
+from django.contrib.postgres.search import SearchQuery
 
 def index(request, page=None):
     paginate = None
@@ -31,6 +30,7 @@ def index(request, page=None):
 
 def post(request, post_id):
     post = Post.objects.get(pk=post_id)
+
     reaction_name = f'has_reaction_{post_id}'
     viewed_name = f'has_viewed_{post_id}'
     has_reaction = reaction_name in request.session.keys()
@@ -107,10 +107,14 @@ def posts(request, tag_id=None):
 
 
 def search(request):
-    if request.method == 'GET' and 'search' in request.form:
-        print(request.form['keyword'])
+    if request.method == 'GET':
+        q = request.GET['q']
+        search = SearchQuery(q, config="english")
+        results = Post.objects.filter(plaintext_content__search=search)
     context = {
+        'results': results,
+        'q': q
 
     }
 
-    return render(request, 'search_result.html', context)
+    return render(request, 'search.html', context)
