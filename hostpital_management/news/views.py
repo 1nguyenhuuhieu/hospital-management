@@ -104,3 +104,15 @@ def posts(request, tag_id=None):
         'posts': posts
     }
     return render(request, 'posts.html', context)
+
+def search(request):
+    if request.method == 'GET' and 'q' in request.GET:
+        q = request.GET['q']
+        results = Post.objects.filter(content__search=q)
+        context = {
+            'q': q,
+            'results': results
+
+        }
+
+        return render(request, 'search.html', context)

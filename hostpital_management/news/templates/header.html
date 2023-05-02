@@ -31,11 +31,11 @@
                       </div>
                     </div> 
                     <div class="col-6 px-2">
-                        <form action="" method="get">
+                        <form action="{% url 'news:search' %}" method="get">
                             <div class="input-group input-group-sm rounded-4 p-1 w-100" style="background-color: #F0F0F0;">
                                 <span class="input-group-text border-0" style="background-color: #F0F0F0;"><i class="bi bi-search"></i></span>
                                 <input type="search" class="form-control border-0" placeholder="Tìm kiếm"
-                                    name="search" style="background-color: #F0F0F0;">
+                                    name="q" style="background-color: #F0F0F0;" required>
                                 <button class="input-group-text btn btn-light rounded-pill text-muted fw-semibold shadow-sm"
                                     type="submit">TÌM KIẾM</button>
                             </div>
@@ -71,7 +71,6 @@
                 <img src="{% static 'imgs/logo-mobile.png' %}" alt="logo trung tâm y tế huyện anh sơn"
                     class="img-fluid" style="height: 35px;">
           </a>
-
           <div class="accordion accordion-flush ms-auto" id="accordionExample">
             <div class="accordion-item ">
               <span class="accordion-header ">
@@ -98,11 +97,11 @@
               <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
             <div class="offcanvas-body">
-              <form action="" method="get" >
+              <form action="{% url 'news:search' %}" method="get" >
                 <div class="input-group rounded-4 p-2 bg-body-tertiary border">
                     <span class="input-group-text border-0"><i class="bi bi-search"></i></span>
                     <input type="search" class="form-control border-0 bg-light " placeholder="Tìm kiếm"
-                        name="search">
+                        name="q" required>
                     <button class="input-group-text btn btn-light border rounded-pill" 
                         type="submit">Tìm kiếm</button>
             </form>
