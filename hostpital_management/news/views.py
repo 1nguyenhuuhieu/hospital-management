@@ -10,7 +10,7 @@ def index(request, page=None):
     current_view_name = request.resolver_match.view_name
     if current_view_name == 'news:posts':
         all_posts = Post.objects.order_by('-created_time')
-        paginate = Paginator(all_posts, 1)
+        paginate = Paginator(all_posts, 5)
         posts = paginate.page(page)
     else:
         posts = Post.objects.order_by('-created_time')[:5]
@@ -104,3 +104,13 @@ def posts(request, tag_id=None):
         'posts': posts
     }
     return render(request, 'posts.html', context)
+
+
+def search(request):
+    if request.method == 'GET' and 'search' in request.form:
+        print(request.form['keyword'])
+    context = {
+
+    }
+
+    return render(request, 'search_result.html', context)

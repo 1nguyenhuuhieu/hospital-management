@@ -7,7 +7,7 @@
     {% endif %}
     <div>
     <a href="{% url 'news:posts' page=1 %}" class="px-3 btn btn-outline-dark rounded-pill fw-semibold fs-6 {% if page == 1 %} active {% endif %}">1</a>
-    <button class="px-3 btn btn-outline-dark rounded-pill fw-semibold fs-6
+    <a href="{% url 'news:posts' page=2 %}" class="px-3 btn btn-outline-dark rounded-pill fw-semibold fs-6
     {% if page != 1 and page != paginate.num_pages %}
     active
     {% endif %}">
@@ -18,7 +18,7 @@
         {% else %}
         {{page}}
         {% endif %}
-    </button>
+    </a>
     <a href="{% url 'news:posts' page=paginate.num_pages %}" class="px-3 btn btn-outline-dark rounded-pill fw-semibold fs-6 {% if page == paginate.num_pages %} active {% endif %}">{{ paginate.num_pages}}</a>
     </div>
     {% if posts.has_next %}
