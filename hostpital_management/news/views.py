@@ -2,7 +2,9 @@ from django.shortcuts import render
 from .models import *
 from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404
-from django.contrib.postgres.search import SearchQuery
+from django.contrib.postgres.search import SearchQuery,SearchVector, SearchHeadline
+from unidecode import unidecode
+
 
 def index(request, page=None):
     paginate = None
@@ -109,10 +111,21 @@ def posts(request, tag_id=None):
 def search(request):
     if request.method == 'GET':
         q = request.GET['q']
-        search = SearchQuery(q, config="english")
-        results = Post.objects.filter(plaintext_content__search=search)
+        q = q.lower()
+        # convert q to tiếng việt không dấu
+        q_khongdau = unidecode(q)
+
+        #search in content 
+        search = SearchQuery(q_khongdau) | SearchQuery(q)
+        search_vector = SearchVector("plaintext_content", "title", "description")
+        
+        result_content = Post.objects.annotate(
+            search=search_vector).filter(
+            search=search
+            )
+
     context = {
-        'results': results,
+        'results': result_content,
         'q': q
 
     }

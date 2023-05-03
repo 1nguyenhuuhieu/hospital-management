@@ -1,5 +1,6 @@
 from django.contrib import admin
 from bs4 import BeautifulSoup
+from unidecode import unidecode
 
 
 
@@ -18,7 +19,13 @@ class PostAdmin(admin.ModelAdmin):
     exclude = ('user',)
     def save_model(self, request, obj, form, change):
         obj.user = request.user
+        # remove HTML tags from richtext field
         plain_text = BeautifulSoup(obj.content).get_text()
+        # lower string
+        plain_text = plain_text.lower()
+        # convert tiếng việt có dấu sang không dấu
+        plain_text = unidecode(plain_text)
+
         obj.plaintext_content = plain_text
         
         super().save_model(request, obj, form, change)
