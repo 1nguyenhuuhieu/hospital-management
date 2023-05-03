@@ -4,26 +4,32 @@ from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404
 from django.contrib.postgres.search import SearchQuery,SearchVector, SearchHeadline
 from unidecode import unidecode
+from django.db.models import Count
 
 
-def index(request, page=None):
+def index(request, page=1, category_id=None):
     paginate = None
-    current_view_name = request.resolver_match.view_name
-    if current_view_name == 'news:posts':
-        all_posts = Post.objects.order_by('-created_time')
-        paginate = Paginator(all_posts, 5)
-        posts = paginate.page(page)
+    category = None
+    if category_id:
+        category = get_object_or_404(Category, pk=category_id)
+        posts = Post.objects.filter(category=category_id).order_by('-created_time')
     else:
-        posts = Post.objects.order_by('-created_time')[:5]
+        posts = Post.objects.order_by('-created_time')
+    paginate = Paginator(posts, 1)
+    posts = paginate.page(page)
+
 
     # thành viên nổi bật: đăng nhiều bài, bình luận nhiều, xem nhiều
 
     # bài viết nổi bật bao gồm: bài viết xem nhiều, vừa bình luận, vừa đăng tải --> kèm status(xem nhiều, mới đăng, vừa bình luận)    
     popular_posts = Post.objects.order_by('-view_count')[:5]
+    popular_user = User.objects.annotate(count=Count('post__id')).order_by('-count')
 
     context = {
+        'category': category,
         'posts': posts,
         'popular_posts': popular_posts,
+        'popular_user': popular_user,
         'paginate': paginate,
         'page': page
     }
@@ -76,6 +82,13 @@ def post(request, post_id):
     
     return render(request, 'post.html', context)
 
+def category(request, category_id):
+    context = {
+
+    }
+
+    return render(request, 'category.html', context)
+
 def posts(request, tag_id=None):
     page=1
     if request.method == 'GET' and 'page' in request.GET:
@@ -117,7 +130,7 @@ def search(request):
 
         #search in content 
         search = SearchQuery(q_khongdau) | SearchQuery(q)
-        search_vector = SearchVector("plaintext_content", "title", "description")
+        search_vector = SearchVector("plaintext_content", "title", "description", "category__title")
         
         result_content = Post.objects.annotate(
             search=search_vector).filter(
@@ -131,3 +144,10 @@ def search(request):
     }
 
     return render(request, 'search.html', context)
+
+def apps(request):
+    context = {
+
+    }
+
+    return render(request, 'apps.html', context)

@@ -4,132 +4,127 @@
 {% block title%}Website{% endblock %}
 {% block content %}
 <div class="container-fluid">
-    <div class="row justify-content-center">
-        <div class="col-lg-3 ps-4 d-none d-lg-block">
-          <div style="position:sticky; top: 80px;">
-
-          <h5 class="fw-bold mb-4"><i class="bi bi-stars me-2"></i><span class="text-secondary">THÀNH VIÊN NỔI BẬT</span></h5>
-          {% for i in '12345'%}
-          <div class="d-flex align-items-center mb-3">
-            <img src="https://thumbs.dreamstime.com/b/faces-avatar-circle-portrait-young-boy-glasses-vector-illustration-eps-flat-cartoon-style-83654284.jpg" alt="" class="rounded-circle me-2" style="width: 35px; height: 35px;">
-            <a href="#" class="link-body-emphasis h6 text-decoration-none">
-              Hiếu Nguyễn
-            </a>
-          </div>
-          {% endfor %}
+  <div class="row justify-content-center">
+    <div class="col-lg-3 ps-4 d-none d-lg-block">
+      <div style="position:sticky; top: 80px;">
+        <h5 class="fw-bold mb-4"><i class="bi bi-stars me-2"></i><span class="text-secondary">THÀNH VIÊN NỔI BẬT</span>
+        </h5>
+        {% for user in popular_user %}
+        <div>
+          <a href="#" class="link-body-emphasis h6 text-decoration-none">
+            <div class="d-flex align-items-center mb-3">
+              <img
+                src="https://thumbs.dreamstime.com/b/faces-avatar-circle-portrait-young-boy-glasses-vector-illustration-eps-flat-cartoon-style-83654284.jpg"
+                alt="" class="rounded-circle me-2" style="width: 35px; height: 35px;">
+              {{ user.staff }}
+            </div>
+          </a>
         </div>
+        {% empty %}
+        no user
+        {% endfor %}
       </div>
-
-        <div class="col-lg-6">
-            {% for post in posts %}
-
-                <div class="card mt-3 mt-sm-0 mb-3 rounded-4 border-0 shadow-sm">
-                    <div class="row g-0 ">
-                      <div class="col-6 col-sm-5 p-2 p-sm-3 d-flex flex-column justify-content-center align-items-center ">
-                        <div class="">
-                          <a href="{% url 'news:post' post_id=post.id %}">
-                          <img src="{{ post.cover.url }}" class="img-fluid rounded-4" alt="{{ post.title|truncatechars:20 }}">
-                            </a>
-              
-                        </div>
-
-                      </div>
-                      <div class="col-6 col-sm-7 ps-0 p-2 d-flex flex-column align-items-between justify-content-center ">
-                            <div>
-                              <h5 class="card-title d-none d-lg-block">
-                                <a href="{% url 'news:post' post_id=post.id %}" class="text-decoration-none link-body-emphasis">
-                                {{ post.title|truncatechars:80 }}
-                              </a>
-                              </h5>
-                              <div class="d-lg-none">
-                              <h6 class="card-title m-0 p-0">
-                                <a href="{% url 'news:post' post_id=post.id %}" class="text-decoration-none link-body-emphasis">
-                                {{ post.title|truncatechars:50 }}
-                              </a>
-                              </h6>
-                              <a href="#" class="fw-medium link-body-emphasis text-decoration-none opacity-75 small mt-0">
-                                {{ post.category.title }}
-                              </a>
-                            </div>
-
-                            </div>
-                            <div class="d-none d-lg-block">
-                            <div class="d-flex justify-content-between align-items-center ">
-                              <div class="d-flex align-items-center">
-                                <img src="https://thumbs.dreamstime.com/b/faces-avatar-circle-portrait-young-boy-glasses-vector-illustration-eps-flat-cartoon-style-83654284.jpg" alt="" class="rounded-circle" width="40px" height="40px">
-                                <div class="d-flex flex-column ms-2">
-                                  <a href="#" class="link-secondary fw-medium text-decoration-none">{{ post.author|title }}</a>
-                                  <div class="d-flex  text-secondary opacity-75 small">
-                                    <span class="">
-                                      {% if not post.is_old_created_time %}
-                                      {{ post.created_time|naturaltime }}
-                                      {% else %}
-                                      {{ post.created_time|date:"d/m/Y" }}
-                                      {% endif %}
-                                    </span>
-                                    <i class="bi bi-dot"></i>
-                                    <a href="#" class="fw-medium link-body-emphasis link-offset-2 link-offset-3-hover link-underline-dark link-underline-opacity-0 link-underline-opacity-75-hover">
-                                      {{ post.category.title }}
-                                    </a>
-
-                                  </div>
-
-                                </div>
-                              </div>
-                              <div class="pe-2" data-bs-toggle="tooltip" data-bs-title="Số người xem">
-                                <a href="#" class="link-body-emphasis opacity-50 text-decoration-none d-flex align-items-center">
-                                <span class="fw-medium me-2">{{ post.view_count }}</span>
-                                <i class="bi bi-eye fs-5"></i>
-                              </a> 
-                              </div>
-                            </div>
-                            </div>
-                      </div>
-                      <div class="col-12 d-lg-none px-3 pb-3 opacity-75">
-                        <div class="d-flex justify-content-between align-items-center">
-                          <div>
-                            <span class="small">24/04/2023</span>
-                            <i class="bi bi-dot"></i>
-                            <span class="small fw-medium">Hiếu Nguyễn</span>
-                          </div>
-                          <a href="#" class="link-body-emphasis opacity-75 text-decoration-none d-flex align-items-center small">
-                            <span class="fw-medium me-2">16</span>
-                            <i class="bi bi-heart"></i>
-                          </a> 
-                        </div>
-                      </div>
+    </div>
+    <div class="col-lg-6">
+      {% if category %}
+      <h2 class="fw-bold mb-4"> {{ category.title|upper }}</h2>
+      {% endif %}
+      {% for post in posts %}
+      <div class="card mt-3 mt-sm-0 mb-3 rounded-4 border-0 shadow-sm">
+        <div class="row g-0 ">
+          <div class="col-6 col-sm-5 p-2 p-sm-3 d-flex flex-column justify-content-center align-items-center ">
+            <div class="">
+              <a href="{% url 'news:post' post_id=post.id %}">
+                <img src="{{ post.cover.url }}" class="img-fluid rounded-4" alt="{{ post.title|truncatechars:20 }}">
+              </a>
+            </div>
+          </div>
+          <div class="col-6 col-sm-7 ps-0 p-2 d-flex flex-column align-items-between justify-content-center ">
+            <div>
+              <h5 class="card-title d-none d-lg-block">
+                <a href="{% url 'news:post' post_id=post.id %}" class="text-decoration-none link-body-emphasis">
+                  {{ post.title|truncatechars:80 }}
+                </a>
+              </h5>
+              <div class="d-lg-none">
+                <h6 class="card-title m-0 p-0">
+                  <a href="{% url 'news:post' post_id=post.id %}" class="text-decoration-none link-body-emphasis">
+                    {{ post.title|truncatechars:50 }}
+                  </a>
+                </h6>
+                <a href="#" class="fw-medium link-body-emphasis text-decoration-none opacity-75 small mt-0">
+                  {{ post.category.title }}
+                </a>
+              </div>
+            </div>
+            <div class="d-none d-lg-block">
+              <div class="d-flex justify-content-between align-items-center ">
+                <div class="d-flex align-items-center">
+                  <img
+                    src="https://thumbs.dreamstime.com/b/faces-avatar-circle-portrait-young-boy-glasses-vector-illustration-eps-flat-cartoon-style-83654284.jpg"
+                    alt="" class="rounded-circle" width="40px" height="40px">
+                  <div class="d-flex flex-column ms-2">
+                    <a href="#" class="link-secondary fw-medium text-decoration-none">{{ post.author|title }}</a>
+                    <div class="d-flex  text-secondary opacity-75 small">
+                      <span class="">
+                        {% if not post.is_old_created_time %}
+                        {{ post.created_time|naturaltime }}
+                        {% else %}
+                        {{ post.created_time|date:"d/m/Y" }}
+                        {% endif %}
+                      </span>
+                      <i class="bi bi-dot"></i>
+                      <a href="#"
+                        class="fw-medium link-body-emphasis link-offset-2 link-offset-3-hover link-underline-dark link-underline-opacity-0 link-underline-opacity-75-hover">
+                        {{ post.category.title }}
+                      </a>
                     </div>
                   </div>
-                  {% empty %}
-                  <h1> no post</h1>
-            {% endfor %}
-            {% if request.resolver_match.view_name == 'news:index' %}
-                
-            <a href="{% url 'news:posts' page=1 %}" class="btn p-3 btn-dark w-100 rounded-pill fw-semibold fs-6 mb-5">XEM THÊM</a>
-            {% else %}
-
-            {% include 'include/paginate.html' %}
-
-            {% endif %}
-
-        </div>
-        <div class="col-lg-3 ps-sm-5 ps-3">
-          <div style="position:sticky; top: 80px;">
-
-          <h5 class="fw-bold mb-4"><i class="bi bi-star-fill me-2"></i><span class="text-secondary">PHỔ BIẾN</span></h5>
-          {% for post in popular_posts %}
-          <div class="d-flex align-items-center mb-4">
-
-            <button class="btn btn-light fw-semibold fs-5 me-2" style="width: 50px;">{{forloop.counter}}</button>
-            <a href="#" class="link-body-emphasis h6 text-decoration-none">
-              {{ post.title }}
-            </a>
+                </div>
+                <div class="pe-2" data-bs-toggle="tooltip" data-bs-title="Số người xem">
+                  <a href="#" class="link-body-emphasis opacity-50 text-decoration-none d-flex align-items-center">
+                    <span class="fw-medium me-2">{{ post.view_count }}</span>
+                    <i class="bi bi-eye fs-5"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
-          {% empty %}
-          no post
-          {% endfor %}
+          <div class="col-12 d-lg-none px-3 pb-3 opacity-75">
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <span class="small">24/04/2023</span>
+                <i class="bi bi-dot"></i>
+                <span class="small fw-medium">Hiếu Nguyễn</span>
+              </div>
+              <a href="#" class="link-body-emphasis opacity-75 text-decoration-none d-flex align-items-center small">
+                <span class="fw-medium me-2">16</span>
+                <i class="bi bi-heart"></i>
+              </a>
+            </div>
+          </div>
         </div>
-        </div>
+      </div>
+      {% empty %}
+      <h1> no post</h1>
+      {% endfor %}
+      {% include 'include/paginate.html' %}
     </div>
+    <div class="col-lg-3 ps-sm-5 ps-3">
+      <div style="position:sticky; top: 80px;">
+        <h5 class="fw-bold mb-4"><i class="bi bi-star-fill me-2"></i><span class="text-secondary">PHỔ BIẾN</span></h5>
+        {% for post in popular_posts %}
+        <div class="d-flex align-items-center mb-4">
+          <button class="btn btn-light fw-semibold fs-5 me-2" style="width: 50px;">{{forloop.counter}}</button>
+          <a href="{% url 'news:post' post_id=post.id %}" class="link-body-emphasis h6 text-decoration-none">
+            {{ post.title }}
+          </a>
+        </div>
+        {% empty %}
+        no post
+        {% endfor %}
+      </div>
+    </div>
+  </div>
 </div>
 {% endblock %}

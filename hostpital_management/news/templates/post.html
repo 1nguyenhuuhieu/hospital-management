@@ -3,7 +3,7 @@
 {% load static %}
 {% block content %}
 <div class="container-fluid">
-  <div class="row mt-3 mt-sm-5 justify-content-center pb-5">
+  <div class="row mt-3 mt-sm-5 justify-content-start pb-5">
     <div class="col-lg-3 text-center ">
       {% include 'include/left_info.html' %}
     </div>
@@ -105,40 +105,9 @@
 
     </form>
     {% include 'include/comment.html' %}
+    {% include 'include/more_posts.html' %}
     </div>
-    <div class="col-lg-3" >
-      <div style="position: sticky;
-      top: 100px;">
-        {% with author=post.author %}
-        {% include 'include/author.html' %}
-        {% endwith %}
-        {% if latest_posts %}
-        {% with posts=latest_posts %}
-        <h4 class="pb-2 mb-3 mt-4 border-bottom border-2 border-danger">Bài viết mới</h4>
-        {% for post in posts %}
-        <div class="card border-0">
-        <div class="row g-2 my-1">
-          <div class="col-3">
-            {% if post.cover %}
-            <img src="{{ post.cover.url }}" class="img-fluid rounded-3 shadow-sm" alt="...">
-            {% else %}
-            <img src="{% static 'imgs/post-cover.png' %}" class="img-fluid rounded-3 shadow-sm" alt="...">
-            {% endif %}
-          </div>
-          <div class="col-9">
-            <h6 class="mb-0 fw-normal"> <a href="{% url 'news:post' post_id=post.id %}" class="stretched-link link-dark text-decoration-none">{{ post.title|truncatechars:70 }}</a> </h6>
-            <p class="text-muted mt-1"> {{ post.created_time|naturaltime }}</p>
-          </div>
-          {% if not forloop.last %}
-          <div class="col-12"><hr class="my-0"></div>
-          {% endif %} 
-        </div>
-      </div>
-        {% endfor %}
-        {% endwith %}
-        {% endif %}
-      </div>
-    </div>
+
   </div>
 </div>
 <script>

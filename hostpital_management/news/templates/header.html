@@ -50,10 +50,60 @@
             </div>
             <div class="col-lg-3">
                 <div class="d-flex justify-content-end align-items-center">
-                <a href="#" class="btn btn-outline-light border-0 rounded-pill  p-1">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="30" viewBox="0 96 960 960" width="30"><path d="M226 896q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19ZM226 642q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19ZM226 388q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Z"/></svg>
-                </a>
-                    <button class="btn btn-dark rounded-pill fw-semibold shadow-sm px-3 ms-2">ĐĂNG NHẬP</button>
+
+                  <div class="dropdown">
+
+                    <button  class="btn btn-outline-light border-0 rounded-pill  p-1"  type="button" data-bs-toggle="dropdown">
+                      <svg xmlns="http://www.w3.org/2000/svg" height="30" viewBox="0 96 960 960" width="30"><path d="M226 896q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19ZM226 642q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19ZM226 388q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Z"/></svg>
+                    </button>
+                    <div class="dropdown-menu rounded-4 shadow-sm px-2" style="width: 400px;">
+                      <div class="row g-0 border-bottom">
+                        <div class="col-4 border-end">
+                          <div class="card border-0 text-center">
+                            <div class="card-body">
+                              <h3><i class="bi bi-person-circle"></i></h3>
+                             <a href="#" class="stretched-link link-body-emphasis text-decoration-none fw-medium small">TÀI KHOẢN</a>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-4  border-end">
+                          <div class="card border-0 text-center">
+                            <div class="card-body">
+                              <h3><i class="bi bi-newspaper"></i></h3>
+                             <a href="{% url 'news:index' %}" class="stretched-link link-body-emphasis text-decoration-none fw-medium small">TIN TỨC</a>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-4">
+                          <div class="card border-0 text-center">
+                            <div class="card-body">
+                              <h3><i class="bi bi-file-medical"></i></h3>
+                             <a href="#" class="stretched-link link-body-emphasis text-decoration-none fw-medium small">SỔ SỨC KHỎE</a>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                      <div class="row g-0">
+                        <div class="col-4 border-end">
+                          <div class="card border-0 text-center">
+                            <div class="card-body">
+                              <h3><i class="bi bi-graph-up-arrow"></i></h3>
+                             <a href="#" class="stretched-link link-body-emphasis text-decoration-none fw-medium small">DASHBOARD</a>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-4 border-end">
+                          <div class="card border-0 text-center">
+                            <div class="card-body">
+                              <h3><i class="bi bi-sliders"></i></h3>
+                             <a href="#" class="stretched-link link-body-emphasis text-decoration-none fw-medium small">CHẤT LƯỢNG BỆNH VIỆN</a>
+                            </div>
+                          </div>
+                        </div>
+     
+                    </div>
+                  </div>
+                    <a href="{% url 'admin:index' %}" class="btn btn-dark rounded-pill fw-semibold shadow-sm px-3 ms-2">ĐĂNG NHẬP</a>
                 </div>
             </div>
         </div>
