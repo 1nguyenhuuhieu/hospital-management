@@ -34,11 +34,11 @@
     Chia sẻ
   </button>
   <ul class="dropdown-menu">
-    <li><button class="btn btn-light dropdown-item" data-sharer="facebook" data-hashtag="thiduananhson"
+    <li><button class="btn btn-light dropdown-item" data-sharer="facebook" data-hashtag="benhvienanhson.com"
       data-url="{{ request.build_absolute_uri }}"><i
           class="bi bi-facebook me-2"></i>Chia sẻ qua facebook</button></li>
-    <li><button class="dropdown-item btn btn-light mt-3" data-sharer="email" data-title="Chia sẻ từ thiduananhson.com"
-      data-url="{{ request.build_absolute_uri }}" data-subject="Chia sẻ từ thiduananhson.com"
+    <li><button class="dropdown-item btn btn-light mt-3" data-sharer="email" data-title="Chia sẻ từ benhvienanhson.com"
+      data-url="{{ request.build_absolute_uri }}" data-subject="{{ post.title }}"
       data-to="some@email.com" data-bs-toggle="tooltip" data-bs-title="Chia sẻ qua email"><i
           class="bi bi-envelope me-2"></i>Chia sẻ qua email</button></li>
     <li><button class="dropdown-item btn btn-copy  btn-light mt-3" data-clipboard-text="{{ request.build_absolute_uri }}"

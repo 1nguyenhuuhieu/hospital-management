@@ -15,7 +15,7 @@ def index(request, page=1, category_id=None):
         posts = Post.objects.filter(category=category_id).order_by('-created_time')
     else:
         posts = Post.objects.order_by('-created_time')
-    paginate = Paginator(posts, 1)
+    paginate = Paginator(posts, 5)
     posts = paginate.page(page)
 
 
