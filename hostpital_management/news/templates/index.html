@@ -35,7 +35,7 @@
           <div class="col-6 col-sm-5 p-2 p-sm-3 d-flex flex-column justify-content-center align-items-center ">
             <div class="">
               <a href="{% url 'news:post' post_id=post.id %}">
-                <img src="{{ post.cover.url }}" class="img-fluid rounded-4" alt="{{ post.title|truncatechars:20 }}">
+                <img src="{{ post.get_cover_image }}" class="img-fluid rounded-4" alt="{{ post.title|truncatechars:20 }}">
               </a>
             </div>
           </div>

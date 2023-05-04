@@ -76,7 +76,6 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-
                 "dynamic_breadcrumbs.context_processors.breadcrumbs",
             ],
         },
@@ -95,8 +94,8 @@ DATABASES = {
         'NAME': 'hospital_management',
         'USER': 'hieu',
         'PASSWORD': '123456',
-        'HOST': 'localhost',
-        'PORT': '',
+        'HOST': '113.160.173.44',
+        'PORT': '5432',
     }
 }
 

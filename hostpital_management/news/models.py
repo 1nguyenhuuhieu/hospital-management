@@ -5,11 +5,12 @@ from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
 from human_resource_management.models import *
 from django.utils import timezone
-
 import os
 
 class Category(models.Model):
     title = models.CharField(max_length=200, verbose_name='tên danh mục')
+    cover = models.ImageField(upload_to='tag-covers/', verbose_name='ảnh bìa', blank=True, null=True, help_text='ảnh bìa sẽ tự động resize về kích thước 768 x 432')
+
 
     class Meta:
         verbose_name = 'danh mục'
@@ -20,6 +21,8 @@ class Category(models.Model):
      
 class Tag(models.Model):
     title = models.CharField(max_length=200, verbose_name='tên đầy đủ')
+    cover = models.ImageField(upload_to='tag-covers/', verbose_name='ảnh bìa', blank=True, null=True, help_text='ảnh bìa sẽ tự động resize về kích thước 768 x 432')
+
     class Meta:
         verbose_name = 'thẻ'
         verbose_name_plural = 'thẻ'
@@ -48,6 +51,19 @@ class Post(models.Model):
     updated_time = models.DateTimeField(auto_now=True,null=True)
     view_count = models.IntegerField(blank=True, null=True, default=0, verbose_name='số lượt xem')
     like = models.IntegerField(blank=True, null=True, default=0, verbose_name='số lượt like')
+
+    def get_cover_image(self):
+        if self.cover:
+            return self.cover.url
+        else:
+            if self.tags:
+                for tag in self.tags.all():
+                    if tag.cover:
+                        return tag.cover.url
+            if self.category.cover:
+                return self.category.cover.url
+            else:
+                return 'static/imgs/no-image.png'
 
     def status_icon(self):
         if self.status == 'public':
@@ -146,6 +162,7 @@ class Author(models.Model):
     name = models.CharField(max_length=200, verbose_name='tên')
     description = models.CharField(max_length=200, verbose_name='mô tả ngắn')
     avatar = models.ImageField(upload_to='avatars/', verbose_name='ảnh đại diện', blank=True)
+    cover = models.ImageField(upload_to='covers/', verbose_name='ảnh bìa', blank=True)
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
         if self.avatar:

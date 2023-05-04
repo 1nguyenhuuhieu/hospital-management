@@ -6,10 +6,9 @@ from django.contrib.auth.models import User
 class Staff(models.Model):
     user = models.OneToOneField(User, verbose_name='tài khoản đăng nhập', blank=True, null=True, on_delete=models.CASCADE)
     full_name = models.CharField(max_length=200, verbose_name='Họ và tên')
-    phone = models.IntegerField()
+    phone = models.IntegerField(blank=True, null=True)
+    email = models.EmailField(blank=True, null=True)
     detail = models.OneToOneField('StaffDetail', verbose_name='thông tin chi tiết', blank=True, null=True, on_delete=models.CASCADE)
-
-
     class Meta:
         verbose_name  = 'nhân viên'
         verbose_name_plural  = 'nhân viên'

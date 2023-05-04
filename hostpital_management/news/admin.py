@@ -15,8 +15,7 @@ class TagInline(admin.StackedInline):
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
     filter_horizontal = ('tags',)
-    readonly_fields = ('view_count', 'like')
-    exclude = ('user',)
+    exclude = ('user','plaintext_content','view_count','like')
     def save_model(self, request, obj, form, change):
         obj.user = request.user
         # remove HTML tags from richtext field
