@@ -7,21 +7,21 @@
   <div class="row justify-content-center">
     <div class="col-lg-3 ps-4 d-none d-lg-block">
       <div style="position:sticky; top: 80px;">
-        <h5 class="fw-bold mb-4"><i class="bi bi-stars me-2"></i><span class="text-secondary">THÀNH VIÊN NỔI BẬT</span>
+        <h5 class="fw-bold mb-4"><i class="bi bi-stars me-2"></i><span class="text-secondary">TÁC GIẢ NỔI BẬT</span>
         </h5>
-        {% for user in popular_user %}
+        {% for author in popular_author %}
         <div>
           <a href="#" class="link-body-emphasis h6 text-decoration-none">
             <div class="d-flex align-items-center mb-3">
               <img
-                src="https://thumbs.dreamstime.com/b/faces-avatar-circle-portrait-young-boy-glasses-vector-illustration-eps-flat-cartoon-style-83654284.jpg"
+                src="{{ author.avatar.url }}"
                 alt="" class="rounded-circle me-2" style="width: 35px; height: 35px;">
-              {{ user.staff }}
+              {{ author.name }}
             </div>
           </a>
         </div>
         {% empty %}
-        no user
+        no author
         {% endfor %}
       </div>
     </div>
@@ -61,7 +61,7 @@
               <div class="d-flex justify-content-between align-items-center ">
                 <div class="d-flex align-items-center">
                   <img
-                    src="https://thumbs.dreamstime.com/b/faces-avatar-circle-portrait-young-boy-glasses-vector-illustration-eps-flat-cartoon-style-83654284.jpg"
+                    src="{{ post.author.get_avatar }}"
                     alt="" class="rounded-circle" width="40px" height="40px">
                   <div class="d-flex flex-column ms-2">
                     <a href="#" class="link-secondary fw-medium text-decoration-none">{{ post.author|title }}</a>

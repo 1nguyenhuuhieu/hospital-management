@@ -65,6 +65,7 @@ class Post(models.Model):
             else:
                 return 'static/imgs/no-image.png'
 
+    
     def status_icon(self):
         if self.status == 'public':
             return 'globe-americas'
@@ -163,6 +164,14 @@ class Author(models.Model):
     description = models.CharField(max_length=200, verbose_name='mô tả ngắn')
     avatar = models.ImageField(upload_to='avatars/', verbose_name='ảnh đại diện', blank=True)
     cover = models.ImageField(upload_to='covers/', verbose_name='ảnh bìa', blank=True)
+
+    def get_avatar(self):
+        if self.avatar:
+            return self.avatar.url
+        else:
+            return 'static/imgs/no-image.png'
+
+
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
         if self.avatar:

@@ -50,9 +50,7 @@
 </div>
 
   </div>
-      {% if post.cover %}
-      <img src="{{ post.cover.url }}" alt="" class=" my-4 rounded-3 shadow-sm w-100">
-        {% endif %}
+      <img src="{{ post.get_cover_image }}" alt="" class=" my-4 rounded-3 shadow-sm w-100">
 
       <div class="fs-5 mb-4">
         {% if post.youtube_url %}
@@ -122,6 +120,7 @@
   window.onload = function () {
     const postDiv = document.getElementById('article')
     const imgs = postDiv.querySelectorAll("img");
+    const tables = postDiv.querySelectorAll("table");
     for (let i = 0; i < imgs.length; i++) {
       imgs[i].style = '';
       imgs[i].className = 'img-fluid rounded-3 shadow-sm my-2';
@@ -135,6 +134,17 @@
       wrapper.setAttribute("data-bs-target", "#imageModal");
       imgs[i].setAttribute("onclick", "updateImageModal(this)");
     }
+
+    for (let i = 0; i < tables.length; i++) {
+      tables[i].style = '';
+      tables[i].className = 'table';
+      let parent = tables[i].parentNode;
+      let wrapper = document.createElement('div');
+      wrapper.className = 'table-responsive';
+      parent.replaceChild(wrapper, tables[i]);
+      wrapper.appendChild(tables[i]);
+    }
+
   };
 
 
