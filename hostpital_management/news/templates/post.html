@@ -50,16 +50,17 @@
 </div>
 
   </div>
-      <img src="{{ post.get_cover_image }}" alt="" class=" my-4 rounded-3 shadow-sm w-100">
-
+  {% if post.youtube_url %}
+  {% with video=post %}
+    <div class="ratio ratio-16x9 my-3">
+      <iframe src="https://www.youtube.com/embed/{{video.youtube_id}}" title="{{video.title}}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    </div>
+    {% endwith %}
+  {% else %}
+  <img src="{{ post.get_cover_image }}" alt="" class=" my-4 rounded-3 shadow-sm w-100">
+  {% endif %}
       <div class="fs-5 mb-4">
-        {% if post.youtube_url %}
-        {% with video=post %}
-          <div class="ratio ratio-16x9 my-3">
-            <iframe src="https://www.youtube.com/embed/{{video.youtube_id}}" title="{{video.title}}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-          </div>
-          {% endwith %}
-        {% endif %}
+
         <article id="article">
           {% autoescape off %}
           {{ post.content }}

@@ -36,6 +36,20 @@ def index(request, page=1, category_id=None):
 
     return render(request, 'index.html', context)
 
+def category(request, category_id, page ):
+    category = get_object_or_404(Category, pk=category_id)
+    posts = Post.objects.filter(category=category_id).order_by('-created_time')
+    paginate = Paginator(posts, 12)
+    posts = paginate.page(page)
+    context = {
+        'category': category,
+        'posts': posts,
+        'paginate': paginate,
+        'page': page
+    }
+
+    return render(request, 'category.html', context)
+
 def post(request, post_id):
     post = Post.objects.get(pk=post_id)
 
@@ -81,13 +95,6 @@ def post(request, post_id):
     }
     
     return render(request, 'post.html', context)
-
-def category(request, category_id):
-    context = {
-
-    }
-
-    return render(request, 'category.html', context)
 
 def posts(request, tag_id=None):
     page=1
