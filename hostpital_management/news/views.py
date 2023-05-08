@@ -23,7 +23,7 @@ def index(request, page=1, category_id=None):
 
     # bài viết nổi bật bao gồm: bài viết xem nhiều, vừa bình luận, vừa đăng tải --> kèm status(xem nhiều, mới đăng, vừa bình luận)    
     popular_posts = Post.objects.order_by('-view_count')[:5]
-    popular_author = Author.objects.annotate(count=Count('post__id')).order_by('count')
+    popular_author = Author.objects.annotate(count=Count('post__id')).order_by('-count')
 
     context = {
         'category': category,
