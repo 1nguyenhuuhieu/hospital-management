@@ -8,11 +8,11 @@
         {% if not post.is_old_created_time %}
         {{ post.created_time|naturaltime }}
         {% else %}
-        {{ post.created_time|date:"D, d/m/Y, H:i" }}
+        {{ post.created_time|date:"D, d/m/Y" }}
         {% endif %}
       </span>
       <i class="bi bi-dot"></i>
-      <a href="#" class="fw-medium link-body-emphasis opacity-75 link-offset-2 link-offset-3-hover link-underline-dark link-underline-opacity-0 link-underline-opacity-75-hover" >{{ post.category.title }}</a>
+      <a href="{% url 'news:category' category_id=post.category.id page=1 %}" class="fw-medium link-body-emphasis opacity-75 link-offset-2 link-offset-3-hover link-underline-dark link-underline-opacity-0 link-underline-opacity-75-hover text-truncate">{{ post.category.title }}</a>
     </div>
     </div>
     <div class="d-flex flex-column justify-content-end align-items-end">
