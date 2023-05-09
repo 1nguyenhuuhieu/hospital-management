@@ -65,6 +65,7 @@ class Post(models.Model):
             else:
                 return 'static/imgs/no-image.png'
 
+
     
     def status_icon(self):
         if self.status == 'public':

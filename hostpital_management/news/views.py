@@ -123,7 +123,7 @@ def posts(request, tag_id=None):
     return render(request, 'posts.html', context)
 
 
-def search(request):
+def search(request, tag_id=None):
     tags = Tag.objects.all()
     
     if request.method == 'GET':

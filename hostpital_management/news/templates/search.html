@@ -9,7 +9,7 @@
         <h1 class="display-5 fw-medium mb-4"><i class="bi bi-tag text-dark me-2"></i>tags cloud</h1>
         {% if tags %}
         {% for tag in tags %}
-        <a href="{% url 'news:posts_tag' tag_id=tag.id %}" class="btn btn-sm rounded-pill btn-light m-1">{{ tag.title }}</a>
+        <a href="{% url 'news:tag' tag_id=tag.id %}" class="btn btn-sm rounded-pill btn-light m-1">{{ tag.title }}</a>
         {% endfor %}
         {% endif %}
 
