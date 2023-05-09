@@ -49,9 +49,7 @@
             </div>
             <div class="col-lg-3">
                 <div class="d-flex justify-content-end align-items-center">
-
                   <div class="dropdown">
-
                     <button  class="btn btn-outline-light border-0 rounded-pill  p-1"  type="button" data-bs-toggle="dropdown">
                       <svg xmlns="http://www.w3.org/2000/svg" height="30" viewBox="0 96 960 960" width="30"><path d="M226 896q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19ZM226 642q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19ZM226 388q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Z"/></svg>
                     </button>
@@ -87,7 +85,7 @@
                           <div class="card border-0 text-center">
                             <div class="card-body">
                               <h3><i class="bi bi-graph-up-arrow"></i></h3>
-                             <a href="#" class="stretched-link link-body-emphasis text-decoration-none fw-medium small">DASHBOARD</a>
+                             <a href="http://benhvienanhson.com:8000/" class="stretched-link link-body-emphasis text-decoration-none fw-medium small">DASHBOARD</a>
                             </div>
                           </div>
                         </div>
@@ -99,7 +97,6 @@
                             </div>
                           </div>
                         </div>
-     
                     </div>
                   </div>
                   {% if request.user.is_authenticated %}
@@ -124,7 +121,6 @@
                 <img src="{% static 'imgs/logo-mobile.png' %}" alt="logo trung tâm y tế huyện anh sơn"
                     class="img-fluid" style="height: 35px;">
           </a>
-
           <div class="accordion accordion-flush ms-auto" id="accordionExample">
             <div class="accordion-item ">
               <span class="accordion-header ">
@@ -134,9 +130,10 @@
               </span>
             </div>
           </div>
-          <a href="#" class="btn btn-outline-light  rounded-pill border-0 p-1 ms-auto me-2">
+          <button class="btn btn-outline-light  rounded-pill border-0 p-1 ms-auto me-2" data-bs-toggle="collapse" href="#collapseApps" role="button" aria-expanded="false" aria-controls="collapseExample">
             <svg xmlns="http://www.w3.org/2000/svg" height="25" viewBox="0 96 960 960" width="25"><path d="M226 896q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19ZM226 642q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19ZM226 388q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Z"/></svg>
-        </a>
+          </button>
+
           <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -165,18 +162,17 @@
                         class="bi bi-calendar-plus me-2 "></i>ĐẶT LỊCH KHÁM</button>
                 <button class="btn btn-dark rounded-pill fw-semibold shadow-sm ms-3 px-3">ĐĂNG NHẬP</button>
             </div>
-
             </div>
           </div>
-
-          
         </div>
 
+        <div class="collapse" id="collapseApps">
+          <div class="p-3">
+            <a href="http://benhvienanhson.com:8000/" class="btn btn-primary">DASHBOARD</a>
+          </div>
+        </div>
         {% include 'include/category.html' with id="collapseCategory2" %}
-
       </nav>
-
-      
 </div>
 <!-- header on mobile -->
 
