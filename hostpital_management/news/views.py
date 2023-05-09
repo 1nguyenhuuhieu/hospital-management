@@ -125,8 +125,9 @@ def posts(request, tag_id=None):
 
 def search(request, tag_id=None):
     tags = Tag.objects.all()
-    
-    if request.method == 'GET':
+    tag = None
+    q = None
+    if request.method == 'GET' and 'q' in request.GET:
         q = request.GET['q']
         q = q.lower()
         # convert q to tiếng việt không dấu
@@ -140,11 +141,17 @@ def search(request, tag_id=None):
             search=search_vector).filter(
             search=search
             )
+    
+    if tag_id:
+        tag = get_object_or_404(Tag, pk=tag_id)
+        posts = Post.objects.filter(tags=tag)
+
 
     context = {
         'posts': posts,
         'q': q,
-        'tags': tags
+        'tags': tags,
+        'tag': tag
     }
     return render(request, 'search.html', context)
 

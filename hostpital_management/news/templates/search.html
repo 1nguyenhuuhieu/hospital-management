@@ -6,16 +6,17 @@
 <div class="container-fluid">
     <div class="row justify-content-center mt-3">
       <div class="col-lg-4">
-        <h1 class="display-5 fw-medium mb-4"><i class="bi bi-tag text-dark me-2"></i>tags cloud</h1>
+        <h1 class="display-5 fw-medium mb-4"><i class="bi bi-tag text-dark me-2"></i>thẻ</h1>
+        <hr>
         {% if tags %}
-        {% for tag in tags %}
-        <a href="{% url 'news:tag' tag_id=tag.id %}" class="btn btn-sm rounded-pill btn-light m-1">{{ tag.title }}</a>
+        {% for t in tags %}
+        <a href="{% url 'news:tag' tag_id=t.id %}" class="btn btn-sm rounded-pill {% if tag.id == t.id %} btn-dark {% else %}btn-light{% endif %} m-1 {% if not t.post_set.all %} disabled {% endif %}" >{{ t.title }}</a>
         {% endfor %}
         {% endif %}
 
       </div>
         <div class="col-lg-7">
-            <h1 class="display-5 fw-bold mb-4">{{ q }} <small class="fw-normal fs-5 fst-italic text-muted">{{ posts|length }} kết quả tìm kiếm</small> </h1>
+            <h1 class="display-5 fw-bold mb-4"> {% firstof tag.title q %}<small class="fw-normal fs-5 fst-italic text-muted ms-2">{{ posts|length }} kết quả tìm kiếm</small> </h1>
             {% include 'include/post_list.html' %}
         </div>
     </div>
