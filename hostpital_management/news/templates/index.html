@@ -11,7 +11,7 @@
         </h5>
         {% for author in popular_author %}
         <div>
-          <a href="#" class="link-body-emphasis h6 text-decoration-none">
+          <a href="{% url 'news:author' author_id=author.id %}" class="link-body-emphasis h6 text-decoration-none">
             <div class="d-flex align-items-center mb-3">
               <img
                 src="{{ author.avatar.url }}"

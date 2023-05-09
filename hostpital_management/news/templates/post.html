@@ -8,7 +8,6 @@
       {% include 'include/left_info.html' %}
     </div>
     <div class="col-lg-6">
-      <form method="post" id="printJS-form">
 
       <h1 class="display-5 fw-bold mb-4">{% block title %}{{ post.title }}{% endblock %}</h1>
       <p class="text-muted fst-italic fs-6">{{ post.description }}</p>
@@ -60,12 +59,17 @@
   <img src="{{ post.get_cover_image }}" alt="" class=" my-4 rounded-3 shadow-sm w-100">
   {% endif %}
       <div class="fs-5 mb-4">
+        <form method="post" id="printJS-form">
+
+      <h1 class="d-none d-print-block">{{ post.title }}</h1>
 
         <article id="article">
           {% autoescape off %}
           {{ post.content }}
           {% endautoescape %}
       </article>
+    </form>
+
 
       <!-- Modal -->
 <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
@@ -87,7 +91,6 @@
 </div>
 
       </div>
-    </form>
     <form method="post">
       {% csrf_token %}
       <div class="d-flex align-items-center justify-content-end">
