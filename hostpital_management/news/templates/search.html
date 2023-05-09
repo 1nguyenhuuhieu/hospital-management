@@ -4,21 +4,19 @@
 {% block title%}Kết quả tìm kiếm bài viết{% endblock %}
 {% block content %}
 <div class="container-fluid">
-    <div class="row justify-content-center">
+    <div class="row justify-content-center mt-3">
+      <div class="col-lg-4">
+        <h1 class="display-5 fw-medium mb-4"><i class="bi bi-tag text-dark me-2"></i>tags cloud</h1>
+        {% if tags %}
+        {% for tag in tags %}
+        <a href="{% url 'news:posts_tag' tag_id=tag.id %}" class="btn btn-sm rounded-pill btn-light m-1">{{ tag.title }}</a>
+        {% endfor %}
+        {% endif %}
+
+      </div>
         <div class="col-lg-7">
-            <h1 class="display-5 fw-medium">{{ results|length }} kết quả tìm kiếm cho "{{ q }}"</h1>
-            <ul class="list-group mt-4">
-            {% for result in results %}
-            <a href="{% url 'news:post' post_id=result.id %}" class="list-group-item list-group-item-action">
-              <h6>{{ result.title }}</h6> 
-              <p>{{ result.description }}</p>
-            </a>
-
-            {% empty %}
-                <h1>no result</h1>
-            {% endfor %}
-        </ul>
-
+            <h1 class="display-5 fw-bold mb-4">{{ q }} <small class="fw-normal fs-5 fst-italic text-muted">{{ posts|length }} kết quả tìm kiếm</small> </h1>
+            {% include 'include/post_list.html' %}
         </div>
     </div>
 </div>

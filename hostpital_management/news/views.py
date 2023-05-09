@@ -7,14 +7,9 @@ from unidecode import unidecode
 from django.db.models import Count
 
 
-def index(request, page=1, category_id=None):
+def index(request, page=1):
     paginate = None
-    category = None
-    if category_id:
-        category = get_object_or_404(Category, pk=category_id)
-        posts = Post.objects.filter(category=category_id).order_by('-created_time')
-    else:
-        posts = Post.objects.order_by('-created_time')
+    posts = Post.objects.order_by('-created_time')
     paginate = Paginator(posts, 5)
     posts = paginate.page(page)
 
@@ -129,6 +124,8 @@ def posts(request, tag_id=None):
 
 
 def search(request):
+    tags = Tag.objects.all()
+    
     if request.method == 'GET':
         q = request.GET['q']
         q = q.lower()
@@ -139,17 +136,16 @@ def search(request):
         search = SearchQuery(q_khongdau) | SearchQuery(q)
         search_vector = SearchVector("plaintext_content", "title", "description", "category__title")
         
-        result_content = Post.objects.annotate(
+        posts = Post.objects.annotate(
             search=search_vector).filter(
             search=search
             )
 
     context = {
-        'results': result_content,
-        'q': q
-
+        'posts': posts,
+        'q': q,
+        'tags': tags
     }
-
     return render(request, 'search.html', context)
 
 def apps(request):
