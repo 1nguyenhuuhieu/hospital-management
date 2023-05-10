@@ -5,7 +5,7 @@
 {% block content %}
 <div class="container-fluid">
   <div class="row justify-content-center">
-    <div class="col-lg-3 ps-4 d-none d-lg-block">
+    <div class="col-lg-3 ps-4 order-2 order-lg-1 mb-4 mb-lg-0">
       <div style="position:sticky; top: 80px;">
         <h5 class="fw-bold mb-4"><i class="bi bi-stars me-2"></i><span class="text-secondary">TÁC GIẢ NỔI BẬT</span>
         </h5>
@@ -25,11 +25,11 @@
         {% endfor %}
       </div>
     </div>
-    <div class="col-lg-6">
+    <div class="col-lg-6 order-1">
       {% include 'include/post_list.html' %}
       {% include 'include/paginate.html' %}
     </div>
-    <div class="col-lg-3 ps-sm-5 ps-3">
+    <div class="col-lg-3 order-2 order-lg-3 ps-sm-5 ps-3">
       <div style="position:sticky; top: 80px;">
         <h5 class="fw-bold mb-4"><i class="bi bi-star-fill me-2"></i><span class="text-secondary">PHỔ BIẾN</span></h5>
         {% for post in popular_posts %}

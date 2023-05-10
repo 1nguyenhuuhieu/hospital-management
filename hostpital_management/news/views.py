@@ -163,8 +163,21 @@ def apps(request):
     return render(request, 'apps.html', context)
 
 def bookmarks(request):
+    if 'bookmarks' in request.session.keys():
+        bookmarks = request.session['bookmarks']
+    else:
+        bookmarks = []
+
+    posts = Post.objects.filter(id__in=bookmarks)
+    context = {
+        'posts': posts
+    }
+
+    return render(request, 'bookmarks.html', context)
+
+def book_appointment(request):
     context = {
 
     }
 
-    return render(request, 'bookmarks.html', context)
+    return render(request, 'book-appointment.html', context)

@@ -11,4 +11,5 @@ urlpatterns = [
     path('tag/<int:tag_id>/', views.search, name='tag'),
     path('apps/', views.apps, name='apps'),
     path('bookmarks/', views.bookmarks, name='bookmarks'),
+    path('book-appointment/', views.book_appointment, name='book_appointment'),
 ]

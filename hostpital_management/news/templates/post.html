@@ -21,11 +21,10 @@
         <i class="bi bi-chat-left-text me-1"></i>
     </span>{{ post.comment_set.all|length }} Bình luận
 </a>
-
   <form method="post">
     {% csrf_token %}
-    <button type="submit" name="like" class="btn btn-light me-2"><i
-            class="bi bi-bookmark{% if  has_reaction  %}-fill text-dark{% endif %} me-1"></i>Lưu
+    <button type="submit" name="bookmark" value="{{ post.id }}"  class="btn btn-light me-2"><i
+            class="bi bi-bookmark{% if  active_bookmark  %}-fill text-dark{% endif %} me-1"></i>Lưu
         </button>
 </form>
 <div class="btn-group">
@@ -42,8 +41,6 @@
           class="bi bi-envelope me-2"></i>Chia sẻ qua email</button></li>
     <li><button class="dropdown-item btn btn-copy  btn-light mt-3" data-clipboard-text="{{ request.build_absolute_uri }}"
       id="copyBtn" data-bs-toggle="tooltip" data-bs-title="Copy liên kết"><i class="bi bi-link me-2"></i>Copy liên kết</button></li>
-    <li><hr class="dropdown-divider"></li>
-    <li><a class="dropdown-item" href="#">Separated link</a></li>
   </ul>
 </div>
 </div>

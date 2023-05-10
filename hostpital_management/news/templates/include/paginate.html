@@ -5,7 +5,7 @@
     {% else %}
     <button class="disabled btn px-3  btn-dark rounded-pill fw-semibold fs-6"><i class="bi bi-chevron-left me-1"></i>TRƯỚC</button>
     {% endif %}
-    <div>
+    <div class="d-none">
     <a href="{% url 'news:posts' page=1 %}" class="px-3 btn btn-outline-dark rounded-pill fw-semibold fs-6 {% if page == 1 %} active {% endif %}">1</a>
     <a href="{% url 'news:posts' page=2 %}" class="px-3 btn btn-outline-dark rounded-pill fw-semibold fs-6
     {% if page != 1 and page != paginate.num_pages %}
