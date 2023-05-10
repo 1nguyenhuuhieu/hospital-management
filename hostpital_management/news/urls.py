@@ -7,8 +7,8 @@ urlpatterns = [
     path('posts/page/<int:page>', views.index, name='posts'),
     path('category/<int:category_id>/page/<int:page>/', views.category, name='category'),
     path('author/<int:author_id>/', views.author, name='author'),
-    path('posts/<int:tag_id>/', views.posts, name='posts_tag'),
     path('search/', views.search, name='search'),
     path('tag/<int:tag_id>/', views.search, name='tag'),
-    path('apps/', views.apps, name='apps')
+    path('apps/', views.apps, name='apps'),
+    path('bookmarks/', views.bookmarks, name='bookmarks'),
 ]
