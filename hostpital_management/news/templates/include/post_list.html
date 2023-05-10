@@ -35,7 +35,7 @@
               src="{{ post.author.get_avatar }}"
               alt="" class="rounded-circle" width="40px" height="40px">
             <div class="d-flex flex-column ms-2">
-              <a href="#" class="link-secondary fw-medium text-decoration-none">{{ post.author|title }}</a>
+              <a href="{% url 'news:author' author_id=post.author.id%}" class="link-secondary fw-medium text-decoration-none">{{ post.author|title }}</a>
               <div class="d-flex  text-secondary opacity-75 small">
                 <span class="">
                   {% if not post.is_old_created_time %}

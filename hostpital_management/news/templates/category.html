@@ -14,7 +14,7 @@
     <div class="row">
         {% for post in posts %}
         <div class="col-lg-4 mt-4">
-            <div class="h-100 d-flex flex-column justify-content-between border-bottom">
+            <div class="h-100 d-flex flex-column justify-content-between">
                 <div>
                     <a href="{% url 'news:post' post_id=post.id %}" class="text-decoration-none link-dark">
                         <img src="{{ post.get_cover_image }}" class="rounded-4 img-fluid" alt="...">
@@ -42,13 +42,12 @@
                         {{ post.created_time|date:"d/m/Y" }}
                         {% endif %}
                     </span>
-                    <form method="post">
-                        {% csrf_token %}
-                        <button type="submit" name="like" class="btn "><i
-                                class="bi bi-bookmark{% if  has_reaction  %}-fill text-dark{% endif %}"
-                                data-bs-toggle="tooltip" data-bs-title="Lưu bài viết"></i>
-                        </button>
-                    </form>
+                    <div>
+                        <div class="d-flex align-items-center" data-bs-toggle="tooltip" data-bs-title="Số người xem">
+                        <span class="fw-medium me-2">{{ post.view_count }}</span>
+                        <i class="bi bi-eye fs-5"></i>
+                    </div>
+                    </div>
                 </div>
             </div>
         </div>
