@@ -49,7 +49,7 @@ INSTALLED_APPS = [
     'dashboard',
     'hospital_quality_management',
     'human_resource_management',
-    'news'
+    'news',
 ]
 
 MIDDLEWARE = [
@@ -68,7 +68,7 @@ ROOT_URLCONF = 'hostpital_management.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -94,8 +94,8 @@ DATABASES = {
         'NAME': 'hospital_management',
         'USER': 'hieu',
         'PASSWORD': '123456',
-        # 'HOST': '113.160.173.44',
-        'HOST': 'localhost',
+        'HOST': '113.160.173.44',
+        # 'HOST': 'localhost',
         'PORT': '5432',
         
     }
