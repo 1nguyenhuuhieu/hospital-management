@@ -85,7 +85,7 @@
 </head>
 <body class="text-center">
   <main class="form-signin w-100 m-auto">
-    <a href="{% url 'news:index' %}"><img class="mb-2" src="{% static 'imgs/logo-dark-200.png' %}" alt=""
+    <a href="{% url 'news:index' %}"><img class="mb-2" src="{% static 'imgs/logo-dark-400.png' %}" alt=""
         height="60"></a>
     <hr>
     <h1 class="h4 my-4 fw-bold opacity-75">ĐĂNG NHẬP TÀI KHOẢN</h1>
@@ -110,7 +110,7 @@
       {% endif %}
     </form>
     <a href="{% url 'password_reset' %}" class="mt-5 text-decoration-none link-body-emphasis fw-medium opacity-75">Quên mật khẩu?</a>
-    <button class="w-100 btn btn-lg btn-outline-secondary fw-bold mt-4 text-uppercase " type="submit" value="login">Đăng ký tài khoản</button>
+    <a href="{% url 'account:register' %}" class="w-100 btn btn-lg btn-outline-secondary fw-bold mt-4 text-uppercase " type="submit" value="login">Đăng ký tài khoản</a>
 
     <p class="mt-5 mb-3 text-body-secondary opacity-75">benhvienanhson.com</p>
 

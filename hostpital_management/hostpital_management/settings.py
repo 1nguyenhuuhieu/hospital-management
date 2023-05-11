@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'hospital_quality_management',
     'human_resource_management',
     'news',
+    'account'
 ]
 
 MIDDLEWARE = [
@@ -167,3 +168,6 @@ CKEDITOR_UPLOAD_PATH = "uploads/"
 CKEDITOR_IMAGE_BACKEND = "ckeditor_uploader.backends.PillowBackend"
 CKEDITOR_FORCE_JPEG_COMPRESSION = True
 CKEDITOR_IMAGE_QUALITY = 50
+
+
+LOGIN_REDIRECT_URL = '/'
