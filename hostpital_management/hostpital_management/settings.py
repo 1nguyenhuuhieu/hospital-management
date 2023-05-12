@@ -56,7 +56,6 @@ INSTALLED_APPS = [
     'ckeditor_uploader',
     'django.contrib.postgres',
     
-    'sslserver',
     'django_extensions',
 
     'dashboard',
@@ -109,8 +108,8 @@ DATABASES = {
         'NAME': 'hospital_management',
         'USER': 'hieu',
         'PASSWORD': '123456',
-        # 'HOST': '113.160.173.44',
-        'HOST': 'localhost',
+        'HOST': '113.160.173.44',
+        # 'HOST': 'localhost',
         'PORT': '5432',
         
     }
@@ -207,3 +206,5 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend'
 ]
+
+SECURE_SSL_REDIRECT = True
