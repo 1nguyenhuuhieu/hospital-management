@@ -55,6 +55,8 @@ INSTALLED_APPS = [
     'ckeditor',
     'ckeditor_uploader',
     'django.contrib.postgres',
+    
+    'sslserver',
 
     'dashboard',
     'hospital_quality_management',
@@ -199,3 +201,8 @@ SOCIALACCOUNT_PROVIDERS = {
         }
     }
 }
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend'
+]
