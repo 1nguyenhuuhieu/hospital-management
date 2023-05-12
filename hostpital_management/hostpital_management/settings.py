@@ -56,7 +56,7 @@ INSTALLED_APPS = [
     'ckeditor_uploader',
     'django.contrib.postgres',
     
-    'sslserver',
+    'django_extensions',
 
     'dashboard',
     'hospital_quality_management',
