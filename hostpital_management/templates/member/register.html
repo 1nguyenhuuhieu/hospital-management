@@ -1,0 +1,66 @@
+{% extends 'account/base.html' %}
+{% block title %}Đăng ký tài khoản{% endblock %}
+{% load static %}
+{% block content %}
+<div class="bg-light border-bottom text-center py-3">
+   <a href="{% url 'news:index' %}"><img src="{% static 'imgs/logo-dark-400.png' %}" alt="logo trung tâm y tế huyện anh sơn" style="width: 200px;"></a>
+</div>
+<div class="container-fluid">
+    <div class="row justify-content-center mt-5">
+        <div class="col-10 col-sm-8 col-md-5 col-lg-4 col-xl-3 text-center">
+            <h2 class="fw-medium text-dark">Tạo tài khoản trên benhvienanhson.com</h2>
+            
+        </div>
+
+    </div>
+
+    <div class="row justify-content-center mt-4">
+        <div class="col-10 col-sm-8 col-md-5 col-lg-4 col-xl-3 text-center">
+            <div class="d-flex flex-column">
+                <button class="btn fw-medium btn-outline-dark w-100 text-uppercase rounded-pill py-2 mb-2">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <i class="bi bi-google me-2 text-danger fs-5"></i>
+                        <span>đăng kí với google</span>
+                        <span></span>
+                    </div>
+                </button>
+                <button class="btn fw-medium btn-outline-dark w-100 text-uppercase rounded-pill py-2 mb-2">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <i class="bi bi-facebook me-2 text-primary fs-5"></i>
+                        <span>đăng kí với facebook</span>
+                        <span></span>
+                    </div>
+                </button>
+                <button class="btn fw-medium btn-outline-dark w-100 text-uppercase rounded-pill py-2">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <i class="bi bi-envelope me-2  fs-5"></i>
+                        <span>đăng kí với email</span>
+                        <span></span>
+                    </div>
+                </button>
+
+            </div>
+
+            <p class="mt-4 text-secondary">
+                Bạn đã có tài khoản? <a href="{% url 'login' %}" class="link-body-emphasis ms-2">ĐĂNG NHẬP</a>
+            </p>
+
+
+        </div>
+
+
+        <div class="col-12 text-center mt-5">
+            <p class="small text-secondary">
+                Bằng việc tạo tài khoản, bạn đã đồng ý với các <br>
+            <a href="" class="link-dark fw-medium small">THỎA THUẬN NGƯỜI DÙNG</a>
+            & 
+            <a href="" class="link-dark fw-medium small">CHÍNH SÁCH BẢO MẬT</a>
+           
+            của benhvienanhson.com
+            </p>
+            
+        </div>
+
+    </div>
+</div>
+{% endblock %}
