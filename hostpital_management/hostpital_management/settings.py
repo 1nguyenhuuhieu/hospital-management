@@ -209,3 +209,12 @@ AUTHENTICATION_BACKENDS = [
 
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 SECURE_SSL_REDIRECT = True
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = False
+EMAIL_PORT = 465
+EMAIL_USE_SSL = True
+EMAIL_HOST_USER = 'trungtamytehuyenanhson@gmail.com'
+EMAIL_HOST_PASSWORD = 'aixcmiidkpdigoua'
