@@ -47,7 +47,6 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
 
     'allauth.socialaccount.providers.facebook',
-
     'allauth.socialaccount.providers.google',
 
     'dynamic_breadcrumbs',
@@ -108,8 +107,8 @@ DATABASES = {
         'NAME': 'hospital_management',
         'USER': 'hieu',
         'PASSWORD': '123456',
-        # 'HOST': '113.160.173.44',
-        'HOST': 'localhost',
+        'HOST': '113.160.173.44',
+        # 'HOST': 'localhost',
         'PORT': '5432',
         
     }
@@ -199,7 +198,17 @@ SOCIALACCOUNT_PROVIDERS = {
             'secret': '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',
             'key': 'AIzaSyCWpkZmOnRhT-01ccxxh2WAWR-wQwKspKI'
         }
-    }
+    },
+    'facebook': {
+        # For each OAuth based provider, either add a ``SocialApp``
+        # (``socialaccount`` app) containing the required client
+        # credentials, or list them here:
+        'APP': {
+            'client_id': '1370487673731546',
+            'secret': 'a7084ed4ebe4f09d1515bf71d7421301',
+            'key': ''
+        }
+    },
 }
 
 AUTHENTICATION_BACKENDS = [
