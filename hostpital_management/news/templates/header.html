@@ -102,7 +102,7 @@
                   {% if request.user.is_authenticated %}
                   <a href="{% url 'admin:index' %}" class="btn btn-dark rounded-pill fw-semibold shadow-sm px-3 ms-2">{{ request.user }}</a>
                   {% else %}
-                    <a href="{% url 'account_login' %}" class="btn btn-dark rounded-pill fw-semibold shadow-sm px-3 ms-2">ĐĂNG NHẬP</a>
+                    <a href="{% url 'login' %}" class="btn btn-dark rounded-pill fw-semibold shadow-sm px-3 ms-2">ĐĂNG NHẬP</a>
                   {% endif %}
                 </div>
             </div>

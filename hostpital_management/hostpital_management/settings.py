@@ -40,14 +40,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.humanize',
 
-    'django.contrib.sites',
-
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-
-    'allauth.socialaccount.providers.facebook',
-    'allauth.socialaccount.providers.google',
 
     'dynamic_breadcrumbs',
     'import_export',
@@ -55,7 +47,6 @@ INSTALLED_APPS = [
     'ckeditor_uploader',
     'django.contrib.postgres',
     
-    'sslserver',
 
     'dashboard',
     'hospital_quality_management',
@@ -185,39 +176,11 @@ CKEDITOR_IMAGE_QUALITY = 50
 LOGIN_REDIRECT_URL = '/'
 
 
-# all auth config
-SITE_ID = 2
 
-SOCIALACCOUNT_PROVIDERS = {
-    'google': {
-        # For each OAuth based provider, either add a ``SocialApp``
-        # (``socialaccount`` app) containing the required client
-        # credentials, or list them here:
-        'APP': {
-            'client_id': '49037162092-uo2l59b1ghpaka9k1ggn6tvgsospug22.apps.googleusercontent.com',
-            'secret': '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',
-            'key': 'AIzaSyCWpkZmOnRhT-01ccxxh2WAWR-wQwKspKI'
-        }
-    },
-    'facebook': {
-        # For each OAuth based provider, either add a ``SocialApp``
-        # (``socialaccount`` app) containing the required client
-        # credentials, or list them here:
-        'APP': {
-            'client_id': '1370487673731546',
-            'secret': 'a7084ed4ebe4f09d1515bf71d7421301',
-            'key': ''
-        }
-    },
-}
 
-AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.ModelBackend',
-    'allauth.account.auth_backends.AuthenticationBackend'
-]
 
-SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
-SECURE_SSL_REDIRECT = True
+# SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+# SECURE_SSL_REDIRECT = True
 
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
