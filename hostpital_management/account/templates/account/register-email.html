@@ -2,6 +2,7 @@
 {% block title %}Đăng ký tài khoản{% endblock %}
 {% load static %}
 {% block content %}
+{% load crispy_forms_tags %}
 <div class="bg-light border-bottom text-center py-3">
    <a href="{% url 'news:index' %}"><img src="{% static 'imgs/logo-dark-400.png' %}" alt="logo trung tâm y tế huyện anh sơn" style="width: 200px;"></a>
 </div>
@@ -19,25 +20,7 @@
         <div class="col-10 col-sm-8 col-md-5 col-lg-4 col-xl-3">
             <form action="" method="post">
                 {% csrf_token %}
-                <table>
-                {{ form.as_table  }}
-            </table>
-            <div class="form-floating mb-3">
-                <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" name="email">
-                <label for="floatingInput">Địa chỉ email</label>
-              </div>
-            <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" name="username">
-                <label for="floatingInput">Tên đăng nhập</label>
-              </div>
-              <div class="form-floating mb-3">
-                <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password1">
-                <label for="floatingPassword">Mật khẩu</label>
-              </div>
-              <div class="form-floating">
-                <input type="password" class="form-control" id="floatingPassword2" placeholder="Password" name="password2">
-                <label for="floatingPassword2">Xác nhận mật khẩu</label>
-              </div>
+                {{ form|crispy  }}
               <button class="btn btn-lg btn-dark text-uppercase fw-medium w-100 mt-4" type="submit">tạo tài khoản</button>
             </form>
         </div>

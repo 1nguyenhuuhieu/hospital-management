@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .forms import RegisterForm
 
 # Create your views here.
@@ -16,6 +16,7 @@ def register_email(request):
         form = RegisterForm(request.POST)
         if form.is_valid():
             form.save()
+            return redirect("news:index")
     else:
         form = RegisterForm()
     

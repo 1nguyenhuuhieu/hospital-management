@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     'ckeditor',
     'ckeditor_uploader',
     'django.contrib.postgres',
+    "crispy_forms",
+    "crispy_bootstrap5",
     
 
     'dashboard',
@@ -190,3 +192,8 @@ EMAIL_PORT = 465
 EMAIL_USE_SSL = True
 EMAIL_HOST_USER = 'trungtamytehuyenanhson@gmail.com'
 EMAIL_HOST_PASSWORD = 'aixcmiidkpdigoua'
+
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+
+CRISPY_TEMPLATE_PACK = "bootstrap5"
