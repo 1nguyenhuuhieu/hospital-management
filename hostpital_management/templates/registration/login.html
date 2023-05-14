@@ -89,7 +89,7 @@
         height="60"></a>
     <hr>
     <h1 class="h4 my-4 fw-bold opacity-75">ĐĂNG NHẬP TÀI KHOẢN</h1>
-    <form method="post" action="{% url 'account_login' %}" class="mb-3">
+    <form method="post" action="{% url 'login' %}" class="mb-3">
       {% csrf_token %}
       <div class="form-floating">
         <input type="text" name="username" autofocus="" autocapitalize="none" autocomplete="username" maxlength="150"
@@ -109,8 +109,8 @@
       </div>
       {% endif %}
     </form>
-    <a href="#" class="mt-5 text-decoration-none link-body-emphasis fw-medium opacity-75">Quên mật khẩu?</a>
-    <a href="#" class="w-100 btn btn-lg btn-outline-secondary fw-bold mt-4 text-uppercase " type="submit" value="login">Đăng ký tài khoản</a>
+    <a href="{% url 'password_reset' %}"class="mt-5 text-decoration-none link-body-emphasis fw-medium opacity-75">Quên mật khẩu?</a>
+    <a href="{% url 'account:register' %}" class="w-100 btn btn-lg btn-outline-secondary fw-bold mt-4 text-uppercase " type="submit" value="login">Đăng ký tài khoản</a>
 
     <p class="mt-5 mb-3 text-body-secondary opacity-75">benhvienanhson.com</p>
 
