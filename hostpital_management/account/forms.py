@@ -4,8 +4,8 @@ from django.contrib.auth.models import User
 
 
 class RegisterForm(UserCreationForm):
-    password1 = forms.CharField(label='Mật khẩu', widget=forms.PasswordInput)
-    password2 = forms.CharField(label=None, widget=forms.PasswordInput, help_text=None)
+    password2 = forms.CharField(label='Mật khẩu', widget=forms.PasswordInput)
+    password1 = forms.CharField(widget=forms.HiddenInput)
     email = forms.CharField(label='Email', widget=forms.HiddenInput)
     username = forms.EmailField(label='Email', help_text="Địa chỉ email sẽ được dùng làm tên đăng nhập")
 
