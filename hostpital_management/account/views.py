@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login
 from .forms import RegisterForm
 
 # Create your views here.
@@ -16,7 +17,15 @@ def register_email(request):
         form = RegisterForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect("news:index")
+            username = form.cleaned_data['username']
+            pwd = form.cleaned_data['password1']
+            user = authenticate(request, username=username, password=pwd)
+            if user is not None:
+                login(request, user)
+                return redirect("news:index")
+
+            else:
+                return redirect("news:index")
     else:
         form = RegisterForm()
     
@@ -27,3 +36,11 @@ def register_email(request):
 
 
     return render(request, 'account/register-email.html', context)
+
+def profile(request):
+    context = {
+
+    }
+
+    return render(request, 'account/profile.html', context)
+

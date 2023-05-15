@@ -7,4 +7,5 @@ app_name = "account"
 urlpatterns = [
     path('', views.register, name='register'),
     path('email', views.register_email, name='register_email'),
+    path('profile', views.profile, name='profile'),
 ]

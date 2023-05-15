@@ -109,7 +109,7 @@
                   <ul class="dropdown-menu text-small">
                     <li><a class="dropdown-item" href="#">Lịch sử khám</a></li>
                     <li><a class="dropdown-item" href="#">Đặt lịch khám</a></li>
-                    <li><a class="dropdown-item" href="#">Tài khoản</a></li>
+                    <li><a class="dropdown-item" href="{% url 'account:profile' %}">Tài khoản</a></li>
                     <li><hr class="dropdown-divider"></li>
                     <li><a class="dropdown-item" href="{% url 'logout' %}"><i class="bi bi-box-arrow-left me-2"></i>Đăng xuất</a></li>
                   </ul>
@@ -179,13 +179,13 @@
 
             </div>
             <hr>
-            <ul class="">
-              <li><a  href="#">Lịch sử khám</a></li>
-              <li><a  href="#">Đặt lịch khám</a></li>
-              <li><a  href="#">Tài khoản</a></li>
-              <li><a  href="{% url 'logout' %}"><i class="bi bi-box-arrow-left me-2"></i>Đăng xuất</a></li>
-            </ul>
-
+            <div class="d-flex flex-column">
+              <p>{{ request.user.username }}</p>
+            <a  href="#" class="link-dark text-decoration-none mb-2">Lịch sử khám</a>
+             <a  href="#" class="link-dark text-decoration-none  mb-2">Đặt lịch khám</a>
+          <a  href="#" class="link-dark text-decoration-none  mb-2">Tài khoản</a>
+          <a  href="{% url 'logout' %}" class="link-dark text-decoration-none">Đăng xuất</a>
+        </div>
             </div>
           </div>
         </div>
