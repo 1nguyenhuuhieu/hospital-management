@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from .forms import *
+from account.models import *
 from django.shortcuts import get_object_or_404
 
 
@@ -34,18 +35,21 @@ def register_email(request):
     context = {
         'form': form
     }
-    
-
-
     return render(request, 'account/register-email.html', context)
 
 def profile(request):
     user = request.user
     user = get_object_or_404(User, pk=user.id)
+    try:
+        profile = Profile.objects.get(user=user)
+    except:
+        profile = Profile(user=user)
+        profile.save()
     form = UserForm(instance=user)
-    profile_form = ProfileForm()
+    profile_form = ProfileForm(instance=profile)
 
     context = {
+        'profile': profile,
         'form': form,
         'profile_form': profile_form
     }
