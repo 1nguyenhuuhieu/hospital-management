@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from .forms import RegisterForm
 
+
 # Create your views here.
 
 def register(request):
@@ -43,4 +44,7 @@ def profile(request):
     }
 
     return render(request, 'account/profile.html', context)
+
+
+
 
