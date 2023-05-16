@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
-from .forms import RegisterForm
+from .forms import *
+from django.shortcuts import get_object_or_404
 
 
 # Create your views here.
@@ -39,8 +40,14 @@ def register_email(request):
     return render(request, 'account/register-email.html', context)
 
 def profile(request):
-    context = {
+    user = request.user
+    user = get_object_or_404(User, pk=user.id)
+    form = UserForm(instance=user)
+    profile_form = ProfileForm()
 
+    context = {
+        'form': form,
+        'profile_form': profile_form
     }
 
     return render(request, 'account/profile.html', context)
