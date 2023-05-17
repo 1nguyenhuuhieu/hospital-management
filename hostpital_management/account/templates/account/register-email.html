@@ -14,7 +14,7 @@
     </div>
     <div class="row justify-content-center mt-4">
         <div class="col-10 col-sm-8 col-md-5 col-lg-4 col-xl-3">
-            <form action="" method="post" class="mb-5" id="registerForm">
+            <form action="" method="post" class="mb-5" id="registerForm" autocomplete="off">
                 {% csrf_token %}
                 {{ form|crispy  }}
 
@@ -54,6 +54,7 @@
     const password2 = document.getElementById("id_password2");
     const password1 = document.getElementById("id_password1");
     const showPwd = document.getElementById("flexSwitchCheckDefault");
+    email.value = "";
     registerForm.addEventListener("submit", (event) => {
         email.value = userName.value
     });
