@@ -68,6 +68,12 @@ def profile(request):
 
     form = UserForm(instance=user)
 
+    if request.method == "POST" and 'user_veritification' in request.POST:
+        staff_id = request.POST['staff_id']
+        staff = Staff.objects.get(pk=staff_id)
+        staff.user = request.user
+        staff.save()
+        
     context = {
         'profile': profile,
         'form': form,
