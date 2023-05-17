@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 import PIL.Image
 
 class Profile(models.Model):
-    user = models.OneToOneField(User, verbose_name='tài khoản đăng nhập', blank=True, null=True, on_delete=models.CASCADE)
+    # user = models.OneToOneField(User, verbose_name='tài khoản đăng nhập', blank=True, null=True, on_delete=models.CASCADE)
     full_name = models.CharField(max_length=200, verbose_name='Họ và tên',blank=True, null=True)
     phone = models.IntegerField(blank=True, null=True, verbose_name='Số điện thoại')
     avatar = models.ImageField(upload_to='avatars/', verbose_name='ảnh đại diện', blank=True, null=True)
