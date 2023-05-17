@@ -25,6 +25,7 @@ class UserForm(ModelForm):
         fields = ["username","password"]
 
 class ProfileForm(ModelForm):
+    birth_of_date = forms.DateField(label="Ngày sinh", required=False ,widget=forms.DateInput(attrs={'type': 'date'}))
     class Meta:
         model = Profile
-        fields = [  "avatar","full_name","phone", "birth_of_date"]
+        fields = [  "avatar", "full_name", "phone", "birth_of_date"]

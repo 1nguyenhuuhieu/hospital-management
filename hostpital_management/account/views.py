@@ -15,7 +15,6 @@ def register(request):
     return render(request, 'account/register.html', context)
 
 def register_email(request):
-
     if request.method == "POST":
         form = RegisterForm(request.POST)
         if form.is_valid():
@@ -45,8 +44,16 @@ def profile(request):
     except:
         profile = Profile(user=user)
         profile.save()
+
+    if request.method == "POST" and 'update_profile' in request.POST:
+        form = ProfileForm(request.POST, request.FILES,instance=profile)
+        if form.is_valid():
+            form.save()
+            return redirect("account:profile")
+    else:
+        profile_form = ProfileForm(instance=profile)
+
     form = UserForm(instance=user)
-    profile_form = ProfileForm(instance=profile)
 
     context = {
         'profile': profile,

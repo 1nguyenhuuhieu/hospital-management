@@ -10,15 +10,16 @@
             <h1>{% block title %}Thông tin tài khoản{% endblock %}</h1>
             <hr>
             <div class="row">
-                <div class="col-lg-3">
+                <div class="col-lg-3 px-5 px-lg-2">
                     <img src="{{ profile.get_avatar }}" alt="" class="img-fluid rounded-circle">
                 </div>
-                <div class="col-lg-4">
-                    <form action="" method="post">
+                <div class="col-lg-6">
+                    <form action="" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+
                         {{ profile_form|crispy  }}
-            
-                        <button type="submit" class="btn btn-dark">cập nhập thông tin</button>
-                        </form>
+                        <button type="submit" class="btn btn-dark fw-medium text-uppercase w-100 rounded-pill" name="update_profile">cập nhập thông tin</button>
+                    </form>
                 </div>
             </div>
 
