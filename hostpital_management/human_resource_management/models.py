@@ -7,28 +7,19 @@ import PIL.Image
 # Create your models here.
 class Staff(models.Model):
     user = models.OneToOneField(User, verbose_name='tài khoản đăng nhập', blank=True, null=True, on_delete=models.CASCADE)
+    SEX_CHOICES = [
+        ("m", "Nam"),
+        ('f', "Nữ")
+    ]
+
     full_name = models.CharField(max_length=200, verbose_name='Họ và tên')
     phone = models.IntegerField(blank=True, null=True)
     email = models.EmailField(blank=True, null=True)
-    detail = models.OneToOneField('StaffDetail', verbose_name='thông tin chi tiết', blank=True, null=True, on_delete=models.CASCADE)
-
-    avatar = models.ImageField(upload_to='avatars/', verbose_name='ảnh đại diện', blank=True, null=True)
-
-    def get_avatar(self):
-        if self.avatar:
-            return self.avatar.url
-        else:
-            return 'static/imgs/no-image.png'
-
-
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
-        if self.avatar:
-            img = PIL.Image.open(self.avatar)
-            img = img.resize((200, 200), PIL.Image.ANTIALIAS)
-            img.save(self.avatar.path, quality=100)
-            img.close()
-            self.avatar.close()
+    department = models.ForeignKey("Department", blank=True, null=True, verbose_name="Khoa/Phòng", on_delete=models.CASCADE)
+    is_work = models.BooleanField(verbose_name="trạng thái làm việc", default=True)
+    birth_date = models.DateField( verbose_name='ngày sinh', blank=True, null=True)
+    sex = models.CharField(max_length=1, choices=SEX_CHOICES, blank=True, null=True, verbose_name='giới tính')
+    address = models.CharField(max_length=1000, blank=True, null=True, verbose_name='địa chỉ hiện tại')
 
     class Meta:
         verbose_name  = 'nhân viên'
@@ -37,6 +28,6 @@ class Staff(models.Model):
     def __str__(self):
         return self.full_name
 
-class StaffDetail(models.Model):
+class Department(models.Model):
     pass
 

@@ -9,7 +9,7 @@ from import_export import resources
 class StaffResource(resources.ModelResource):
     class Meta:
         model = Staff
-        fields = ('id', 'user', 'full_name', 'phone', 'detail',)
+        fields = ('id', 'full_name', 'phone', 'email','birth_date','sex','address')
 
 
 
