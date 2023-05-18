@@ -7,58 +7,28 @@
 </style>
 <div class="d-none d-lg-block mb-4 sticky-top">
 <div class="bg-white">
-    <div class="container-fluid bg-white shadow-sm py-2">
+    <div class="container-fluid bg-dark shadow-sm py-2">
         <!-- header on desktop -->
         <div class="row align-items-center">
-            <div class="col-lg-3">
-                <a href="{% url 'news:index' %}" id="topPage">
-                    <img src="{% static 'imgs/logo-dark-200.png' %}" alt="logo trung tâm y tế huyện anh sơn"
-                        class="img-fluid">
+            <div class="col-lg-5">
+                <a href="{% url 'hrm:index' %}" id="topPage">
+                    <img src="{% static 'hrm/imgs/LOGO_DARK.png' %}" alt="logo trung tâm y tế huyện anh sơn">
                 </a>
             </div>
-            <div class="col-lg-6">
-                <div class="row g-0 align-items-center">
-                    <div class="col-3 text-start accordion-header">
-                      <div class="accordion accordion-flush" id="accordionExample">
-                        <div class="accordion-item ">
-                          <span class="accordion-header ">
-                            <button class="accordion-button collapsed p-0 fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCategory1" aria-expanded="true" aria-controls="collapseOne">
-                              DANH MỤC
-                            </button>
-                          </span>
-                        </div>
-                      </div>
-                    </div> 
-                    <div class="col-6 px-2">
-                        <form action="{% url 'news:search' %}" method="get">
-                            <div class="input-group input-group-sm rounded-4 p-1 w-100" style="background-color: #F0F0F0;">
-                                <span class="input-group-text border-0" style="background-color: #F0F0F0;"><i class="bi bi-search"></i></span>
-                                <input type="search" class="form-control border-0" placeholder="Tìm kiếm"
-                                    name="q" style="background-color: #F0F0F0;" required>
-                                <button class="input-group-text btn btn-light rounded-pill text-muted fw-semibold shadow-sm"
-                                    type="submit" >TÌM KIẾM</button>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="col-3 text-end">
-                        <a href="{% url 'news:book_appointment' %}" class="fw-semibold link-offset-2 link-offset-3-hover link-underline-dark link-underline-opacity-0 link-underline-opacity-75-hover link-dark text-truncate">
-                          ĐẶT LỊCH KHÁM<i class="bi bi-calendar-plus ms-2"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3">
+
+            <div class="col-lg-7">
                 <div class="d-flex justify-content-end align-items-center">
                   <div>
-                    <button  class="btn btn-outline-light border-0 rounded-pill  p-1"  type="button" data-bs-toggle="dropdown">
-                      <svg xmlns="http://www.w3.org/2000/svg" height="30" viewBox="0 96 960 960" width="30"><path d="M226 896q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19ZM226 642q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19ZM226 388q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Z"/></svg>
+                    <button  class="btn btn-outline-dark border-0 rounded-pill  p-1"  type="button" data-bs-toggle="dropdown">
+                      <svg xmlns="http://www.w3.org/2000/svg" height="30" viewBox="0 96 960 960" width="30" style="fill: white;"><path d="M226 896q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19ZM226 642q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19ZM226 388q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 0q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Z"/></svg>
                     </button>
                     {% include 'include/apps.html' %}
                 </div>
                 {% if request.user.is_authenticated %}
                 <div class="dropdown text-end ms-2">
                   <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="{{ request.user.profile.get_avatar }}" alt="{{ request.user.username }} avatar" width="32" height="32" class="rounded-circle border">
+                    <button class=" fw-medium text-uppercase me-2 btn btn-sm btn-light rounded-pill">{{ request.user.staff.full_name }}</button> 
+                    <img src="{{ request.user.profile.get_avatar }}" alt="{{ request.user.username }} avatar" width="45" height="45" class="rounded-circle">
                   </a>
                   <ul class="dropdown-menu text-small">
                     <li><a class="dropdown-item" href="#">Lịch sử khám</a></li>

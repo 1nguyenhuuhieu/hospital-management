@@ -26,8 +26,41 @@ class Staff(models.Model):
         verbose_name_plural  = 'nhân viên'
 
     def __str__(self):
-        return self.full_name
+        return f'{self.full_name} {self.birth_date}'
 
 class Department(models.Model):
     pass
+
+class Team(models.Model):
+    title = models.CharField(max_length=200, verbose_name='tên nhóm')
+    created_date = models.DateField(auto_now_add=True, verbose_name='thời gian tạo')
+    class Meta:
+        verbose_name  = 'nhóm'
+        verbose_name_plural  = 'nhóm'
+
+    def __str__(self):
+        return self.title
+
+class StaffTeam(models.Model):
+    ROLE_CHOICES = [
+        (0, 'Thành viên'),
+        (1, 'Trưởng nhóm'),
+        (2, 'Phó nhóm'),
+    ]
+    staff = models.ForeignKey(Staff, verbose_name='nhân viên', on_delete=models.CASCADE)
+    team = models.ForeignKey(Team, verbose_name='nhóm', on_delete=models.CASCADE)
+    created_date = models.DateField(auto_now_add=True, verbose_name='thời gian tạo')
+    role = models.IntegerField(choices=ROLE_CHOICES, default=0, verbose_name='vị trí')
+
+
+    class Meta:
+        verbose_name  = 'thành viên nhóm'
+        verbose_name_plural  = 'thành viên nhóm'
+        unique_together = ['staff','team']
+
+    def __str__(self):
+        return f'{self.staff}, {self.team}'
+
+  
+
 
