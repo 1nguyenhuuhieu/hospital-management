@@ -36,7 +36,7 @@ class Post(models.Model):
     author = models.ForeignKey('Author', verbose_name='tác giả', blank=True, null=True, on_delete=models.CASCADE)
     user = models.ForeignKey(User, verbose_name='người đăng', blank=True, null=True, on_delete=models.CASCADE)
     STATUS_CHOICES = [
-        ('private', 'Chỉ mình tôi'),
+        ('private', 'Ẩn'),
         ('staff', 'Nhân viên'),
         ('public', 'Mọi người')
     ]
@@ -46,7 +46,7 @@ class Post(models.Model):
     plaintext_content = models.TextField(verbose_name='plain text of content', blank=True, null=True)
     youtube_url = models.URLField(max_length=40, blank=True, null=True, verbose_name='URL video youtube', help_text='dán url video youtube vào đây')
     cover = models.ImageField(upload_to='post-covers/', verbose_name='ảnh bìa', blank=True, null=True, help_text='ảnh bìa sẽ tự động resize về kích thước 768 x 432')
-    tags = models.ManyToManyField(Tag, verbose_name='thẻ', blank=True,null=True)
+    tags = models.ManyToManyField(Tag, verbose_name='thẻ', blank=True)
     created_time = models.DateTimeField(auto_now_add=True,null=True)
     updated_time = models.DateTimeField(auto_now=True,null=True)
     view_count = models.IntegerField(blank=True, null=True, default=0, verbose_name='số lượt xem')
@@ -161,6 +161,7 @@ class Comment(models.Model):
         return f'{self.comment}' 
 
 class Author(models.Model):
+    user = models.ForeignKey(User, blank=True, null=True, verbose_name='tài khoản', on_delete=models.CASCADE)
     name = models.CharField(max_length=200, verbose_name='tên')
     description = models.CharField(max_length=200, verbose_name='mô tả ngắn')
     avatar = models.ImageField(upload_to='avatars/', verbose_name='ảnh đại diện', blank=True)
@@ -188,3 +189,13 @@ class Author(models.Model):
 
     def __str__(self):
         return f'{self.name}'
+
+class PostEditor(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    editor = models.ForeignKey(User, on_delete=models.CASCADE)
+    date_created = models.DateTimeField(auto_now=True)
+
+class PostChecker(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    checker = models.ForeignKey(User, on_delete=models.CASCADE)
+    date_created = models.DateTimeField(auto_now=True)
