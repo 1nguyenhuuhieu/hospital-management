@@ -1,0 +1,23 @@
+{% extends 'hrm/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Tổ truyền thông{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <h4>Bài viết mới</h4>
+            <hr>
+            <form action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ post_form.media  }}
+                {{ post_form|crispy  }}
+                <div class="text-end">
+                    <button class="btn btn-outline-dark text-uppercase " type="submit">LƯU BẢN NHÁP</button>
+                    <button class="btn btn-dark text-uppercase ms-2" type="submit">Gửi bài viết</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
