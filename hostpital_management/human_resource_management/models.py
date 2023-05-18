@@ -11,7 +11,6 @@ class Staff(models.Model):
         ("m", "Nam"),
         ('f', "Nữ")
     ]
-
     full_name = models.CharField(max_length=200, verbose_name='Họ và tên')
     phone = models.IntegerField(blank=True, null=True)
     email = models.EmailField(blank=True, null=True)

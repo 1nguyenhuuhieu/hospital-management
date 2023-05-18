@@ -25,9 +25,10 @@
                     {% include 'include/apps.html' %}
                 </div>
                 {% if request.user.is_authenticated %}
+                <a href="{% url 'hrm:profile' %}" class=" fw-medium text-uppercase mx-2 btn btn-sm btn-light rounded-pill">{{ request.user.staff.full_name }}</a> 
+
                 <div class="dropdown text-end ms-2">
                   <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                    <button class=" fw-medium text-uppercase me-2 btn btn-sm btn-light rounded-pill">{{ request.user.staff.full_name }}</button> 
                     <img src="{{ request.user.profile.get_avatar }}" alt="{{ request.user.username }} avatar" width="45" height="45" class="rounded-circle">
                   </a>
                   <ul class="dropdown-menu text-small">

@@ -16,6 +16,7 @@
           </div>
         </div>
       </div>
+
       <div class="col-4">
         <div class="card border-0 text-center">
           <div class="card-body">
@@ -25,7 +26,16 @@
         </div>
       </div>
   </div>
-    <div class="row g-0">
+    <div class="row g-0 border-bottom">
+      <div class="col-4  border-end">
+        <div class="card border-0 text-center">
+          <div class="card-body">
+            <h3><i class="bi bi-house-lock-fill"></i></h3>
+           <a href="{% url 'hrm:index' %}" class="stretched-link link-body-emphasis text-decoration-none fw-medium small">NỘI BỘ</a>
+          </div>
+        </div>
+      </div>
+      
       <div class="col-4 border-end">
         <div class="card border-0 text-center">
           <div class="card-body">
@@ -34,7 +44,7 @@
           </div>
         </div>
       </div>
-      <div class="col-4 border-end">
+      <div class="col-4">
         <div class="card border-0 text-center">
           <div class="card-body">
             <h3><i class="bi bi-sliders"></i></h3>
@@ -42,11 +52,14 @@
           </div>
         </div>
       </div>
-      <div class="col-4">
+  </div>
+    <div class="row g-0">
+    
+      <div class="col-4 border-end">
         <div class="card border-0 text-center">
           <div class="card-body">
             <h3><i class="bi bi-megaphone"></i></h3>
-           <a href="#" class="stretched-link link-body-emphasis text-decoration-none fw-medium small">TRUYỀN THÔNG</a>
+           <a href="{% url 'communication:index' %}" class="stretched-link link-body-emphasis text-decoration-none fw-medium small">TRUYỀN THÔNG</a>
           </div>
         </div>
       </div>

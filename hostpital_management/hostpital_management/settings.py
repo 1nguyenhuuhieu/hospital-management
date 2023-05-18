@@ -54,7 +54,8 @@ INSTALLED_APPS = [
     'hospital_quality_management',
     'human_resource_management',
     'news',
-    'account'
+    'account',
+    'communication'
 ]
 
 
