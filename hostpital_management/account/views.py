@@ -3,6 +3,9 @@ from django.contrib.auth import authenticate, login
 from .forms import *
 from account.models import *
 from django.shortcuts import get_object_or_404
+from human_resource_management.models import Staff
+from django.contrib import messages
+
 
 
 # Create your views here.
@@ -15,7 +18,6 @@ def register(request):
     return render(request, 'account/register.html', context)
 
 def register_email(request):
-
     if request.method == "POST":
         form = RegisterForm(request.POST)
         if form.is_valid():
@@ -45,17 +47,39 @@ def profile(request):
     except:
         profile = Profile(user=user)
         profile.save()
-    form = UserForm(instance=user)
-    profile_form = ProfileForm(instance=profile)
+    verification_staff = None
+    if request.method == "POST" and 'verification_staff' in request.POST:
+        full_name = request.POST['full_name']
+        staff_serch = Staff.objects.filter(full_name__search=full_name)
+        birth_of_date = request.POST['birth_date']
+        if not birth_of_date:
+            messages.add_message(request, messages.INFO, "Bạn phải cập nhập ngày sinh để xác minh thông tin nhân viên")
+        else:
+            verification_staff = staff_serch.filter(birth_date=birth_of_date)
 
+
+    if request.method == "POST" and 'update_profile' in request.POST:
+        form = ProfileForm(request.POST, request.FILES,instance=profile)
+        if form.is_valid():
+            form.save()
+            return redirect("account:profile")
+    else:
+        profile_form = ProfileForm(instance=profile)
+
+    form = UserForm(instance=user)
+
+    if request.method == "POST" and 'user_veritification' in request.POST:
+        staff_id = request.POST['staff_id']
+        staff = Staff.objects.get(pk=staff_id)
+        staff.user = request.user
+        staff.save()
+        
     context = {
         'profile': profile,
         'form': form,
-        'profile_form': profile_form
+        'profile_form': profile_form,
+        'verification_staff': verification_staff
     }
 
     return render(request, 'account/profile.html', context)
-
-
-
 

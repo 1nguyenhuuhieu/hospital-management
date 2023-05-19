@@ -54,7 +54,8 @@ INSTALLED_APPS = [
     'hospital_quality_management',
     'human_resource_management',
     'news',
-    'account'
+    'account',
+    'communication'
 ]
 
 
@@ -100,8 +101,8 @@ DATABASES = {
         'NAME': 'hospital_management',
         'USER': 'hieu',
         'PASSWORD': '123456',
-        # 'HOST': '113.160.173.44',
-        'HOST': 'localhost',
+        'HOST': '113.160.173.44',
+        # 'HOST': 'localhost',
         'PORT': '5432',
         
     }
@@ -198,3 +199,10 @@ EMAIL_HOST_PASSWORD = 'aixcmiidkpdigoua'
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 
 CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+
+CKEDITOR_CONFIGS = {
+'default': {
+    'width': 'auto',
+          },
+    }

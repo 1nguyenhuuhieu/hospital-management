@@ -6,19 +6,69 @@
 {% block content %}
 <div class="container-fluid">
     <div class="row justify-content-center">
-        <div class="col-lg-7">
+        <div class="col-lg-8">
             <h1>{% block title %}Thông tin tài khoản{% endblock %}</h1>
             <hr>
             <div class="row">
-                <div class="col-lg-3">
-                    <img src="{{ profile.get_avatar }}" alt="" class="img-fluid rounded-circle">
-                </div>
-                <div class="col-lg-4">
+                {% if not verification_staff %}
+                <div class="col-lg-4 px-5 px-lg-2 text-center">
+                    <img src="{{ profile.get_avatar }}" alt="" class="img-fluid rounded-circle border shadow-sm">
+                    {% if not request.user.staff %}
                     <form action="" method="post">
+                    {% csrf_token %}
+                        <input type="hidden" name="full_name" value="{{ profile.full_name }}">
+                        <input type="hidden" name="birth_date" value="{{ profile.birth_of_date|date:'Y-m-d' }}">
+                    <button class="btn btn-primary w-100 mt-3 fw-medium text-uppercase w-100 rounded-pill" type="submit" name="verification_staff">Xác thực nhân viên</button>
+                    {% if messages %}
+                    {% for message in messages %}
+                    <div class="alert alert-danger mt-3" role="alert">
+                        {{ message }}
+                      </div>
+                    {% endfor %}
+                {% endif %}
+                    </form>
+                    {% else %}
+                    <div class="d-flex flex-column justify-content-center align-items-center">
+                   <p class="badge text-bg-success rounded-pill mt-3"><i class="bi bi-check-circle me-2"></i>Tài khoản nhân viên</p>
+                   <a href="{% url 'hrm:profile' %}" class="text-decoration-none">Đi tới trang tài khoản nhân viên<i class="bi bi-arrow-right ms-1"></i></a>
+                </div>
+                    {% endif %}
+                    <button class="btn btn-primary w-100 mt-3 fw-medium text-uppercase w-100 rounded-pill disabled">kết nối hồ sơ sức khỏe</button>
+                </div>
+                {% endif %}
+                <div class="col-lg-8">
+                    {% if verification_staff %}
+                    <h5>Tìm thấy {{ verification_staff|length }} thông tin nhân viên phù hợp</h5>
+                    {% for staff in verification_staff %}
+                    <ul>
+                        <li>Họ và tên: {{ staff.full_name }} </li>
+                        <li>Giới tính: {{ staff.get_sex_display }} </li>
+                        <li>Ngày sinh: {{ staff.birth_date }} </li>
+                        <li>Điện thoại: {{ staff.phone }} </li>
+                        <li>Email: {{ staff.email }} </li>
+                    </ul>
+                    <form method="post">
+                        {% csrf_token %}
+                        <input type="hidden" value="{{ staff.id }}" name="staff_id">
+                        <button class="btn btn-success fw-medium text-uppercase" name="user_veritification">XÁC NHẬN đây LÀ thông tin của TÔI</button>
+                    </form>
+                    <p class="mt-3">
+                    <small class="fst-italic text-secondary"><i class="bi bi-info-circle me-1"></i>Khi liên kết với tài khoản nhân viên, bạn sẽ không thể hủy liên kết. Nếu phát hiện giả mạo, tài khoản của bạn sẽ bị khóa mà không cần báo trước.</small>
+                </p>
+                    {% endfor %}
+                    
+                    
+                    {% else %}
+                    <form action="" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
                         {{ profile_form|crispy  }}
-            
-                        <button type="submit" class="btn btn-dark">cập nhập thông tin</button>
-                        </form>
+                        <button type="submit" class="btn btn-dark fw-medium text-uppercase w-100 rounded-pill" name="update_profile">cập nhập thông tin</button>
+                    </form>
+                    <button class="btn btn-outline-danger w-100 mt-3 fw-medium text-uppercase w-100 rounded-pill">thay đổi mật khẩu</button>
+
+                    {% endif %}
+
+
                 </div>
             </div>
 

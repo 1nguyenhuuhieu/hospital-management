@@ -1,0 +1,30 @@
+{% extends 'hrm/base.html' %}
+
+{% block content %}
+
+{% load static %}
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <h1>{% block title %}Thông tin nhân viên{% endblock %}</h1>
+            <hr>
+            {% with staff=request.user.staff %}
+            {% for team in staff.staffteam_set.all %}
+            <span class="badge text-bg-primary rounded-pill mb-2">{{ team.team.title }}</span>
+            
+            {% empty %}
+            no text-small
+
+            {% endfor %}
+            <ul>
+                <li>Họ và tên: {{ staff.full_name }}</li>
+                <li>Ngày sinh: {{ staff.birth_date }}</li>
+                <li>Số điện thoại: {{ staff.phone }}</li>
+                <li>Email: {{ staff.email }}</li>
+            </ul>
+            {% endwith %}
+
+        </div>
+    </div>
+</div>
+{% endblock %}

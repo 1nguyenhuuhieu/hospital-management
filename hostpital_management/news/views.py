@@ -9,7 +9,7 @@ from django.db.models import Count
 
 def index(request, page=1):
     paginate = None
-    posts = Post.objects.order_by('-created_time')
+    posts = Post.objects.filter(status='public').order_by('-created_time')
     paginate = Paginator(posts, 5)
     posts = paginate.page(page)
 
@@ -17,7 +17,7 @@ def index(request, page=1):
     # thành viên nổi bật: đăng nhiều bài, bình luận nhiều, xem nhiều
 
     # bài viết nổi bật bao gồm: bài viết xem nhiều, vừa bình luận, vừa đăng tải --> kèm status(xem nhiều, mới đăng, vừa bình luận)    
-    popular_posts = Post.objects.order_by('-view_count')[:5]
+    popular_posts = Post.objects.filter(status='public').order_by('-view_count')[:5]
     popular_author = Author.objects.annotate(count=Count('post__id')).order_by('-count')
 
     context = {
@@ -33,7 +33,7 @@ def index(request, page=1):
 
 def category(request, category_id, page):
     category = get_object_or_404(Category, pk=category_id)
-    posts = Post.objects.filter(category=category_id).order_by('-created_time')
+    posts = Post.objects.filter(status='public').filter(category=category_id).order_by('-created_time')
     paginate = Paginator(posts, 12)
     posts = paginate.page(page)
     context = {
@@ -48,7 +48,7 @@ def category(request, category_id, page):
 def author(request, author_id):
 
     author = get_object_or_404(Author, pk=author_id)
-    posts = Post.objects.filter(author=author)
+    posts = Post.objects.filter(status='public').filter(author=author)
 
     context = {
         'posts': posts,
@@ -58,7 +58,7 @@ def author(request, author_id):
     return render(request, 'author.html', context)
 
 def post(request, post_id):
-    post = Post.objects.get(pk=post_id)
+    post = Post.objects.filter(status='public').get(pk=post_id)
 
     reaction_name = f'has_reaction_{post_id}'
 
@@ -137,7 +137,7 @@ def search(request, tag_id=None):
         search = SearchQuery(q_khongdau) | SearchQuery(q)
         search_vector = SearchVector("plaintext_content", "title", "description", "category__title")
         
-        posts = Post.objects.annotate(
+        posts = Post.objects.filter(status='public').annotate(
             search=search_vector).filter(
             search=search
             )
@@ -168,7 +168,7 @@ def bookmarks(request):
     else:
         bookmarks = []
 
-    posts = Post.objects.filter(id__in=bookmarks)
+    posts = Post.objects.filter(status='public').filter(id__in=bookmarks)
     context = {
         'posts': posts
     }

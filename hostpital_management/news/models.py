@@ -36,11 +36,13 @@ class Post(models.Model):
     author = models.ForeignKey('Author', verbose_name='tác giả', blank=True, null=True, on_delete=models.CASCADE)
     user = models.ForeignKey(User, verbose_name='người đăng', blank=True, null=True, on_delete=models.CASCADE)
     STATUS_CHOICES = [
-        ('private', 'Chỉ mình tôi'),
+        ('draft', 'Nháp'),
+        ('pending', 'Chờ duyệt'),
+        ('private', 'Ẩn'),
         ('staff', 'Nhân viên'),
         ('public', 'Mọi người')
     ]
-    status = models.CharField(choices=STATUS_CHOICES,verbose_name='trạng thái bài viết', default='public', max_length=10)
+    status = models.CharField(choices=STATUS_CHOICES,verbose_name='trạng thái bài viết', default='private', max_length=10, blank=True, null=True)
     description = models.TextField(verbose_name='tóm tắt')
     content = RichTextUploadingField(verbose_name='nội dung')
     plaintext_content = models.TextField(verbose_name='plain text of content', blank=True, null=True)
@@ -161,6 +163,7 @@ class Comment(models.Model):
         return f'{self.comment}' 
 
 class Author(models.Model):
+    user = models.ForeignKey(User, blank=True, null=True, verbose_name='tài khoản', on_delete=models.CASCADE)
     name = models.CharField(max_length=200, verbose_name='tên')
     description = models.CharField(max_length=200, verbose_name='mô tả ngắn')
     avatar = models.ImageField(upload_to='avatars/', verbose_name='ảnh đại diện', blank=True)
@@ -188,3 +191,13 @@ class Author(models.Model):
 
     def __str__(self):
         return f'{self.name}'
+
+class PostEditor(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    editor = models.ForeignKey(User, on_delete=models.CASCADE)
+    date_created = models.DateTimeField(auto_now=True)
+
+class PostChecker(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    checker = models.ForeignKey(User, on_delete=models.CASCADE)
+    date_created = models.DateTimeField(auto_now=True)
