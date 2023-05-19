@@ -2,9 +2,20 @@ from django.shortcuts import render, redirect
 from news.models import *
 from .forms import *
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import user_passes_test
+
+
 # Create your views here.
 
 
+def staff_check(user):
+    try:
+        staff = user.staff
+        return True
+    except:
+        return False
+
+@user_passes_test(staff_check)
 @login_required
 def index(request):
     context = {
