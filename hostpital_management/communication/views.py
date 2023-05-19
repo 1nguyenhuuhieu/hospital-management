@@ -1,8 +1,11 @@
 from django.shortcuts import render, redirect
 from news.models import *
 from .forms import *
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
+
+@login_required
 def index(request):
     context = {
 
@@ -10,6 +13,8 @@ def index(request):
 
     return render(request, 'communication/index.html', context)
 
+
+@login_required
 def new_post(request):
     if request.method == 'POST':
         post_form = PostForm(request.POST, request.FILES)

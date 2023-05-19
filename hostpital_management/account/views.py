@@ -5,6 +5,8 @@ from account.models import *
 from django.shortcuts import get_object_or_404
 from human_resource_management.models import Staff
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+
 
 
 
@@ -39,6 +41,8 @@ def register_email(request):
     }
     return render(request, 'account/register-email.html', context)
 
+
+@login_required
 def profile(request):
     user = request.user
     user = get_object_or_404(User, pk=user.id)
