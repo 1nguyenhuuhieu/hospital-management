@@ -36,6 +36,8 @@ class Post(models.Model):
     author = models.ForeignKey('Author', verbose_name='tác giả', blank=True, null=True, on_delete=models.CASCADE)
     user = models.ForeignKey(User, verbose_name='người đăng', blank=True, null=True, on_delete=models.CASCADE)
     STATUS_CHOICES = [
+        ('draft', 'Nháp'),
+        ('pending', 'Chờ duyệt'),
         ('private', 'Ẩn'),
         ('staff', 'Nhân viên'),
         ('public', 'Mọi người')
