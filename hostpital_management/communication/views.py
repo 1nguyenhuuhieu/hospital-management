@@ -4,6 +4,7 @@ from .forms import *
 from human_resource_management.models import *
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.decorators import user_passes_test
+from django.shortcuts import get_object_or_404
 
 
 # Create your views here.
@@ -28,11 +29,20 @@ def index(request):
 
 
 @user_passes_test(communication_check)
-def edit_post(request):
+def edit_post(request, post_id=None):
+
+    if post_id:
+        post = get_object_or_404(Post, pk=post_id)
+        post_form = PostForm(instance=post)
+    else:
+        post_form = PostForm()
+
+
     if request.method == 'POST':
         post_form = PostForm(request.POST, request.FILES)
         if post_form.is_valid():
             new_post = post_form.save(commit=False)
+            new_post.user = request.user
             if 'draft' in (request.POST):
                 new_post.status = 'draft'
             if 'send' in (request.POST):
@@ -40,8 +50,7 @@ def edit_post(request):
             new_post.save()
             return redirect('communication:index')
 
-    else:
-        post_form = PostForm()
+        
     context = {
         'post_form': post_form
     }

@@ -15,8 +15,8 @@ def index(request, page=1):
 
 
     # thành viên nổi bật: đăng nhiều bài, bình luận nhiều, xem nhiều
-
-    # bài viết nổi bật bao gồm: bài viết xem nhiều, vừa bình luận, vừa đăng tải --> kèm status(xem nhiều, mới đăng, vừa bình luận)    
+    # bài viết nổi bật bao gồm: bài viết xem nhiều, vừa bình luận, vừa đăng tải --> kèm status(xem nhiều, mới đăng, vừa bình luận)  
+    #   
     popular_posts = Post.objects.filter(status='public').order_by('-view_count')[:5]
     popular_author = Author.objects.annotate(count=Count('post__id')).order_by('-count')
 
@@ -58,7 +58,10 @@ def author(request, author_id):
     return render(request, 'author.html', context)
 
 def post(request, post_id):
-    post = Post.objects.filter(status='public').get(pk=post_id)
+    try:
+        post = Post.objects.filter(user=request.user).get(pk=post_id)
+    except:
+        post = Post.objects.filter(status='public').get(pk=post_id)
 
     reaction_name = f'has_reaction_{post_id}'
 
