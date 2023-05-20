@@ -6,5 +6,5 @@ app_name = "communication"
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('new-post/', views.new_post, name='new_post'),
+    path('edit-post/', views.edit_post, name='edit_post'),
 ]

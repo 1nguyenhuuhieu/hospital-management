@@ -1,14 +1,27 @@
 {% extends 'hrm/base.html' %}
 {% block title %}Tổ truyền thông{% endblock %}
 {% block content %}
-<div class="container">
+<div class="container-fluid">
     <div class="row">
-        <div class="col-lg-8">
-            <a href="{% url 'communication:new_post' %}" class="btn btn-sm  btn-primary rounded-pill"><i class="bi bi-pen me-2"></i>Viết bài</a>
-        </div>
-        <div class="col-lg-4">
-            <h5 class="fw-medium mt-3">Bài viết của tôi</h5>
-            <hr>
+        <div class="col-lg-7">
+            <h1>Thống kê</h1>
+            </div>
+        <div class="col-lg-5">
+            <div class="text-end">
+            <a href="{% url 'communication:edit_post' %}" class="btn btn-lg  btn-warning mb-4 fw-medium text-uppercase"><i class="bi bi-plus me-2"></i>Bài viết mới</a>
+            </div>
+            <div class="d-flex justify-content-between align-items-center border-bottom">
+            <h5 class="fw-medium text-uppercase">Bài viết của tôi</h5>
+                <a href="#" class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Tất cả<i class="bi bi-arrow-right ms-2"></i></a>
+            </div>
+                {% for post in my_posts %}
+                <div class="row mb-2 border-bottom">
+                    <div class="col-10">{{ post.title }}</div>
+                    <div class="col-2"></div>
+                </div>
+                {% empty %}
+                Chưa có bài viết
+                {% endfor %}
         </div>
     </div>
 </div>

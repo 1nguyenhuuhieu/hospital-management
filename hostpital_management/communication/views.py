@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from news.models import *
 from .forms import *
+from human_resource_management.models import *
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.decorators import user_passes_test
 
@@ -8,25 +9,26 @@ from django.contrib.auth.decorators import user_passes_test
 # Create your views here.
 
 
-def staff_check(user):
+def communication_check(user):
     try:
-        staff = user.staff
+        staffteam = StaffTeam.objects.get(staff__user=user)
         return True
     except:
         return False
 
-@user_passes_test(staff_check)
-@login_required
+@user_passes_test(communication_check)
 def index(request):
-    context = {
 
+    my_posts = Post.objects.filter(user=request.user).order_by('-created_time')[:5]
+    context = {
+        'my_posts': my_posts
     }
 
     return render(request, 'communication/index.html', context)
 
 
-@login_required
-def new_post(request):
+@user_passes_test(communication_check)
+def edit_post(request):
     if request.method == 'POST':
         post_form = PostForm(request.POST, request.FILES)
         if post_form.is_valid():
@@ -44,4 +46,4 @@ def new_post(request):
         'post_form': post_form
     }
 
-    return render(request, 'communication/new_post.html', context)
+    return render(request, 'communication/edit_post.html', context)
