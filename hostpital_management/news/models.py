@@ -33,8 +33,8 @@ class Tag(models.Model):
 class Post(models.Model):
     title = models.CharField(max_length=1000, verbose_name='tên bài viết')
     category = models.ForeignKey(Category, verbose_name='danh mục', on_delete=models.SET_NULL, null=True)
-    author = models.ForeignKey('Author', verbose_name='tác giả', blank=True, null=True, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, verbose_name='người đăng', blank=True, null=True, on_delete=models.CASCADE)
+    author = models.ForeignKey('Author', verbose_name='tác giả', blank=True, null=True, on_delete=models.SET_NULL)
+    user = models.ForeignKey(User, verbose_name='người đăng', blank=True, null=True, on_delete=models.SET_NULL)
     STATUS_CHOICES = [
         ('draft', 'Nháp'),
         ('pending', 'Chờ duyệt'),
@@ -164,16 +164,25 @@ class Comment(models.Model):
 
 class Author(models.Model):
     user = models.ForeignKey(User, blank=True, null=True, verbose_name='tài khoản', on_delete=models.CASCADE)
-    name = models.CharField(max_length=200, verbose_name='tên')
-    description = models.CharField(max_length=200, verbose_name='mô tả ngắn')
-    avatar = models.ImageField(upload_to='avatars/', verbose_name='ảnh đại diện', blank=True)
-    cover = models.ImageField(upload_to='covers/', verbose_name='ảnh bìa', blank=True)
+    name = models.CharField(max_length=200, verbose_name='tên',blank=True, null=True,)
+    description = models.CharField(max_length=200, verbose_name='mô tả ngắn',blank=True, null=True,)
+    avatar = models.ImageField(upload_to='avatars/', verbose_name='ảnh đại diện', blank=True, null=True)
+    cover = models.ImageField(upload_to='covers/', verbose_name='ảnh bìa', blank=True, null=True)
+
+    def get_name(self):
+        if self.user:
+            return self.user.profile.full_name
+        else:
+            return self.name
 
     def get_avatar(self):
-        if self.avatar:
-            return self.avatar.url
+        if self.user:
+            return self.user.profile.avatar.url
         else:
-            return 'static/imgs/no-image.png'
+            if self.avatar:
+                return self.avatar.url
+            else:
+                return 'static/imgs/no-image.png'
 
 
     def save(self, *args, **kwargs):
@@ -190,7 +199,7 @@ class Author(models.Model):
         verbose_name_plural = 'tác giả'
 
     def __str__(self):
-        return f'{self.name}'
+        return f'{self.get_name()}'
 
 class PostEditor(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)

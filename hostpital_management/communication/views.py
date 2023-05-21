@@ -36,13 +36,20 @@ def edit_post(request, post_id=None):
         post_form = PostForm(instance=post)
     else:
         post_form = PostForm()
-
-
     if request.method == 'POST':
-        post_form = PostForm(request.POST, request.FILES)
+        if post_id:
+            post_form = PostForm(request.POST, request.FILES, instance=post)
+        else:
+            post_form = PostForm(request.POST, request.FILES)
         if post_form.is_valid():
             new_post = post_form.save(commit=False)
             new_post.user = request.user
+            try:
+                author = Author.objects.get(user=request.user)
+            except:
+                author = Author(user=request.user)
+                author.save()
+            new_post.author = author
             if 'draft' in (request.POST):
                 new_post.status = 'draft'
             if 'send' in (request.POST):
