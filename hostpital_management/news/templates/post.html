@@ -9,6 +9,7 @@
     </div>
     <div class="col-lg-6">
       <h1 class="display-5 fw-bold mb-4">{% block title %}{{ post.title }}{% endblock %}</h1>
+      {% if request.user == post.user %}<a href="{% url 'communication:edit_post' post_id=post.id %}" class="btn btn-primary mb-2">Sửa bài viết</a>{% endif %}
       <p class="text-muted fst-italic fs-6">{{ post.description }}</p>
       
       {% include 'include/post_info.html' %}
