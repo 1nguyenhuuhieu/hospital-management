@@ -8,8 +8,6 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
 
-
-
 # Create your views here.
 
 def register(request):

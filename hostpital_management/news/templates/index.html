@@ -14,9 +14,10 @@
           <a href="{% url 'news:author' author_id=author.id %}" class="link-body-emphasis h6 text-decoration-none">
             <div class="d-flex align-items-center mb-3">
               <img
-                src="{{ author.avatar.url }}"
+                src="{{ author.get_avatar }}"
                 alt="" class="rounded-circle me-2" style="width: 35px; height: 35px;">
-              {{ author.name }}
+                <span class="text-capitalize">{{ author.get_name }}</span>
+              
             </div>
           </a>
         </div>
