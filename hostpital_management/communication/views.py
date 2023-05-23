@@ -59,7 +59,8 @@ def edit_post(request, post_id=None):
 
         
     context = {
-        'post_form': post_form
+        'post_form': post_form,
+        'post_id': post_id
     }
 
     return render(request, 'communication/edit_post.html', context)

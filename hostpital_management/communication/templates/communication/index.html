@@ -8,22 +8,23 @@
             </div>
         <div class="col-lg-5">
             <div class="text-end">
-            <a href="{% url 'communication:edit_post' %}" class="btn btn-lg  btn-warning mb-4 fw-medium text-uppercase"><i class="bi bi-plus me-2"></i>Bài viết mới</a>
+            <a href="{% url 'communication:edit_post' %}" class="btn btn-lg  btn-warning mb-3 fw-medium text-uppercase"><i class="bi bi-plus me-2"></i>Bài viết mới</a>
             </div>
+            <div class="bg-white px-3 pt-3 rounded-4">
             <div class="d-flex justify-content-between align-items-center border-bottom">
             <h5 class="fw-medium text-uppercase">Bài viết của tôi</h5>
                 <a href="#" class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Tất cả<i class="bi bi-arrow-right ms-2"></i></a>
             </div>
-
-              <table class="table">
+            <div class="table-responsive pb-0">
+              <table class="table table-hover table-borderless ">
 
                 <tbody>
                 {% for post in my_posts %}
                  
                 <tr>
-                    <td> <a href="{% url 'news:post' post_id=post.id %}">{{ post.title }}</a> </td>
-                    <td><span class="badge text-bg-primary rounded-pill">{{ post.get_status_display }}</span></td>
-                    <td><a href="{% url 'communication:edit_post' post_id=post.id %}">sửa</a></td>
+                    <td> <a href="{% url 'news:post' post_id=post.id %}" class="text-decoration-none link-body-emphasis">{{ post.title }}</a> </td>
+                    <td><span class="badge text-bg-light rounded-pill">{{ post.get_status_display }}</span></td>
+                    <td><a href="{% url 'communication:edit_post' post_id=post.id %}" class="text-decoration-none fw-medium">Sửa</a></td>
                   </tr>
        
                 {% empty %}
@@ -32,6 +33,32 @@
             </tbody>
         </table>
         </div>
+        </div>
+            <div class="bg-white px-3 pt-3 rounded-4 mt-3">
+            <div class="d-flex justify-content-between align-items-center border-bottom">
+            <h5 class="fw-medium text-uppercase">Bài viết vừa đăng</h5>
+                <a href="#" class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Tất cả<i class="bi bi-arrow-right ms-2"></i></a>
+            </div>
+            <div class="table-responsive pb-0">
+              <table class="table table-hover table-borderless ">
+
+                <tbody>
+                {% for post in my_posts %}
+                 
+                <tr>
+                    <td> <a href="{% url 'news:post' post_id=post.id %}" class="text-decoration-none link-body-emphasis">{{ post.title }}</a> </td>
+                    <td><span class="badge text-bg-light rounded-pill">{{ post.get_status_display }}</span></td>
+                    <td><a href="{% url 'communication:edit_post' post_id=post.id %}" class="text-decoration-none fw-medium">Sửa</a></td>
+                  </tr>
+       
+                {% empty %}
+                Chưa có bài viết
+                {% endfor %}
+            </tbody>
+        </table>
+        </div>
+        </div>
+    </div>
     </div>
 </div>
 {% endblock %}

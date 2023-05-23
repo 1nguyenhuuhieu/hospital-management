@@ -72,6 +72,10 @@ class Post(models.Model):
     def status_icon(self):
         if self.status == 'public':
             return 'globe-americas'
+        elif self.status == 'draft':
+            return 'file-earmark-lock'
+        elif self.status == 'pending':
+            return 'hourglass-split'
         else:
             return 'people'
 
