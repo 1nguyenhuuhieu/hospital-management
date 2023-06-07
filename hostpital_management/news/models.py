@@ -180,13 +180,11 @@ class Author(models.Model):
             return self.name
 
     def get_avatar(self):
-        if self.user:
-            return self.user.profile.avatar.url
+
+        if self.avatar:
+            return self.avatar.url
         else:
-            if self.avatar:
-                return self.avatar.url
-            else:
-                return 'static/imgs/no-image.png'
+            return 'static/imgs/no-image.png'
 
 
     def save(self, *args, **kwargs):
@@ -203,7 +201,7 @@ class Author(models.Model):
         verbose_name_plural = 'tác giả'
 
     def __str__(self):
-        return f'{self.get_name()}'
+        return f'{self.name}'
 
 class PostEditor(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
