@@ -74,6 +74,8 @@ def profile(request):
         staff_id = request.POST['staff_id']
         staff = Staff.objects.get(pk=staff_id)
         staff.user = request.user
+        user.is_staff = True
+        user.save()
         staff.save()
         
     context = {
