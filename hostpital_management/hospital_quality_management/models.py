@@ -3,8 +3,6 @@ from ckeditor.fields import RichTextField
 from django.contrib.auth.models import User
 
 from human_resource_management.models import *
-
-
 # Models for Hospital Quality Management - HQM
 
 # Phần tiêu chí đánh giá
@@ -213,8 +211,6 @@ class AssessmentCondition(models.Model):
     files = models.ManyToManyField(File, verbose_name='file đính kèm', blank=True)
     images = models.ManyToManyField(Image, verbose_name='ảnh đính kèm', blank=True)
 
-
-
     class Meta:
         verbose_name  = 'đánh giá tiểu mục'
         verbose_name_plural  = 'đánh giá tiểu mục'
@@ -223,12 +219,7 @@ class AssessmentCondition(models.Model):
 class HQMMember(models.Model):
     member = models.ForeignKey(Staff, on_delete=models.CASCADE, verbose_name='nhân viên')
     date_joined = models.DateField(auto_now=True)
-    ROLE_CHOICES = (
-        (1, 'Quản lý'),
-        (2, 'Thành viên'),
-    )
 
-    role = models.IntegerField(choices=ROLE_CHOICES, verbose_name='Vai trò')
     note = models.CharField(max_length=200, blank=True, null=True, verbose_name='Ghi chú')
 
     class Meta:
@@ -236,4 +227,25 @@ class HQMMember(models.Model):
         verbose_name_plural  = 'thành viên nhóm QLCLBV'
     
     def __str__(self):
-        return f'{self.member} - {self.get_role_display()}'
+        return f'{self.member}'
+    
+
+# Bảng kiểm đánh giá chất lượng bệnh viện
+class HQMDashboard(models.Model):
+    LEVEL_CHOICES = (
+        (1, 'Mức 1'),
+        (2, 'Mức 2'),
+        (3, 'Mức 3'),
+        (4, 'Mức 4'),
+        (5, 'Mức 5'),
+    )
+    evaluation_criteria = models.ForeignKey(EvaluationCriteria, verbose_name='tiêu chí', on_delete=models.CASCADE)
+    previous_result = models.IntegerField(choices=LEVEL_CHOICES, verbose_name='kết quả năm trước')
+    next_result = models.IntegerField(choices=LEVEL_CHOICES, verbose_name='mục tiêu năm nay')
+    notes = models.TextField(verbose_name='giải pháp cần thực hiện')
+    manager_ec = models.ForeignKey(HQMMember, verbose_name='người chịu trách nhiệm thực hiện' , on_delete=models.CASCADE, related_name='manager_ec')
+    member_ec = models.ManyToManyField(HQMMember, verbose_name='người phối hợp', related_name='member_ec')
+    viewer_ec = models.ForeignKey(HQMMember, verbose_name='người giám sát' , on_delete=models.CASCADE, related_name='viewer_ec')
+    deadline = models.DateField(verbose_name='Thời gian hoàn thành dự kiến')
+    result = models.IntegerField(choices=LEVEL_CHOICES, verbose_name='kết quả')
+

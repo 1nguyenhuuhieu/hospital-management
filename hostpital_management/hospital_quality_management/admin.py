@@ -116,6 +116,10 @@ class ConditionAdmin(ImportExportModelAdmin):
 class HQMMemberAdmin(admin.ModelAdmin):
     pass
 
+@admin.register(HQMDashboard)
+class HQMDashboardAdmin(admin.ModelAdmin):
+    list_display = [field.name for field in HQMDashboard._meta.fields if field.name != "id"]
+
 @admin.register(File)
 class FileAdmin(admin.ModelAdmin):
     def get_model_perms(self, request):
