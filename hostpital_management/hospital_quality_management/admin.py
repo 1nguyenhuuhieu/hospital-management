@@ -118,7 +118,7 @@ class HQMMemberAdmin(admin.ModelAdmin):
 
 @admin.register(HQMDashboard)
 class HQMDashboardAdmin(admin.ModelAdmin):
-    pass
+    list_display = [field.name for field in HQMDashboard._meta.fields if field.name != "id"]
 
 @admin.register(File)
 class FileAdmin(admin.ModelAdmin):
