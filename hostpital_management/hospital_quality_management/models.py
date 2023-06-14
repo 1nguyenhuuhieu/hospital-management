@@ -239,13 +239,13 @@ class HQMDashboard(models.Model):
         (4, 'Mức 4'),
         (5, 'Mức 5'),
     )
-    evaluation_criteria = models.ForeignKey(EvaluationCriteria, verbose_name='tiêu chí', on_delete=models.CASCADE)
+    evaluation_criteria = models.OneToOneField(EvaluationCriteria, verbose_name='tiêu chí', on_delete=models.CASCADE)
     previous_result = models.IntegerField(choices=LEVEL_CHOICES, verbose_name='kết quả năm trước')
     next_result = models.IntegerField(choices=LEVEL_CHOICES, verbose_name='mục tiêu năm nay')
-    notes = models.TextField(verbose_name='giải pháp cần thực hiện')
+    notes = models.TextField(verbose_name='giải pháp cần thực hiện', blank=True, null=True)
     manager_ec = models.ForeignKey(HQMMember, verbose_name='người chịu trách nhiệm thực hiện' , on_delete=models.CASCADE, related_name='manager_ec')
-    member_ec = models.ManyToManyField(HQMMember, verbose_name='người phối hợp', related_name='member_ec')
+    member_ec = models.TextField(blank=True, null=True, verbose_name='phoi hop')
     viewer_ec = models.ForeignKey(HQMMember, verbose_name='người giám sát' , on_delete=models.CASCADE, related_name='viewer_ec')
-    deadline = models.DateField(verbose_name='Thời gian hoàn thành dự kiến')
-    result = models.IntegerField(choices=LEVEL_CHOICES, verbose_name='kết quả')
+    deadline = models.DateField(verbose_name='Thời gian hoàn thành dự kiến', blank=True, null=True)
+    result = models.BooleanField( verbose_name='Hoan thanh hay khong?', blank=True, null=True)
 
