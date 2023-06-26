@@ -27,6 +27,15 @@
   <link rel="stylesheet" href="https://printjs-4de6.kxcdn.com/print.min.css">
 
 
+  {% if post %}
+
+  <meta property="og:url"  content="{% url 'news:post' post_id=post.id %}" />
+  <meta property="og:type"  content="Bài viết" />
+  <meta property="og:title"  content="{{ post.title }}" />
+  <meta property="og:description" content="{{ post.description }}" />
+  <meta property="og:image"  content="{{ post.get_cover_image }}" />
+  {% endif %}
+
   <style>
     #myBtn {
       display: none;
