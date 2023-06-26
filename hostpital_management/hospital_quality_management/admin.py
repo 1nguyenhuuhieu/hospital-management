@@ -35,6 +35,11 @@ class ConditionResource(resources.ModelResource):
         model = Condition
         fields = ('id', 'evaluation_criteria_level', 'index', 'title',)
 
+class HQMDashboardResource(resources.ModelResource):
+    class Meta:
+        model = HQMDashboard
+        fields = ('evaluation_criteria__section_chapter__title','evaluation_criteria__evaluation_criteria','evaluation_criteria__title','previous_result' )
+
 
 
 # tabular admin inline
@@ -117,8 +122,16 @@ class HQMMemberAdmin(admin.ModelAdmin):
     pass
 
 @admin.register(HQMDashboard)
-class HQMDashboardAdmin(admin.ModelAdmin):
-    list_display = [field.name for field in HQMDashboard._meta.fields if field.name != "id"]
+class HQMDashboardAdmin(ImportExportModelAdmin):
+    resource_classes = [HQMDashboardResource]
+
+    list_display = ('evaluation_criteria', 'previous_result', 'next_result', 'manager_name' )
+
+    list_filter = ('manager_ec__member__full_name',)
+
+    @admin.display(description="Chịu trách nhiệm")
+    def manager_name(self, obj):
+        return obj.manager_ec.member.full_name
 
 @admin.register(File)
 class FileAdmin(admin.ModelAdmin):

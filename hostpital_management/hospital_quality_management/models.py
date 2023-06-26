@@ -244,8 +244,11 @@ class HQMDashboard(models.Model):
     next_result = models.IntegerField(choices=LEVEL_CHOICES, verbose_name='mục tiêu năm nay')
     notes = models.TextField(verbose_name='giải pháp cần thực hiện', blank=True, null=True)
     manager_ec = models.ForeignKey(HQMMember, verbose_name='người chịu trách nhiệm thực hiện' , on_delete=models.CASCADE, related_name='manager_ec')
-    member_ec = models.TextField(blank=True, null=True, verbose_name='phoi hop')
+    member_ec = models.TextField(blank=True, null=True, verbose_name='Phối hợp')
     viewer_ec = models.ForeignKey(HQMMember, verbose_name='người giám sát' , on_delete=models.CASCADE, related_name='viewer_ec')
     deadline = models.DateField(verbose_name='Thời gian hoàn thành dự kiến', blank=True, null=True)
-    result = models.BooleanField( verbose_name='Hoan thanh hay khong?', blank=True, null=True)
+    result = models.BooleanField( verbose_name='Hoàn thành hay không?', blank=True, null=True)
 
+    class Meta:
+        verbose_name  = 'phân công nhiệm vụ'
+        verbose_name_plural  = 'phân công nhiệm vụ'
